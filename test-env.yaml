@@ -10,8 +10,3 @@ services:
       - RUN_TESTS=1
       - PIP_AUTO_INSTALL=1
     depends_on: ["db"]
-    command:
-      [
-        "odoo",
-        # "-d <database>",
-      ]

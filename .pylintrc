@@ -1,6 +1,6 @@
 [MASTER]
 profile=no
-ignore=CVS,.git,scenarios,.bzr
+ignore=CVS,.git,studio_customization
 persistent=yes
 cache-size=500
 load-plugins=pylint.extensions.docstyle,pylint.extensions.mccabe

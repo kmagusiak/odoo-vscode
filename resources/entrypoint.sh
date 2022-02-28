@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -e
 
 # set the postgres database host, port, user and password according to the environment
 # and pass them as arguments to the odoo process if not present in the config file
@@ -11,15 +11,11 @@ set -x
 
 # set all variables
 
-function getAddons() {
+EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} 2>&1)
 
-    EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} 2>&1)
-}
-
-getAddons
-
-if [ ! -f ${ODOO_RC} ]; then
-echo "
+if [ ! -f ${ODOO_RC} ]
+then
+    cat > $ODOO_RC <<EOF
 [options]
 addons_path = ${ODOO_ADDONS_BASEPATH}
 admin_passwd = ${ADMIN_PASSWORD}
@@ -59,7 +55,8 @@ test_enable = ${TEST_ENABLE}
 unaccent = ${UNACCENT}
 without_demo = ${WITHOUT_DEMO}
 workers = ${WORKERS}
-running_env = ${RUNNING_ENV}" > $ODOO_RC
+odoo_stage = ${ODOO_STAGE}
+EOF
 fi
 
 if [ -z "$EXTRA_ADDONS_PATHS" ]; then
@@ -87,8 +84,10 @@ check_config "db_port" "$PGPORT"
 check_config "db_user" "$PGUSER"
 check_config "db_password" "$PGPASSWORD"
 
+[ "$1" != -* ] || set -- -- "$@"
+
 case "$1" in
-    -- | odoo | ${ODOO_CMD})
+    -- | odoo | */odoo-bin | "")
         shift
         if [[ "$1" == "scaffold" ]] ; then
             exec odoo "$@"
@@ -112,9 +111,6 @@ case "$1" in
             fi
             exec odoo "$@" "${DB_ARGS[@]}"
         fi
-        ;;
-    -*)
-        exec odoo "$@" "${DB_ARGS[@]}"
         ;;
     *)
         exec "$@"

@@ -85,15 +85,10 @@
 
 	"extensions": [
 		"aaron-bond.better-comments",
-		"adamcaviness.theme-monokai-dark-soda",
 		"dbaeumer.vscode-eslint",
-		"dotjoshjohnson.xml",
 		"eamodio.gitlens",
-		"magicstack.magicpython",
 		"ms-python.python",
-		"ms-azuretools.vscode-docker",
 		"mstuttgart.odoo-snippets",
-		"vscode-icons-team.vscode-icons",
 		"visualstudioexptteam.vscodeintellicode",
 		"scapigliato.vsc-odoo-development",
 		"scapigliato.odoo-snippets",

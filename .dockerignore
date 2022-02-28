@@ -1,11 +1,8 @@
+.devcontainer/*
 .git
 .github
 .gitignore
 LICENSE
 README.md
-Changelog.md
-Makefile
 custom/*
-src/*
-.devcontainer/*
-.yaml
+odoo/*
