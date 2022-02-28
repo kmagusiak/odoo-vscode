@@ -3,7 +3,7 @@ env PYTHONUNBUFFERED 1
 
 user root
 run ln -s /usr/lib/python3/dist-packages/odoo /opt/odoo
-run rm /etc/odoo/odoo.conf && chown odoo:odoo /etc/odoo
+run rm /etc/odoo/odoo.conf && chown odoo:odoo /etc/odoo /var/lib/odoo
 
 # PIP auto-install requirements.txt (change value to "1" to auto-install)
 ENV PIP_AUTO_INSTALL=${PIP_AUTO_INSTALL:-"0"}

@@ -86,6 +86,8 @@ check_config "db_password" "$PGPASSWORD"
 
 [ "$1" != -* ] || set -- -- "$@"
 
+# TODO DEBUGPY_ENABLE
+
 case "$1" in
     -- | odoo | */odoo-bin | "")
         shift
