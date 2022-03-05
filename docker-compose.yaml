@@ -17,14 +17,10 @@ services:
       # Host paths (.ssh configuration)
       - ~/.ssh/:/opt/odoo/.ssh/:cached
       # Named volumes
+      # TODO store files in database by default
       - odoo-data:${ODOO_DATA_DIR}
       # Development volumes
       - ./custom:${ODOO_EXTRA_ADDONS}:cached
-      # - ./src/odoo:/${ODOO_BASEPATH}:ro:cached
-    environment:
-      - LOG_LEVEL=debug
-      - WITHOUT_DEMO=False
-      - DEBUGPY_ENABLE=1
     command: ["odoo", "--dev", "qweb,xml"]
     depends_on:
       - db
