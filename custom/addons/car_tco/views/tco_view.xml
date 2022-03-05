@@ -1,0 +1,20 @@
+<odoo>
+    <record id="tco_view_tree" model="ir.ui.view">
+        <field name="name">car.tco.tree</field>
+        <field name="model">car.tco</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="power"/>
+                <field name="power_ratio"/>
+            </tree>
+        </field>
+    </record>
+    <record id="tco_view_tree_action" model="ir.actions.act_window">
+        <field name="name">Car TCO</field>
+        <field name="res_model">car.tco</field>
+        <field name="view_id" ref="tco_view_tree"/>
+    </record>
+    <menuitem id="menu_tco_view"
+        action="tco_view_tree_action"/>
+</odoo>
