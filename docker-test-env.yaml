@@ -8,4 +8,3 @@ services:
       - LOG_LEVEL=debug
       - WITHOUT_DEMO=False
       - PIP_AUTO_INSTALL=1
-    depends_on: ["db"]

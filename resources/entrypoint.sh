@@ -62,9 +62,13 @@ odoo_stage = ${ODOO_STAGE:-docker}
 EOF
 fi
 
+if [ -n "$EXTRA_ADDONS_PATHS" ]
+then
+    echo "ENTRY - Addon paths: $EXTRA_ADDONS_PATHS"
+fi
 if [ -n "$EXTRA_ADDONS_PATHS" ] && [ "${PIP_AUTO_INSTALL:-}" -eq "1" ]
 then
-    echo "Auto install requirements.txt from $ODOO_EXTRA_ADDONS"
+    echo "ENTRY - Auto install requirements.txt from $ODOO_EXTRA_ADDONS"
     find $ODOO_EXTRA_ADDONS -name 'requirements.txt' -exec pip3 install --user -r {} \;
 fi
 
@@ -72,11 +76,7 @@ DB_ARGS=()
 function check_config() {
     param="$1"
     value="$2"
-    if ! grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC"
-    then
-        DB_ARGS+=("--${param}")
-        DB_ARGS+=("${value}")
-   fi
+    DB_ARGS+=("--${param}" "${value}")
 }
 
 check_config "db_host" "$PGHOST"
@@ -84,7 +84,17 @@ check_config "db_port" "$PGPORT"
 check_config "db_user" "$PGUSER"
 check_config "db_password" "$PGPASSWORD"
 
-[ "${1:-}" != -* ] || set -- -- "$@"
+case "${1:-}" in
+    scaffold | shell | -*)
+        set -- odoo "$@"
+        ;;
+esac
+
+if [ -f "${ODOO_BASEPATH:-}/odoo-bin" ]
+then
+    export PYTHONPATH=$ODOO_BASEPATH
+    echo "ENTRY - Hosted odoo source, setting PYTHONPATH=${PYTHONPATH}"
+fi
 
 case "${1:-}" in
     -- | odoo | odoo-bin | "")
@@ -94,7 +104,6 @@ case "${1:-}" in
             exec odoo "$@"
             exit $?
         fi
-        # TODO handle shell
 
         wait-for-psql.py "${DB_ARGS[@]}" --timeout=30
 
@@ -104,7 +113,7 @@ case "${1:-}" in
             then
                 EXTRA_MODULES=$(python3 -c "from getaddons import get_modules; print(','.join(get_modules('${ODOO_EXTRA_ADDONS}', depth=3)))")
             fi
-            echo "Enable testing for modules: ${EXTRA_MODULES}"
+            echo "ENTRY - Enable testing for modules: ${EXTRA_MODULES}"
             set -- "$@" "--test-enable" "--stop-after-init" "-i" "${EXTRA_MODULES}" "-d" "${DBNAME_TEST:-${DBNAME}}"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
@@ -113,21 +122,22 @@ case "${1:-}" in
             for db in ${ODOO_DB_LIST}
             do
                 # TODO handle separately click-odoo
-                echo "Update database: ${db}"
-                click-odoo-update --ignore-core-addons -d $db -c ${ODOO_RC} --log-level=error
-                echo "Update database finished"
+                echo "ENTRY - Update database: ${db}"
+                click-odoo-update --ignore-core-addons -d $db -c "${ODOO_RC}" --log-level=error
+                echo "ENTRY - Update database finished"
             done
         fi
 
 
         if [ "${DEBUGPY_ENABLE:-0}" == "1" ]
         then
-            echo "Enable debugpy"
-            set -- python3 -m debugpy --listen "${DEBUGPY_PORT:-41234}" "$(which odoo)" "$@" --workers 0 --limit-time-real 100000
+            echo "ENTRY - Enable debugpy"
+            set -- python3 -m debugpy --listen "0.0.0.0:${DEBUGPY_PORT:-41234}" "$(which odoo)" "$@" --workers 0 --limit-time-real 100000
         else
             set -- odoo "$@"
         fi
-        echo "Start odoo..."
+        echo "$@"
+        echo "ENTRY - Start odoo..."
         exec "$@" "${DB_ARGS[@]}"
         ;;
     *)

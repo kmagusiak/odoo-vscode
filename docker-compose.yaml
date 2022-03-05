@@ -14,14 +14,11 @@ services:
     ports: ["8069:8069", "8072:8072", "41234:41234"]
 
     volumes:
-      # Host paths (.ssh configuration)
-      - ~/.ssh/:/opt/odoo/.ssh/:cached
       # Named volumes
-      # TODO store files in database by default
       - odoo-data:${ODOO_DATA_DIR}
       # Development volumes
       - ./custom:${ODOO_EXTRA_ADDONS}:cached
-    command: ["odoo", "--dev", "qweb,xml"]
+    command: ["odoo", "--dev", "xml"]
     depends_on:
       - db
 
