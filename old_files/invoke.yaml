@@ -1,0 +1,15 @@
+postgresql:
+  name: postgres_odoo
+  version: 13
+  password: admin
+  # export_path: ./export
+  export_chown: '1000:1000'
+  database: odoo14
+odoo:
+  image: kma/odoo:14 # odoo:14
+  contained: true
+  config: ./odoo.conf
+  addons:
+    - base
+  addons_paths:
+    - ./addons

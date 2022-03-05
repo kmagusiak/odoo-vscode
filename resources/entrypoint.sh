@@ -20,6 +20,7 @@ EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} 2>&1)
 
 if [ ! -f ${ODOO_RC} ]
 then
+    echo "ENTRY - Generate $ODOO_RC"
     cat > $ODOO_RC <<EOF
 [options]
 addons_path = ${EXTRA_ADDONS_PATHS}

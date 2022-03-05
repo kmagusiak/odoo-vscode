@@ -1,9 +1,0 @@
-# linting and formatting
-black
-flake8
-pylint-odoo==3.7.1
-
-# debugging and tools
-debugpy
-invoke
-ipython
