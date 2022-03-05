@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   odoo:
-    volumes:
+    #volumes:
       # Host paths (.vscode configuration)
       #- ./.devcontainer/.vscode:${ODOO_EXTRA_ADDONS}/.vscode
       #

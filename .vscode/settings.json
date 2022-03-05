@@ -1,0 +1,69 @@
+{
+	"editor.insertSpaces": false,
+	"editor.rulers": [79, 100],
+	"files.eol": "\n",
+	"search.followSymlinks": true,
+	"sqltools.connections": [{
+		"name": "Container odoo",
+		"driver": "PostgreSQL",
+		"previewLimit": 50,
+		"server": "localhost",
+		"port": 5432,
+		"database": "odoo",
+		"username": "odoo",
+		"password": "odoo"
+	},{
+		"name": "Container postgres",
+		"driver": "PostgreSQL",
+		"previewLimit": 50,
+		"server": "localhost",
+		"port": 5432,
+		"database": "postgres",
+		"username": "odoo",
+		"password": "odoo"
+	}],
+	"terminal.integrated.defaultProfile.linux": "bash",
+	"python.defaultInterpreterPath": "/usr/bin/python3",
+	"[python]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 4
+	},
+	"python.formatting.blackArgs": [
+		"--skip-string-normalization",
+		"--line-length",
+		"100"
+	],
+	"python.formatting.provider": "black",
+	"python.linting.enabled": true,
+	"python.linting.flake8Enabled": true,
+	"python.linting.pylintEnabled": false,
+	"python.terminal.activateEnvInCurrentTerminal": true,
+	"python.analysis.extraPaths": [
+		"./odoo"
+	],
+	// inherited
+	"python.pythonPath": "/usr/local/bin/python",
+	"python.autoComplete.addBrackets": true,
+	"python.autoComplete.extraPaths": [
+		"/opt/odoo/addons",
+		"/opt/odoo",
+		"/opt/odoo/odoo/addons",
+		"/opt/enterprise",
+		"/mnt/extra-addons"
+	],
+	"python.linting.ignorePatterns": [
+		"/opt/odoo"
+	],
+	"python.linting.pylintArgs": [
+		//"--rcfile", "${workspaceFolder}/.vscode/oca_pylint.cfg",
+		"--load-plugins", "pylint_odoo"
+		
+	],
+	"python.linting.flake8Args": [
+		//"--config", "${workspaceFolder}/.vscode/travis_run_flake8.cfg"
+	],
+	"files.exclude": {
+		"**/*__pycache__": true,
+		"**/.git": true,
+	},
+}

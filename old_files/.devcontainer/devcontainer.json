@@ -1,13 +1,15 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/python-3-postgres
-// Update the VARIANT arg in docker-compose.yml to pick a Python version
 {
-	"name": "Python Odoo & PostgreSQL",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspace",
+	"name": "Python Odoo with PostgreSQL",
+	"dockerComposeFile": [
+		"../docker-compose.yaml",
+		"dev-vscode.yaml"
+	],
+	"service": "odoo",
+	//"remoteUser": "odoo",
+	"shutdownAction": "stopCompose",
 
-	// Set *default* container specific settings.json values on container create.
+	"workspaceFolder": "/mnt/extra-addons",
+
 	"settings": {
 		"editor.insertSpaces": false,
 		"editor.rulers": [79, 100],
@@ -49,12 +51,45 @@
 		"python.linting.pylintEnabled": false,
 		"python.terminal.activateEnvInCurrentTerminal": true,
 		"python.analysis.extraPaths": [
-			"./src/odoo"
-		]
+			"./odoo"
+		],
+		// inherited
+		"python.pythonPath": "/usr/local/bin/python",
+		"python.autoComplete.addBrackets": true,
+		"python.autoComplete.extraPaths": [
+			"/opt/odoo/addons",
+			"/opt/odoo",
+			"/opt/odoo/odoo/addons",
+			"/opt/enterprise",
+			"/mnt/extra-addons"
+		],
+		"python.linting.ignorePatterns": [
+			"/opt/odoo"
+		],
+		"python.linting.pylintArgs": [
+			//"--rcfile", "${workspaceFolder}/.vscode/oca_pylint.cfg",
+			"--load-plugins", "pylint_odoo"
+			
+		],
+		"python.linting.flake8Args": [
+			//"--config", "${workspaceFolder}/.vscode/travis_run_flake8.cfg"
+		],
+		"files.exclude": {
+			"**/*__pycache__": true,
+			"**/.git": true,
+		},
 	},
 
-	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
+		"aaron-bond.better-comments",
+		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
+		//"ms-python.python",
+		"mstuttgart.odoo-snippets",
+		"visualstudioexptteam.vscodeintellicode",
+		"scapigliato.vsc-odoo-development",
+		"scapigliato.odoo-snippets",
+		// my addons
 		"gruntfuggly.todo-tree",
 		"mechatroner.rainbow-csv",
 		"mrorz.language-gettext",
@@ -63,14 +98,5 @@
 		"ms-python.vscode-pylance",
 		"mtxr.sqltools",
 		"mtxr.sqltools-driver-pg"
-	],
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8069, 5432],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "ln -s /opt/odoo",
-
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "odoo"
+	]
 }

@@ -17,7 +17,10 @@ copy --chown=odoo:odoo ./resources/getaddons.py /
 entrypoint ["/entrypoint.sh"]
 user odoo
 
+# PRODUCTION
+# nothing special is needed
 from base as production
 
+# DEBUG
 from base as debug
 expose 41234

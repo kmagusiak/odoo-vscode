@@ -43,11 +43,19 @@ TODO Document requirements odoo.sh database.sh
 # Improvements
 
 TODO restore database
+- drop and recreate new
+- reset passwords and configuration
+TODO odoo.sh: update modules
 TODO lint run
 TODO test run
+TODO shell debug?
+TODO test with browser (chrome?)
+TODO github actions
 
-TODO store files in database by default
+Store files in database by default
 requires to have a module to change this and migrate data
+
+.devcontainer doesn't work because of UID=1000 and odoo=101
 
 # Dockerized Odoo
 

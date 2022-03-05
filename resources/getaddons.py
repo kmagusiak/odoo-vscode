@@ -60,7 +60,7 @@ def get_modules_info(path, depth=1):
                     }
             else:
                 deeper_modules = get_modules_info(
-                    os.path.join(path, module), depth-1)
+                    os.path.join(path, module), depth - 1)
                 modules.update(deeper_modules)
     return modules
 
@@ -82,7 +82,7 @@ def get_addons(path, depth=1):
                      for x in sorted(os.listdir(path))
                      if os.path.isdir(os.path.join(path, x))]
         for new_path in new_paths:
-            res.extend(get_addons(new_path, depth-1))
+            res.extend(get_addons(new_path, depth - 1))
     return res
 
 
@@ -112,10 +112,12 @@ def add_auto_install(modules, to_install):
     while found:
         found = False
         for module, module_data in modules.items():
-            if (module_data.get('auto_install') and
-                    module not in to_install and
-                    all(dependency in to_install
-                        for dependency in module_data.get('depends', []))):
+            if (
+                module_data.get('auto_install')
+                and module not in to_install
+                and all(
+                    dependency in to_install
+                    for dependency in module_data.get('depends', []))):
                 found = True
                 to_install.add(module)
     return to_install
@@ -191,7 +193,7 @@ def main(argv=None):
         res = sorted(list(res))
     else:
         lists = [get_addons(path) for path in params]
-        res = [x for l in lists for x in l]  # flatten list of lists
+        res = [x for ls in lists for x in ls]  # flatten list of lists
     if exclude_modules:
         res = [x for x in res if x not in exclude_modules]
     print(','.join(res))
