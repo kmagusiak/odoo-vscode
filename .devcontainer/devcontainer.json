@@ -2,13 +2,14 @@
 	"name": "Python Odoo with PostgreSQL",
 	"dockerComposeFile": [
 		"../docker-compose.yaml",
-		"dev-vscode.yaml"
-	],
+		"docker-vscode.yaml"
+	],	
 	"service": "odoo",
-	//"remoteUser": "odoo",
+	"remoteUser": "odoo",
+	"updateRemoteUserUID": false,
 	"shutdownAction": "stopCompose",
 
-	"workspaceFolder": "/mnt/extra-addons",
+	"workspaceFolder": "/mnt/vscode",
 
 	"settings": {
 		"editor.insertSpaces": false,

@@ -18,8 +18,16 @@ entrypoint ["/entrypoint.sh"]
 user odoo
 
 # PRODUCTION
-# nothing special is needed
 from base as production
+
+# VSCODE (tools for development)
+from base as vscode
+user root
+run apt-get update \
+	&& apt-get -y install git htop \
+	&& mkdir /mnt/vscode \
+	&& chown odoo:odoo /mnt/vscode
+user odoo
 
 # DEBUG
 from base as debug

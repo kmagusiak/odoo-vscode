@@ -11,7 +11,12 @@ services:
       # because of Docker's hosted volumes performance
       #
       # - ./custom:${ODOO_EXTRA_ADDONS}:delegated
+    build:
+      target: vscode
+    volumes:
+      - .:/mnt/vscode:cached
     environment:
+      - ODOO_EXTRA_ADDONS=/mnt/vscode/custom
       - PIP_AUTO_INSTALL=1
       - DEBUGPY_ENABLE=1
     command: /bin/sh -c "while sleep 1000; do :; done"
