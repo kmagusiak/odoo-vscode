@@ -1,8 +1,9 @@
 # Odoo in docker
 
 Dockerized version of Odoo for development and debugging.
-We are going to use the official image where the we have replaced the
-entrypoint customized for debugging and Odoo management.
+We are going to use the [official image](https://github.com/odoo/docker)
+where the we have replaced the entrypoint
+customized for debugging and Odoo management.
 You will need `docker-compose` for this to run.
 
 ## Running
@@ -25,24 +26,24 @@ every time the container starts.
 
 ```bash
 your-project/
- ├── resources/         # Scripts for service automation
  ├── odoo/              # Optional hosted source code of Odoo
  ├── custom/            # Custom modules goes here, same level hierarchy **REQUIRED**
  │   ├── addons/
  │   ├── OCA/
  │   ├── enterprise/
  │   └── /
+ ├── resources/         # Scripts for service automation
  ├── ...                # Common files (.gitignore, etc.)
+ ├── requirements.txt   # Python requirements for development
  ├── .env               # Single source of environment definition
  ├── Dockerfile         # Single source of image definition
  ├── docker-compose.yml             # The default docker-compose
  └── docker-compose.override.yml    # Optional custom version
 ```
-TODO Document requirements odoo.sh database.sh
 
 # Improvements
 
-TODO restore database
+TODO database.sh restore database
 - drop and recreate new
 - reset passwords and configuration
 TODO odoo.sh: update modules
