@@ -23,11 +23,16 @@ from base as production
 # VSCODE (tools for development)
 from base as vscode
 user root
+add requirements.txt /tmp
 run apt-get update \
-	&& apt-get -y install git htop \
-	&& mkdir /mnt/vscode \
-	&& chown odoo:odoo /mnt/vscode
+	&& apt-get -y install git htop vim \
+	&& pip3 install --no-cache invoke -r /tmp/requirements.txt \
+	&& rm -f /tmp/requirements.txt
+run useradd -G odoo --create-home vscode \
+	&& mkdir /workspace \
+	&& chown vscode:odoo /workspace
 user odoo
+volume ["/workspace"]
 
 # DEBUG
 from base as debug

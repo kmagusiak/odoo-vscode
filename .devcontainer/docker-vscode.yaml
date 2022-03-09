@@ -14,9 +14,9 @@ services:
     build:
       target: vscode
     volumes:
-      - .:/mnt/vscode:cached
+      - .:/workspace:cached
     environment:
-      - ODOO_EXTRA_ADDONS=/mnt/vscode/custom
+      - ODOO_EXTRA_ADDONS=/workspace/custom
       - PIP_AUTO_INSTALL=1
       - DEBUGPY_ENABLE=1
     command: /bin/sh -c "while sleep 1000; do :; done"

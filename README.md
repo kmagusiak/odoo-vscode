@@ -43,6 +43,7 @@ your-project/
 
 # Improvements
 
+TODO devcontainer launch odoo
 TODO database.sh restore database
 - drop and recreate new
 - reset passwords and configuration
@@ -52,6 +53,15 @@ TODO test run
 TODO shell debug?
 TODO test with browser (chrome?)
 TODO github actions
+
+Wanted commands:
+- backup db
+- restore db
+- create db template
+- reset config (and password)
+- list_db
+- lint
+- test
 
 Store files in database by default
 requires to have a module to change this and migrate data
@@ -67,6 +77,7 @@ Dockerdoo is integrated with **VSCode** for fast development and debugging, just
 Mainly based on:
 
 * [dockerdoo](https://github.com/iterativo-git/dockerdoo)
+* [odoo/docker](https://github.com/odoo/docker)
 * [David Arnold](https://github.com/blaggacao) ([XOE Solutions](https://xoe.solutions))
 
 Bunch of ideas taken from:

@@ -5,11 +5,10 @@
 		"docker-vscode.yaml"
 	],	
 	"service": "odoo",
-	"remoteUser": "odoo",
-	"updateRemoteUserUID": false,
+	"remoteUser": "vscode",
 	"shutdownAction": "stopCompose",
 
-	"workspaceFolder": "/mnt/vscode",
+	"workspaceFolder": "/workspace",
 
 	"settings": {
 		"editor.insertSpaces": false,

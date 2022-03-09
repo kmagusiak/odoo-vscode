@@ -1,7 +1,7 @@
 # linting and formatting
 black
 flake8
-pylint-odoo==3.7.1
+pylint-odoo
 
 # debugging and tools
 debugpy
