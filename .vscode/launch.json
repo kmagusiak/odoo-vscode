@@ -22,6 +22,57 @@
                     "remoteRoot": "/mnt/extra-addons"
                 }
             ]
+        },
+        {
+            "name": "Odoo Debug",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceRoot}",
+            "justMyCode": false,
+            "program": "/usr/bin/odoo",
+            "args": [
+                "--dev=qweb,xml",
+                "--log-level=info",
+                "--workers=0",
+                "--limit-time-real=100000",
+            ],
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/odoo",
+                    "remoteRoot": "/opt/odoo"
+                }
+            ]
+        },
+        {
+            "name": "Odoo Shell",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceRoot}",
+            "program": "/usr/bin/odoo",
+            "args": [
+                "shell",
+                "--log-level=info",
+                "--limit-time-real=100000",
+            ],
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/odoo",
+                    "remoteRoot": "/opt/odoo"
+                }
+            ]
+        },
+        {
+            "name": "Upgrade modules",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceRoot}",
+            "program": "click-odoo-update",
+            "args": [
+                "--ignore-core-addons",
+            ],
         }
     ]
 }

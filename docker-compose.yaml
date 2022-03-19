@@ -1,8 +1,8 @@
 version: "3.7"
 
 volumes:
-  odoo-data:
-  postgres-odoo:
+  odoo_data:
+  postgres_odoo:
 
 services:
   odoo:
@@ -14,9 +14,7 @@ services:
     ports: ["8069:8069", "8072:8072", "41234:41234"]
 
     volumes:
-      # Named volumes
-      - odoo-data:${ODOO_DATA_DIR}
-      # Development volumes
+      - odoo_data:${ODOO_DATA_DIR}
       - ./custom:${ODOO_EXTRA_ADDONS}:cached
     command: ["odoo", "--dev", "xml"]
     depends_on:
@@ -26,7 +24,7 @@ services:
     image: postgres:${PSQL_VERSION}
     restart: unless-stopped
     volumes:
-      - postgres-odoo:/var/lib/postgresql/data/pgdata
+      - postgres_odoo:/var/lib/postgresql/data/pgdata
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}

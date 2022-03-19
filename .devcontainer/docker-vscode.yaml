@@ -1,22 +1,18 @@
 version: "3.7"
 
+volumes:
+  vscode_home:
+
 services:
   odoo:
-    #volumes:
-      # Host paths (.vscode configuration)
-      #- ./.devcontainer/.vscode:${ODOO_EXTRA_ADDONS}/.vscode
-      #
-      # Uncomment to use hosted volume from your Host
-      # This is not the default for VSContainers as it's too slow on PC and Mac
-      # because of Docker's hosted volumes performance
-      #
-      # - ./custom:${ODOO_EXTRA_ADDONS}:delegated
     build:
       target: vscode
     volumes:
-      - .:/workspace:cached
+      - .:/workspace
+      - vscode_home:/home/vscode
     environment:
       - ODOO_EXTRA_ADDONS=/workspace/custom
+      - ODOO_DATA_DIR=/home/vscode
+      - ODOO_STAGE=devcontainer
       - PIP_AUTO_INSTALL=1
-      - DEBUGPY_ENABLE=1
     command: /bin/sh -c "while sleep 1000; do :; done"

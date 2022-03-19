@@ -7,6 +7,7 @@
 	"service": "odoo",
 	"remoteUser": "vscode",
 	"shutdownAction": "stopCompose",
+	"postStartCommand": "ln -sf /opt/odoo /workspace/odoo",
 
 	"workspaceFolder": "/workspace",
 
@@ -19,7 +20,7 @@
 			"name": "Container odoo",
 			"driver": "PostgreSQL",
 			"previewLimit": 50,
-			"server": "localhost",
+			"server": "db",
 			"port": 5432,
 			"database": "odoo",
 			"username": "odoo",
@@ -28,7 +29,7 @@
 			"name": "Container postgres",
 			"driver": "PostgreSQL",
 			"previewLimit": 50,
-			"server": "localhost",
+			"server": "db",
 			"port": 5432,
 			"database": "postgres",
 			"username": "odoo",
@@ -54,8 +55,6 @@
 			"./odoo"
 		],
 		// inherited
-		"python.pythonPath": "/usr/local/bin/python",
-		"python.autoComplete.addBrackets": true,
 		"python.autoComplete.extraPaths": [
 			"/opt/odoo/addons",
 			"/opt/odoo",

@@ -42,8 +42,6 @@
 		"./odoo"
 	],
 	// inherited
-	"python.pythonPath": "/usr/local/bin/python",
-	"python.autoComplete.addBrackets": true,
 	"python.autoComplete.extraPaths": [
 		"/opt/odoo/addons",
 		"/opt/odoo",

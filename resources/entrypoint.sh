@@ -12,7 +12,7 @@ fi
 : ${PGHOST:=${DB_PORT_5432_TCP_ADDR:-${POSTGRES_HOST:-db}}}
 : ${PGPORT:=${DB_PORT_5432_TCP_PORT:-${POSTGRES_PORT:-5432}}}
 : ${PGUSER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:-odoo}}}
-: ${PGPASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD}}}
+: ${PGPASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:-odoo}}}
 
 # set all variables
 : ${ODOO_EXTRA_ADDONS:=/mnt/extra-addons}
@@ -122,9 +122,8 @@ case "${1:-}" in
             ODOO_DB_LIST=$(psql -X -A -d postgres -t -c "SELECT STRING_AGG(datname, ' ') FROM pg_database WHERE datdba=(SELECT usesysid FROM pg_user WHERE usename=current_user) AND NOT datistemplate and datallowconn AND datname <> 'postgres'")
             for db in ${ODOO_DB_LIST}
             do
-                # TODO handle separately click-odoo
                 echo "ENTRY - Update database: ${db}"
-                click-odoo-update --ignore-core-addons -d $db -c "${ODOO_RC}" --log-level=error
+                click-odoo-update --ignore-core-addons -d "$db" -c "${ODOO_RC}" --log-level=error
                 echo "ENTRY - Update database finished"
             done
         fi

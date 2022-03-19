@@ -2,5 +2,6 @@
 *.py[cod]
 __pycache__
 
-# Odoo sources
+# Local files
 /odoo
+/docker-compose.override.yaml
