@@ -10,6 +10,7 @@
         # 'fleet', # (for car management)
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/tco_view.xml',
     ],
 }
