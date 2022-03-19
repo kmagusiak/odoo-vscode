@@ -91,12 +91,6 @@ case "${1:-}" in
         ;;
 esac
 
-if [ -f "${ODOO_BASEPATH:-}/odoo-bin" ]
-then
-    export PYTHONPATH=$ODOO_BASEPATH
-    echo "ENTRY - Hosted odoo source, setting PYTHONPATH=${PYTHONPATH}"
-fi
-
 case "${1:-}" in
     -- | odoo | odoo-bin | "")
         shift
@@ -128,13 +122,13 @@ case "${1:-}" in
             done
         fi
 
-
+        ODOO_BIN="$ODOO_BASEPATH/odoo-bin"
         if [ "${DEBUGPY_ENABLE:-0}" == "1" ]
         then
             echo "ENTRY - Enable debugpy"
-            set -- python3 -m debugpy --listen "0.0.0.0:${DEBUGPY_PORT:-41234}" "$(which odoo)" "$@" --workers 0 --limit-time-real 100000
+            set -- python3 -m debugpy --listen "0.0.0.0:${DEBUGPY_PORT:-41234}" "$ODOO_BIN" "$@" --workers 0 --limit-time-real 100000
         else
-            set -- odoo "$@"
+            set -- "$ODOO_BIN" "$@"
         fi
         echo "$@"
         echo "ENTRY - Start odoo..."

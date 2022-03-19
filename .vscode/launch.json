@@ -14,10 +14,6 @@
             },
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}/odoo",
-                    "remoteRoot": "/opt/odoo"
-                },
-                {
                     "localRoot": "${workspaceFolder}/custom",
                     "remoteRoot": "/mnt/extra-addons"
                 }
