@@ -37,6 +37,10 @@
                 {
                     "localRoot": "${workspaceFolder}/odoo",
                     "remoteRoot": "/opt/odoo"
+                },
+                {
+                    "localRoot": "${workspaceFolder}/odoo-enterprise",
+                    "remoteRoot": "/opt/odoo-enterprise"
                 }
             ]
         },
@@ -56,6 +60,10 @@
                 {
                     "localRoot": "${workspaceFolder}/odoo",
                     "remoteRoot": "/opt/odoo"
+                },
+                {
+                    "localRoot": "${workspaceFolder}/odoo-enterprise",
+                    "remoteRoot": "/opt/odoo-enterprise"
                 }
             ]
         }
