@@ -58,17 +58,6 @@
                     "remoteRoot": "/opt/odoo"
                 }
             ]
-        },
-        {
-            "name": "Upgrade modules",
-            "type": "python",
-            "request": "launch",
-            "redirectOutput": false,
-            "cwd": "${workspaceRoot}",
-            "program": "click-odoo-update",
-            "args": [
-                "--ignore-core-addons",
-            ],
         }
     ]
 }
