@@ -15,9 +15,11 @@ fi
 : ${PGPASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:-odoo}}}
 
 # set all variables
+: ${ODOO_BASEPATH:=/opt/odoo}
+ODOO_BIN="$ODOO_BASEPATH/odoo-bin"
+: ${ODOO_BASE_ADDONS:=/mnt/odoo-addons}
 : ${ODOO_EXTRA_ADDONS:=/mnt/extra-addons}
-EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} ${ODOO_BASEPATH:-/opt/odoo} 2>&1)
-[ ! -d "${ODOO_ENTERPRISE}" ] || EXTRA_ADDONS_PATHS+=",${ODOO_ENTERPRISE}"
+EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} ${ODOO_BASE_ADDONS} ${ODOO_BASEPATH} 2>&1)
 
 if [ ! -f ${ODOO_RC} ]
 then
@@ -70,8 +72,12 @@ then
 fi
 if [ -n "$EXTRA_ADDONS_PATHS" ] && [ "${PIP_AUTO_INSTALL:-}" -eq "1" ]
 then
-    echo "ENTRY - Auto install requirements.txt from $ODOO_EXTRA_ADDONS"
-    find $ODOO_EXTRA_ADDONS -name 'requirements.txt' -exec pip3 install --user -r {} \;
+    for ADDON_PATH in "$ODOO_BASE_ADDONS" "$ODOO_EXTRA_ADDONS"
+    do
+        [ -d "$ADDON_PATH" ] || continue
+        echo "ENTRY - Auto install requirements.txt from $ADDON_PATH"
+        find $ADDON_PATH -name 'requirements.txt' -exec pip3 install --user -r {} \;
+    done
 fi
 
 DB_ARGS=()
@@ -86,6 +92,7 @@ check_config "db_port" "$PGPORT"
 check_config "db_user" "$PGUSER"
 check_config "db_password" "$PGPASSWORD"
 
+# if we have an odoo command, just prepend odoo
 case "${1:-}" in
     scaffold | shell | -*)
         set -- odoo "$@"
@@ -123,7 +130,6 @@ case "${1:-}" in
             done
         fi
 
-        ODOO_BIN="$ODOO_BASEPATH/odoo-bin"
         if [ "${DEBUGPY_ENABLE:-0}" == "1" ]
         then
             echo "ENTRY - Enable debugpy"

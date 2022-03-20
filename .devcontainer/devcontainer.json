@@ -36,7 +36,7 @@
 			"/opt/odoo/addons",
 			"/opt/odoo",
 			"/opt/odoo/odoo/addons",
-			"/opt/enterprise",
+			"/mnt/odoo-addons",
 			"/mnt/extra-addons"
 		],
 		"files.exclude": {

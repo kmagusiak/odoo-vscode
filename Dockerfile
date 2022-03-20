@@ -1,6 +1,7 @@
 from odoo:15 as base
 env PYTHONUNBUFFERED 1
 env ODOO_BASEPATH /opt/odoo
+env ODOO_EXTRA_ADDONS /mnt/extra-addons
 
 # Changes to run with a dynamic container
 user root
@@ -36,7 +37,7 @@ run apt-get update \
 run useradd -G odoo --create-home vscode \
 	&& mkdir /odoo-workspace \
 	&& chown vscode:odoo /odoo-workspace
-user odoo
+user vscode
 volume ["/odoo-workspace"]
 
 # PRODUCTION

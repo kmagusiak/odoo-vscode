@@ -7,7 +7,7 @@
 			"path": "/opt/odoo"
 		},
 		{
-			"path": "/opt/odoo-enterprise"
+			"path": "/mnt/odoo-addons"
 		}
 	],
 	"settings": {
