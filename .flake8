@@ -5,7 +5,7 @@
 # Line break should be before operator (W503 ignored and W504 is pep8)
 ignore = E123,E133,E226,E241,E242,F811,C901,F812,D100,D101,D400,D102,D403,D210,D205,D202,W503
 max-line-length = 100
-exclude = .git,__init__.py
+exclude = .git
 max-complexity = 10
 per-file-ignores =
-  **/init.py:F401
+  **/__init__.py:F401

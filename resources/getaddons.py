@@ -29,19 +29,18 @@ def is_module(path):
     files = os.listdir(path)
     filtered = [x for x in files if x in (MANIFEST_FILES + ['__init__.py'])]
     if len(filtered) == 2 and '__init__.py' in filtered:
-        return os.path.join(
-            path, next(x for x in filtered if x != '__init__.py'))
+        return os.path.join(path, next(x for x in filtered if x != '__init__.py'))
     else:
         return False
 
 
 def get_modules(path, depth=1):
-    """ Return modules of path repo"""
+    """Return modules of path repo"""
     return sorted(list(get_modules_info(path, depth).keys()))
 
 
 def get_modules_info(path, depth=1):
-    """ Return a digest of each installable module's manifest in path repo"""
+    """Return a digest of each installable module's manifest in path repo"""
     # Avoid empty basename when path ends with slash
     if not os.path.basename(path):
         path = os.path.dirname(path)
@@ -59,8 +58,7 @@ def get_modules_info(path, depth=1):
                         'auto_install': manifest.get('auto_install'),
                     }
             else:
-                deeper_modules = get_modules_info(
-                    os.path.join(path, module), depth - 1)
+                deeper_modules = get_modules_info(os.path.join(path, module), depth - 1)
                 modules.update(deeper_modules)
     return modules
 
@@ -78,9 +76,11 @@ def get_addons(path, depth=1):
     if is_addons(path):
         res.append(path)
     else:
-        new_paths = [os.path.join(path, x)
-                     for x in sorted(os.listdir(path))
-                     if os.path.isdir(os.path.join(path, x))]
+        new_paths = [
+            os.path.join(path, x)
+            for x in sorted(os.listdir(path))
+            if os.path.isdir(os.path.join(path, x))
+        ]
         for new_path in new_paths:
             res.extend(get_addons(new_path, depth - 1))
     return res
@@ -106,8 +106,8 @@ def get_dependents(modules, module_name):
 
 
 def add_auto_install(modules, to_install):
-    """ Append automatically installed glue modules to to_install if their
-    dependencies are already present. to_install is a set. """
+    """Append automatically installed glue modules to to_install if their
+    dependencies are already present. to_install is a set."""
     found = True
     while found:
         found = False
@@ -115,17 +115,16 @@ def add_auto_install(modules, to_install):
             if (
                 module_data.get('auto_install')
                 and module not in to_install
-                and all(
-                    dependency in to_install
-                    for dependency in module_data.get('depends', []))):
+                and all(dependency in to_install for dependency in module_data.get('depends', []))
+            ):
                 found = True
                 to_install.add(module)
     return to_install
 
 
 def get_applications_with_dependencies(modules):
-    """ Return all modules marked as application with their dependencies.
-    For our purposes, l10n modules cannot be an application. """
+    """Return all modules marked as application with their dependencies.
+    For our purposes, l10n modules cannot be an application."""
     result = set()
     for module, module_data in modules.items():
         if module_data.get('application') and not module.startswith('l10n_'):
@@ -134,8 +133,7 @@ def get_applications_with_dependencies(modules):
 
 
 def get_localizations_with_dependents(modules):
-    """ Return all localization modules with the modules that depend on them
-    """
+    """Return all localization modules with the modules that depend on them"""
     result = set()
     for module in modules.keys():
         if module.startswith('l10n_'):

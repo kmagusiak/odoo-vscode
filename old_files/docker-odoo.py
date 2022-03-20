@@ -6,7 +6,6 @@ from pathlib import Path
 
 from invoke import task
 
-
 ###########################################################
 # Database commands
 
@@ -23,6 +22,7 @@ def reset_passwords(c, password='admin'):
     """Reset Odoo password for all users"""
     logging.info('Resetting password for all users')
     from passlib.context import CryptContext
+
     crypt = CryptContext(schemes=['pbkdf2_sha512'])
     encrypted = crypt.encrypt(password)
     query = "update res_users set password='%s'" % encrypted
@@ -57,9 +57,14 @@ def run_odoo_params(c, load_languages=False, demo=False):
 
 
 def run_odoo(
-    c, command, *,
-    pty=False, background=False, rm=True,
-    port=False, debug=False,
+    c,
+    command,
+    *,
+    pty=False,
+    background=False,
+    rm=True,
+    port=False,
+    debug=False,
 ):
     cmd = ["docker run"]
     if pty:
@@ -140,11 +145,14 @@ def init(c, addons=[], install=False, demo=False, test=False, load_languages=Fal
     run_odoo(c, command)
     if install and config_param(c, 'contained', False):
         # Set the attachment location to with the database
-        run_postgres(c, """insert into ir_config_parameter
+        run_postgres(
+            c,
+            """insert into ir_config_parameter
         (key, value, create_uid, create_date, write_uid, write_date)
         select 'ir_attachment.location', 'db', 1, now(), 1, now()
         where not exists(select 1 from ir_config_parameter where key = 'ir_attachment.location')
-        """)
+        """,
+        )
 
 
 @task()
@@ -162,8 +170,12 @@ def start(c, shell=False, debug=False, dev=None, background=False):
     if shell or debug:
         command += " --workers=0"
     run_odoo(
-        c, command, port=not interactive, pty=interactive,
-        background=background, debug=debug,
+        c,
+        command,
+        port=not interactive,
+        pty=interactive,
+        background=background,
+        debug=debug,
     )
 
 
@@ -184,6 +196,7 @@ def build(c, release='dev'):
 @task()
 def update_repository(c):
     import os
+
     virtual_dir = Path(os.environ['VIRTUAL_ENV'])
     directory = virtual_dir / 'odoo'
     if directory.exists():
@@ -192,6 +205,5 @@ def update_repository(c):
     else:
         with c.cd(virtual_dir):
             c.run(
-                'git clone --branch 14.0 https://github.com/odoo/odoo.git odoo-community',
-                pty=True
+                'git clone --branch 14.0 https://github.com/odoo/odoo.git odoo-community', pty=True
             )

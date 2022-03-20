@@ -1,0 +1,28 @@
+#!/bin/bash
+set -eu
+cd "$(dirname "$0")"
+
+case "${1:-run}" in
+	run) ;;
+	install)
+		echo "Installing pre-commit"
+		(cd .git/hooks && ln -sf ../../pre-commit .)
+		exit;;
+	uninstall)
+		echo "Uninstalling pre-commit"
+		rm -f .git/hooks/pre-commit
+		exit;;
+	*)
+		echo "Invalid option: $*"
+		echo "Supported options: install, uninstall"
+		exit 1;;
+esac
+
+# Check directory
+[ -d .git ] || cd ../..
+
+# Run checks
+flake8
+black --check .
+isort --check-only .
+echo "All good to commit"

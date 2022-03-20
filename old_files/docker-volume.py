@@ -5,9 +5,7 @@ from invoke import task
 
 
 def join_cmd(cmd):
-    return ' '.join(
-        ("'" + a.replace("'", "\\'") + "'" if ' ' in a else a) for a in cmd
-    )
+    return ' '.join(("'" + a.replace("'", "\\'") + "'" if ' ' in a else a) for a in cmd)
 
 
 def split_path(path, exists_exception=False):
@@ -145,24 +143,20 @@ def list_databases(c, container, hide=False):
         '-l',
     ] + postgres_connection_args(c)
     databases_run = c.run(join_cmd(cmd), hide=hide)
-    databases = [
-        i.lstrip(' ')
-        for i in databases_run.stdout.splitlines()
-        if '|' in i
-    ]
-    databases = [
-        i.split(' ')[0]
-        for i in databases
-        if i[0] != '|' and not i.startswith('Name ')
-    ]
+    databases = [i.lstrip(' ') for i in databases_run.stdout.splitlines() if '|' in i]
+    databases = [i.split(' ')[0] for i in databases if i[0] != '|' and not i.startswith('Name ')]
     return databases
 
 
 @task
 def create_database(
-    c, container, database,
-    owner=None, template=None,
-    drop=False, raise_if_exists=True,
+    c,
+    container,
+    database,
+    owner=None,
+    template=None,
+    drop=False,
+    raise_if_exists=True,
 ):
     """Create a database (empty or from template)"""
     if drop:
@@ -203,13 +197,7 @@ def drop_database(c, container, database, raise_if_not_found=False):
 @task
 def psql(c, container, database=None):
     """Run psql on a container"""
-    cmd = [
-        'docker',
-        'exec',
-        '-it',
-        container,
-        'psql'
-    ] + postgres_connection_args(c)
+    cmd = ['docker', 'exec', '-it', container, 'psql'] + postgres_connection_args(c)
     if database:
         cmd.append(database)
     c.run(join_cmd(cmd), pty=True)
@@ -225,7 +213,7 @@ def dump_database(c, container, database, path, overwrite=False, data=True, blob
         container,
         'pg_dump',
         '--format=c',
-        '--no-owner'
+        '--no-owner',
     ] + postgres_connection_args(c)
     if not data:
         cmd.append('--schema-only')
@@ -261,12 +249,16 @@ def restore_database(c, container, database, path, clean=False, drop=False):
     if parallelism > 1:
         opt.extend(['-j', str(parallelism)])
     opt.extend(['-d', database])
-    cmd = [
-        'docker',
-        'exec',
-        container,
-        'pg_restore',
-    ] + opt + [restore_path]
+    cmd = (
+        [
+            'docker',
+            'exec',
+            container,
+            'pg_restore',
+        ]
+        + opt
+        + [restore_path]
+    )
     c.run(join_cmd(['docker', 'cp', path, container + ':' + restore_path]))
     c.run(join_cmd(cmd), pty=True)
     c.run(join_cmd(['docker', 'exec', container, 'rm', '-f', restore_path]))

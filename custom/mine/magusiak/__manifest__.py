@@ -16,5 +16,5 @@
     ],
     'data': [
         'data/res_company.xml',
-    ]
+    ],
 }

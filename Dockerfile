@@ -7,6 +7,7 @@ env ODOO_EXTRA_ADDONS /mnt/extra-addons
 user root
 run mv /etc/odoo/odoo.conf /etc/odoo/odoo.conf.example \
 	&& mkdir -p "$ODOO_BASEPATH" \
+	&& chmod 775 /etc/odoo \
 	&& chown odoo:odoo /etc/odoo /var/lib/odoo "$ODOO_BASEPATH"
 # Odoo forgot these icons...
 run apt-get update \
