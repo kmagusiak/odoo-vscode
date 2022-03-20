@@ -18,7 +18,8 @@ env PYTHON_DIST_PACKAGES=/usr/lib/python3/dist-packages
 run for f in $(find "$PYTHON_DIST_PACKAGES/odoo" -type l); do ln -sf "$(readlink -f $f)" "$f"; done \
 	&& mv "$PYTHON_DIST_PACKAGES/odoo" "$ODOO_BASEPATH" \
 	&& echo "$ODOO_BASEPATH" > "$PYTHON_DIST_PACKAGES/odoo.pth" \
-	&& cp /usr/bin/odoo "$ODOO_BASEPATH/odoo-bin"
+	&& mv /usr/bin/odoo "$ODOO_BASEPATH/odoo-bin" \
+	&& ln -s "$ODOO_BASEPATH/odoo-bin" /usr/bin/odoo
 # Script to manage the installation and update and debugging
 run pip3 install --no-cache click-odoo-contrib debugpy
 

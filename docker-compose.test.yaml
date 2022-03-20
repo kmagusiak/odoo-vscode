@@ -1,13 +1,13 @@
 version: "3.7"
 
-# instead use docker-compose --env-file option?
-
 services:
   odoo:
     restart: "no"
     environment:
-      - DB_NAME_TEST=test
+      - DB_NAME_TEST=test_odoo
+      - LOG_LEVEL=info
       - TEST_ENABLE=True
-      - LOG_LEVEL=debug
       - WITHOUT_DEMO=False
       - PIP_AUTO_INSTALL=1
+      - DEBUGPY_ENABLE=0
+    command: ["odoo"]

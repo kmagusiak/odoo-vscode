@@ -7,13 +7,10 @@ a container.
 ## Running
 
 ```shell
+# start up odoo and the database
 docker-compose up
-```
 
-If you want to mount your files, for example odoo sources...
-
-```shell
-# With odoo files hosted locally
+# mount odoo source files hosted locally
 git clone --depth=1 -b 15.0 git@github.com:odoo/odoo.git
 cat > docker-compose.override.yaml <<EOF
 version: "3.7"
@@ -24,6 +21,26 @@ odoo:
 	- /opt/odoo:/opt/odoo:cached
 	- /mnt:/mnt/host:ro
 EOF
+
+# connect and run things on the containers
+docker-compose exec odoo bash
+docker-compose exec odoo odoo shell
+docker-compose exec db psql -U odoo -l
+
+# copy files to and from the container
+docker copy myfile.tar dockerodoo-odoo-1:/
+```
+
+Since the default configuration is set to connect to odoo, you can run
+commands inside the odoo container without specifying most parameters.
+
+``` shell
+# run the shell
+odoo shell
+
+# connect to the database or list them
+psql -U odoo -h db
+psql -U odoo -h db -l
 ```
 
 ## Project Structure
@@ -59,6 +76,7 @@ replace the entrypoint and add a *health check* to the image.
 You can set up environment variables in `.env` file.
 These are loaded into the odoo container and a configuration file is generated
 every time the container starts at `/etc/odoo/odoo.conf`.
+The default database is `odoo`.
 
 The addon's directories are found in the following locations:
 - ODOO_BASEPATH where you find Odoo source code
@@ -82,7 +100,7 @@ File locations:
 - The workspace is mounted at `/odoo-workspace`
 - ODOO_EXTRA_ADDONS=`/odoo-workspace/custom`
 
-# Testing
+# Development and Testing
 
 ## Linting
 
@@ -90,14 +108,29 @@ A simple script `pre-commit` is there to lint the code before committing.
 You can install it as a hook or run manually with `./pre-commit lint` if you
 want the full checks.
 
-# Improvements
+## Backup and restore database
 
-TODO database.sh restore database
-- drop and recreate new
-- reset passwords and configuration
-TODO odoo.sh: update modules
-TODO test run
-TODO shell debug?
+You can use [click-odoo-contrib] to backup, restore, copy databases and
+related jobs.
+It is installed on the odoo container, so you could just mount a
+/mnt/backup folder and use it for files.
+
+You can also use `click-odoo-initdb` or `click-odoo-update` to update
+installed modules.
+
+TODO click-odoo to reset passwords and configuration
+
+## Running tests
+
+	# inside the devcontainer
+	odoo --test-enable --stop-after-init -i mymodule -d test_db_1
+
+	# using docker-compose
+	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm \
+		-e TEST_MODULES=base odoo
+
+# TODO Improvements
+
 TODO test with browser (chrome?)
 TODO github actions
 
@@ -117,10 +150,17 @@ requires to have a module to change this and migrate data
 
 Based on:
 
-* [dockerdoo](https://github.com/iterativo-git/dockerdoo)
+* [dockerdoo]
 
 Bunch of ideas taken from:
 
-* [Odoo](https://github.com/odoo) ([docker](https://github.com/odoo/docker))
-* [OCA](https://github.com/OCA) ([maintainer-quality-tools](https://github.com/OCA/maintainer-quality-tools))
-* [click-odoo-contrib](https://github.com/acsone/click-odoo-contrib)
+* [Odoo] ([odoo-docker])
+* [OCA] ([maintainer-quality-tools](https://github.com/OCA/maintainer-quality-tools))
+* [click-odoo-contrib]
+
+
+[click-odoo-contrib]: https://github.com/acsone/click-odoo-contrib
+[dockerdoo]: https://github.com/iterativo-git/dockerdoo
+[OCA]: https://github.com/OCA
+[Odoo]: https://github.com/odoo
+[odoo-docker]: https://github.com/odoo/docker

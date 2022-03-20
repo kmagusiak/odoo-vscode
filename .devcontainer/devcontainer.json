@@ -2,6 +2,7 @@
 	"name": "Python Odoo with PostgreSQL",
 	"dockerComposeFile": [
 		"../docker-compose.yaml",
+		"../docker-compose.override.yaml",
 		"docker-vscode.yaml"
 	],	
 	"service": "odoo",

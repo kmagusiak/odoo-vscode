@@ -87,6 +87,7 @@ function check_config() {
     DB_ARGS+=("--${param}" "${value}")
 }
 
+export PGHOST PGPORT PGUSER PGPASSWORD
 check_config "db_host" "$PGHOST"
 check_config "db_port" "$PGPORT"
 check_config "db_user" "$PGUSER"
@@ -102,7 +103,7 @@ esac
 case "${1:-}" in
     -- | odoo | odoo-bin | "")
         shift
-        if [[ "$1" == "scaffold" ]]
+        if [[ "${1:-}" == "scaffold" ]]
         then
             exec odoo "$@"
             exit $?
@@ -112,15 +113,19 @@ case "${1:-}" in
 
         if [ -n "${TEST_ENABLE}" ] && [ "${TEST_ENABLE}" != "False" ]
         then
-            if [ -z "${EXTRA_MODULES:-}" ]
+            if [ -z "${TEST_MODULES:-}" ]
             then
-                EXTRA_MODULES=$(python3 -c "from getaddons import get_modules; print(','.join(get_modules('${ODOO_EXTRA_ADDONS}', depth=3)))")
+                TEST_MODULES=$(python3 -c "from getaddons import get_modules; print(','.join(get_modules('${ODOO_EXTRA_ADDONS}', depth=3)))")
             fi
-            echo "ENTRY - Enable testing for modules: ${EXTRA_MODULES}"
-            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${EXTRA_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
+            if [ -n "${DB_NAME_TEST:-}" ]
+            then
+                echo "ENTRY - Drop test database: ${DB_NAME_TEST}"
+                click-odoo-dropdb --if-exists "${DB_NAME_TEST}"
+            fi
+            echo "ENTRY - Enable testing for modules: ${TEST_MODULES}"
+            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${TEST_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
-            export PGHOST PGPORT PGUSER PGPASSWORD
             ODOO_DB_LIST=$(psql -X -A -d postgres -t -c "SELECT STRING_AGG(datname, ' ') FROM pg_database WHERE datdba=(SELECT usesysid FROM pg_user WHERE usename=current_user) AND NOT datistemplate and datallowconn AND datname <> 'postgres'")
             for db in ${ODOO_DB_LIST}
             do
