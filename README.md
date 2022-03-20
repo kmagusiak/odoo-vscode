@@ -43,7 +43,7 @@ your-project/
 
 # Improvements
 
-TODO devcontainer launch odoo
+TODO /glyphicons-halflings-regular* not found in odoo
 TODO database.sh restore database
 - drop and recreate new
 - reset passwords and configuration
@@ -67,6 +67,16 @@ Store files in database by default
 requires to have a module to change this and migrate data
 
 .devcontainer doesn't work because of UID=1000 and odoo=101
+
+	# docker-compose.override.yaml
+	version: "3.7"
+
+	services:
+	odoo:
+		volumes:
+		#- ./odoo:/opt/odoo
+		- /mnt:/mnt/host:ro
+
 
 # Dockerized Odoo
 

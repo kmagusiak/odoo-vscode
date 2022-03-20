@@ -8,10 +8,13 @@ extension-pkg-whitelist=lxml
 
 [ODOOLINT]
 readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
-manifest_required_authors=Odoo Community Association (OCA)
+# manifest_required_authors=Odoo Community Association (OCA)
 manifest_required_keys=license, author
 manifest_deprecated_keys=description,active
+manifest_version_format=\d+(.\d+)+
+valid_odoo_versions=15.0
 license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
+method_required_super=create,write,read,unlink,copy,setUp,setUpClass,tearDown,default_get
 
 [MESSAGES CONTROL]
 disable=all
@@ -152,7 +155,7 @@ ignore-comments=yes
 ignore-docstrings=yes
 
 [MISCELLANEOUS]
-notes=FIXME,TODO
+notes=FIXME,TODO,XXX
 
 [IMPORTS]
 deprecated-modules=pdb,pudb,ipdb,openerp.osv
