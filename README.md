@@ -19,6 +19,7 @@ services:
 odoo:
 	volumes:
 	- /opt/odoo:/opt/odoo:cached
+	- /opt/odoo-addons:/mnt/odoo-addons:cached
 	- /mnt:/mnt/host:ro
 EOF
 
@@ -99,6 +100,8 @@ which we create here, beacuse odoo's uid=101.
 File locations:
 - The workspace is mounted at `/odoo-workspace`
 - ODOO_EXTRA_ADDONS=`/odoo-workspace/custom`
+- ODOO_BASEPATH=`/opt/odoo`
+- ODOO_BASE_ADDONS=`/mnt/odoo-addons`
 
 # Development and Testing
 
