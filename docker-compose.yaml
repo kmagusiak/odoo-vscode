@@ -21,7 +21,7 @@ services:
       - db
 
   db:
-    image: postgres:${PSQL_VERSION}
+    image: postgres:13
     restart: unless-stopped
     volumes:
       - postgres_odoo:/var/lib/postgresql/data/pgdata

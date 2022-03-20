@@ -8,10 +8,10 @@ services:
     build:
       target: vscode
     volumes:
-      - .:/workspace
+      - .:/odoo-workspace
       - vscode_home:/home/vscode
     environment:
-      - ODOO_EXTRA_ADDONS=/workspace/custom
+      - ODOO_EXTRA_ADDONS=/odoo-workspace/custom
       - ODOO_DATA_DIR=/home/vscode
       - ODOO_STAGE=devcontainer
       - PIP_AUTO_INSTALL=1

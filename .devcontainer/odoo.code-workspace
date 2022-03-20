@@ -1,0 +1,50 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "/opt/odoo"
+		},
+		{
+			"path": "/opt/odoo-enterprise"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"name": "Container odoo",
+				"driver": "PostgreSQL",
+				"previewLimit": 50,
+				"server": "db",
+				"port": 5432,
+				"database": "odoo",
+				"username": "odoo",
+				"password": "odoo"
+			},
+			{
+				"name": "Container postgres",
+				"driver": "PostgreSQL",
+				"previewLimit": 50,
+				"server": "db",
+				"port": 5432,
+				"database": "postgres",
+				"username": "odoo",
+				"password": "odoo"
+			}
+		]
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Current File",
+				"type": "python",
+				"request": "launch",
+				"program": "${file}",
+				"console": "integratedTerminal",
+				"justMyCode": true
+			}
+		]
+	}
+}

@@ -16,7 +16,7 @@ fi
 
 # set all variables
 : ${ODOO_EXTRA_ADDONS:=/mnt/extra-addons}
-EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} 2>&1)
+EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} ${ODOO_BASEPATH:-/opt/odoo} 2>&1)
 [ ! -d "${ODOO_ENTERPRISE}" ] || EXTRA_ADDONS_PATHS+=",${ODOO_ENTERPRISE}"
 
 if [ ! -f ${ODOO_RC} ]

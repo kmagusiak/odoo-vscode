@@ -31,10 +31,10 @@ run apt-get update \
 	&& pip3 install --no-cache invoke -r /tmp/requirements.txt \
 	&& rm -f /tmp/requirements.txt
 run useradd -G odoo --create-home vscode \
-	&& mkdir /workspace \
-	&& chown vscode:odoo /workspace
+	&& mkdir /odoo-workspace \
+	&& chown vscode:odoo /odoo-workspace
 user odoo
-volume ["/workspace"]
+volume ["/odoo-workspace"]
 
 # PRODUCTION
 from base as production

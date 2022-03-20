@@ -7,9 +7,8 @@
 	"service": "odoo",
 	"remoteUser": "vscode",
 	"shutdownAction": "stopCompose",
-	"postCreateCommand": "/workspace/resources/update_workspace.sh",
 
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/odoo-workspace",
 
 	"settings": {
 		"editor.insertSpaces": false,

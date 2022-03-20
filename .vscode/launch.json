@@ -29,19 +29,9 @@
             "program": "/usr/bin/odoo",
             "args": [
                 "--dev=qweb,xml",
-                "--log-level=info",
+                "--log-level=debug",
                 "--workers=0",
                 "--limit-time-real=100000",
-            ],
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}/odoo",
-                    "remoteRoot": "/opt/odoo"
-                },
-                {
-                    "localRoot": "${workspaceFolder}/odoo-enterprise",
-                    "remoteRoot": "/opt/odoo-enterprise"
-                }
             ]
         },
         {
@@ -54,17 +44,8 @@
             "args": [
                 "shell",
                 "--log-level=info",
+                "--workers=0",
                 "--limit-time-real=100000",
-            ],
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}/odoo",
-                    "remoteRoot": "/opt/odoo"
-                },
-                {
-                    "localRoot": "${workspaceFolder}/odoo-enterprise",
-                    "remoteRoot": "/opt/odoo-enterprise"
-                }
             ]
         }
     ]
