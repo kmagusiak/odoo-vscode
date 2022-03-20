@@ -6,7 +6,7 @@ services:
   odoo:
     restart: "no"
     environment:
-      - DBNAME_TEST=test
+      - DB_NAME_TEST=test
       - TEST_ENABLE=True
       - LOG_LEVEL=debug
       - WITHOUT_DEMO=False

@@ -7,8 +7,11 @@ user root
 run mv /etc/odoo/odoo.conf /etc/odoo/odoo.conf.example \
 	&& mkdir -p "$ODOO_BASEPATH" \
 	&& chown odoo:odoo /etc/odoo /var/lib/odoo "$ODOO_BASEPATH"
-# Move odoo package to /opt
-# we must also update the links
+# Odoo forgot these icons...
+run apt-get update \
+	&& apt-get -y install fonts-glyphicons-halflings
+# Move odoo package to $ODOO_BASEPATH
+# (we must also update the links)
 env PYTHON_DIST_PACKAGES=/usr/lib/python3/dist-packages
 run for f in $(find "$PYTHON_DIST_PACKAGES/odoo" -type l); do ln -sf "$(readlink -f $f)" "$f"; done \
 	&& mv "$PYTHON_DIST_PACKAGES/odoo" "$ODOO_BASEPATH" \

@@ -34,8 +34,8 @@ db_port = ${PGPORT}
 db_sslmode = ${DB_SSLMODE:-prefer}
 db_template = ${DB_TEMPLATE:-template1}
 db_user = ${PGUSER}
-dbfilter = ${DBFILTER:-.*}
-db_name = ${DBNAME:-}
+dbfilter = ${DB_FILTER:-.*}
+db_name = ${DB_NAME:-}
 limit_request = ${LIMIT_REQUEST:-8196}
 limit_memory_hard = ${LIMIT_MEMORY_HARD:-2684354560}
 limit_memory_soft = ${LIMIT_MEMORY_SOFT:-2147483648}
@@ -110,7 +110,7 @@ case "${1:-}" in
                 EXTRA_MODULES=$(python3 -c "from getaddons import get_modules; print(','.join(get_modules('${ODOO_EXTRA_ADDONS}', depth=3)))")
             fi
             echo "ENTRY - Enable testing for modules: ${EXTRA_MODULES}"
-            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${EXTRA_MODULES}" "-d" "${DBNAME_TEST:-${DBNAME}}"
+            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${EXTRA_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
             export PGHOST PGPORT PGUSER PGPASSWORD

@@ -43,7 +43,6 @@ your-project/
 
 # Improvements
 
-TODO /glyphicons-halflings-regular* not found in odoo
 TODO database.sh restore database
 - drop and recreate new
 - reset passwords and configuration

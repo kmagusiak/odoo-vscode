@@ -8,7 +8,7 @@ extension-pkg-whitelist=lxml
 
 [ODOOLINT]
 readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
-# manifest_required_authors=Odoo Community Association (OCA)
+manifest_required_authors=Odoo Community Association (OCA),Krzysztof Magusiak
 manifest_required_keys=license, author
 manifest_deprecated_keys=description,active
 manifest_version_format=\d+(.\d+)+
