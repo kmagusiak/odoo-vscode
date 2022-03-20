@@ -82,13 +82,20 @@ File locations:
 - The workspace is mounted at `/odoo-workspace`
 - ODOO_EXTRA_ADDONS=`/odoo-workspace/custom`
 
+# Testing
+
+## Linting
+
+A simple script `pre-commit` is there to lint the code before committing.
+You can install it as a hook or run manually with `./pre-commit lint` if you
+want the full checks.
+
 # Improvements
 
 TODO database.sh restore database
 - drop and recreate new
 - reset passwords and configuration
 TODO odoo.sh: update modules
-TODO lint run
 TODO test run
 TODO shell debug?
 TODO test with browser (chrome?)

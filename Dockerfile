@@ -33,6 +33,7 @@ user root
 add requirements.txt /tmp
 run apt-get update \
 	&& apt-get -y install git htop less vim \
+	&& apt-get -y install libxml2-utils \
 	&& pip3 install --no-cache invoke -r /tmp/requirements.txt \
 	&& rm -f /tmp/requirements.txt
 run useradd -G odoo --create-home vscode \

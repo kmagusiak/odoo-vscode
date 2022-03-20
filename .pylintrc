@@ -3,7 +3,7 @@ profile=no
 ignore=CVS,.git,studio_customization
 persistent=yes
 cache-size=500
-load-plugins=pylint.extensions.docstyle,pylint.extensions.mccabe
+load-plugins=pylint.extensions.docstyle,pylint.extensions.mccabe,pylint_odoo
 extension-pkg-whitelist=lxml
 
 [ODOOLINT]
@@ -79,7 +79,8 @@ disable=all
 #   wrong-tabs-instead-of-spaces - W7910
 #   xml-syntax-error - E7902
 
-enable=anomalous-backslash-in-string,
+enable=odoolint,
+    anomalous-backslash-in-string,
     assignment-from-none,
     api-one-deprecated,
     api-one-multi-together,
@@ -149,13 +150,48 @@ comment=no
 [FORMAT]
 indent-string='    '
 expected-line-ending-format=LF
+max-line-length=100
+ignore-long-lines=^\s*(# )?<?https?://\S+>?$
 
 [SIMILARITIES]
+min-similarity-lines=4
 ignore-comments=yes
 ignore-docstrings=yes
 
 [MISCELLANEOUS]
 notes=FIXME,TODO,XXX
+
+[BASIC]
+good-names=i,j,k,ex,Run,_
+function-rgx=[a-z_][a-z0-9_]{2,30}$
+function-name-hint=[a-z_][a-z0-9_]{2,30}$
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+variable-name-hint=[a-z_][a-z0-9_]{2,30}$
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+const-name-hint=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+attr-rgx=[a-z_][a-z0-9_]{2,30}$
+attr-name-hint=[a-z_][a-z0-9_]{2,30}$
+argument-rgx=[a-z_][a-z0-9_]{2,30}$
+argument-name-hint=[a-z_][a-z0-9_]{2,30}$
+class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,30}|(__.*__))$
+class-attribute-name-hint=([A-Za-z_][A-Za-z0-9_]{2,30}|(__.*__))$
+inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
+inlinevar-name-hint=[A-Za-z_][A-Za-z0-9_]*$
+class-rgx=[A-Z_][a-zA-Z0-9]+$
+class-name-hint=[A-Z_][a-zA-Z0-9]+$
+module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+module-name-hint=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+method-rgx=[a-z_][a-z0-9_]{2,30}$
+method-name-hint=[a-z_][a-z0-9_]{2,30}$
+no-docstring-rgx=^_
+docstring-min-length=-1
+
+[ELIF]
+max-nested-blocks=4
+
+[VARIABLES]
+init-import=no
+dummy-variables-rgx=_+[a-zA-Z0-9]*?$
 
 [IMPORTS]
 deprecated-modules=pdb,pudb,ipdb,openerp.osv

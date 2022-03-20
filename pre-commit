@@ -3,7 +3,7 @@ set -eu
 cd "$(dirname "$0")"
 
 case "${1:-run}" in
-	run) ;;
+	run | lint) ;;
 	install)
 		echo "Installing pre-commit"
 		(cd .git/hooks && ln -sf ../../pre-commit .)
@@ -25,4 +25,23 @@ esac
 flake8
 black --check .
 isort --check-only .
+
+if type xmllint &> /dev/null
+then
+	find -name '*.xml' -type f | xargs xmllint -noout
+elif [ "${1:-}" == 'lint' ]
+then
+	echo "xmllint not installed"
+	exit 1
+else
+	echo "xmllint not installed, skipping"
+fi
+
+if [ "${1:-}" == 'lint' ]
+then
+	# only during linting (tools which are quite slow)
+	echo "pylint odoo..."
+	pylint --errors-only -e odoolint ./custom/
+fi
+
 echo "All good to commit"
