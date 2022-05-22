@@ -37,7 +37,6 @@ fi
 if [ "${1:-}" == 'lint' ]
 then
 	# only during linting (tools which are quite slow)
-	echo "pylint odoo..."
 	pylint --errors-only -e odoolint $(find -name '__manifest__.py' -exec dirname '{}' ';')
 fi
 

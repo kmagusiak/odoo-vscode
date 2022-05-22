@@ -1,6 +1,7 @@
 from odoo:15 as base
 env PYTHONUNBUFFERED 1
 env ODOO_BASEPATH /opt/odoo
+env ODOO_BASE_ADDONS /mnt/odoo-addons
 env ODOO_EXTRA_ADDONS /mnt/extra-addons
 
 # Changes to run with a dynamic container

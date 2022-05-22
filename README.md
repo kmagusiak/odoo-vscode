@@ -135,7 +135,6 @@ TODO click-odoo to reset passwords and configuration
 # TODO Improvements
 
 TODO test with browser (chrome?)
-TODO github actions
 
 Wanted commands:
 - backup db
