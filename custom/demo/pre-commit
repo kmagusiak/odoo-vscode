@@ -23,21 +23,23 @@ flake8
 black --check .
 isort --check-only .
 
-if type xmllint &> /dev/null
+if [ "${1:-}" != 'lint' ]
+then
+	true  # skipping xmllint
+elif type xmllint &> /dev/null
 then
 	find -name '*.xml' -type f | xargs xmllint -noout
-elif [ "${1:-}" == 'lint' ]
-then
+else
 	echo "xmllint not installed"
 	exit 1
-else
-	echo "xmllint not installed, skipping"
 fi
 
 if [ "${1:-}" == 'lint' ]
 then
 	# only during linting (tools which are quite slow)
-	pylint --errors-only -e odoolint $(find -name '__manifest__.py' -exec dirname '{}' ';')
+	# Skipping: import-error (odoo not available in github actions)
+	pylint --errors-only -e odoolint -d import-error \
+		$(find -name '__manifest__.py' -exec dirname '{}' ';')
 fi
 
 echo "All good to commit"
