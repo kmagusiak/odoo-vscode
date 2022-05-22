@@ -13,7 +13,8 @@ run mv /etc/odoo/odoo.conf /etc/odoo/odoo.conf.example \
 run apt-get update \
 	&& apt-get -y install fonts-glyphicons-halflings
 # Move odoo package to $ODOO_BASEPATH
-# (we must also update the links)
+# we must add a pth file to indicate where we move files
+# we must also update the links
 env PYTHON_DIST_PACKAGES=/usr/lib/python3/dist-packages
 run for f in $(find "$PYTHON_DIST_PACKAGES/odoo" -type l); do ln -sf "$(readlink -f $f)" "$f"; done \
 	&& mv "$PYTHON_DIST_PACKAGES/odoo" "$ODOO_BASEPATH" \
@@ -23,7 +24,7 @@ run for f in $(find "$PYTHON_DIST_PACKAGES/odoo" -type l); do ln -sf "$(readlink
 # Script to manage the installation and update and debugging
 run pip3 install --no-cache click-odoo-contrib debugpy
 
-# Healthcheck and entrypoint
+# Entrypoint
 copy --chown=odoo:odoo ./resources/entrypoint.sh /
 copy --chown=odoo:odoo ./resources/getaddons.py /
 entrypoint ["/entrypoint.sh"]

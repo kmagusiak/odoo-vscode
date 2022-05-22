@@ -1,0 +1,44 @@
+#!/bin/bash
+set -eu
+cd "$(dirname "$0")"
+
+case "${1:-run}" in
+	run | lint) ;;
+	install)
+		echo "Installing pre-commit"
+		(cd .git/hooks && ln -sf ../../pre-commit .)
+		exit;;
+	uninstall)
+		echo "Uninstalling pre-commit"
+		rm -f .git/hooks/pre-commit
+		exit;;
+	*)
+		echo "Invalid option: $*"
+		echo "Supported options: install, uninstall"
+		exit 1;;
+esac
+
+# Run checks
+flake8
+black --check .
+isort --check-only .
+
+if type xmllint &> /dev/null
+then
+	find -name '*.xml' -type f | xargs xmllint -noout
+elif [ "${1:-}" == 'lint' ]
+then
+	echo "xmllint not installed"
+	exit 1
+else
+	echo "xmllint not installed, skipping"
+fi
+
+if [ "${1:-}" == 'lint' ]
+then
+	# only during linting (tools which are quite slow)
+	echo "pylint odoo..."
+	pylint --errors-only -e odoolint $(find -name '__manifest__.py' -exec dirname '{}' ';')
+fi
+
+echo "All good to commit"

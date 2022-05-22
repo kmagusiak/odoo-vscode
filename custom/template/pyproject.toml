@@ -1,0 +1,17 @@
+[build-system]
+requires = [
+]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+skip-string-normalization = 1
+exclude = "custom/server-tools"
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip = "custom/server-tools"
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"

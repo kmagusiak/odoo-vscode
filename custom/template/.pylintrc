@@ -1,6 +1,6 @@
 [MASTER]
 profile=no
-ignore=CVS,.git,studio_customization
+ignore=.git,studio_customization
 persistent=yes
 cache-size=500
 load-plugins=pylint.extensions.docstyle,pylint.extensions.mccabe,pylint_odoo
@@ -112,7 +112,6 @@ enable=odoolint,
     method-required-super,
     method-search,
     missing-newline-extrafiles,
-    missing-readme,
     missing-import-error,
     missing-manifest-dependency,
     unnecessary-utf8-coding-comment,

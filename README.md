@@ -50,12 +50,10 @@ psql -U odoo -h db -l
 your-project/
  ├── .devcontainer/     # vscode development in container
  │   ├── devconainer.json    # definition of the container
- │   ├── docker-vscode.yaml  # docker-compose for the container
- │   └── odoo.code-workspace # workspace to use inside the container
+ │   └── docker-vscode.yaml  # docker-compose for the container
  ├── .vscode/           # vscode default configuration
  ├── custom/            # Custom modules goes here, same level hierarchy **REQUIRED**
  │   ├── OCA/
- │   ├── enterprise/
  │   └── myaddons/
  ├── resources/         # Scripts for service automation
  ├── ...                # Common files (.gitignore, etc.)
@@ -63,6 +61,7 @@ your-project/
  ├── Dockerfile         # Image definition
  ├── docker-compose.yml # The default docker-compose
  ├── requirements.txt   # Python requirements for development
+ ├── vscode.code-workspace # workspace to use inside the container
  └── README.md          # This file
 ```
 
@@ -82,7 +81,8 @@ The default database is `odoo`.
 The addon's directories are found in the following locations:
 - ODOO_BASEPATH where you find Odoo source code
 - ODOO_EXTRA_ADDONS where you find your addons
-- ODOO_BASE_ADDONS where you find other already available addons (optional)
+- ODOO_BASE_ADDONS where you find other already available addons
+  like *enterprise* (optional)
 
 *Addon paths* are generated dynamically, so you can checkout entire
 Odoo addon repositories in the `custom` directory

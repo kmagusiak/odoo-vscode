@@ -1,4 +1,5 @@
 version: "3.7"
+# Base for running docker
 
 volumes:
   odoo_data:

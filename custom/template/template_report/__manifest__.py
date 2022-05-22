@@ -10,6 +10,6 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'report/report.xml',
+        'reports/report.xml',
     ],
 }

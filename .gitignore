@@ -3,6 +3,4 @@
 __pycache__
 
 # Local files
-/odoo
-/odoo-enterprise
 /docker-compose.override.yaml

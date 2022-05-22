@@ -22,26 +22,10 @@ esac
 [ -d .git ] || cd ../..
 
 # Run checks
-flake8
-black --check .
-isort --check-only .
+for precommit in custom/*/pre-commit
+do
+	echo "Project > $precommit"
+	(cd "$(dirname "$precommit")" && ./pre-commit "${1:-}")
+done
 
-if type xmllint &> /dev/null
-then
-	find -name '*.xml' -type f | xargs xmllint -noout
-elif [ "${1:-}" == 'lint' ]
-then
-	echo "xmllint not installed"
-	exit 1
-else
-	echo "xmllint not installed, skipping"
-fi
-
-if [ "${1:-}" == 'lint' ]
-then
-	# only during linting (tools which are quite slow)
-	echo "pylint odoo..."
-	pylint --errors-only -e odoolint ./custom/
-fi
-
-echo "All good to commit"
+echo "Project > All good to commit"
