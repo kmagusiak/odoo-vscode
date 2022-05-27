@@ -123,7 +123,7 @@ case "${1:-}" in
                 click-odoo-dropdb --if-exists "${DB_NAME_TEST}"
             fi
             echo "ENTRY - Enable testing for modules: ${TEST_MODULES}"
-            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${TEST_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
+            set -- "$@" "--test-enable" "--stop-after-init" "-i" "base,${TEST_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
             ODOO_DB_LIST=$(psql -X -A -d postgres -t -c "SELECT STRING_AGG(datname, ' ') FROM pg_database WHERE datdba=(SELECT usesysid FROM pg_user WHERE usename=current_user) AND NOT datistemplate and datallowconn AND datname <> 'postgres'")

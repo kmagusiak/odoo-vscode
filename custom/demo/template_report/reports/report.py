@@ -20,7 +20,7 @@ class Report(models.Model):
                 ,i.write_uid
                 ,i.name
             from sale_order i
-            where s.state = 'sale'
+            where i.state = 'sale'
         )
             """
         )

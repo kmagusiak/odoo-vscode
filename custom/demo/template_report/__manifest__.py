@@ -7,6 +7,7 @@
     'depends': [
         # Odoo modules
         'base',
+        'sale',
     ],
     'data': [
         'security/ir.model.access.csv',
