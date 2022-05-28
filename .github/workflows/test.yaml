@@ -16,6 +16,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Build image
+      run: docker-compose -f "docker-compose.yaml" build
+
     - name: Run test container
       run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run odoo
 
