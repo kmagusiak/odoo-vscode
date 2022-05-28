@@ -2,14 +2,11 @@ name: Run test
 
 on:
   workflow_dispatch:
-    inputs:
-      timeout:
-        description: Timeout in minutes
-        default: "10"
+    inputs: {}
 
 jobs:
   test_run:
-    timeout-minutes: ${{ fromJSON(inputs.timeout) }}
+    timeout-minutes: 10
     runs-on: ubuntu-latest
 
     steps:
