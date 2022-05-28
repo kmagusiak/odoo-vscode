@@ -5,16 +5,11 @@ on:
     inputs:
       timeout:
         description: Timeout in minutes
-        type: number
-        default: 10
-    secrets:
-      AZURE_SECRET:
-        required: true
-
+        default: "10"
 
 jobs:
   test_run:
-    timeout-minutes: ${{ inputs.timeout }}
+    timeout-minutes: ${{ fromJSON(inputs.timeout) }}
     runs-on: ubuntu-latest
 
     steps:
