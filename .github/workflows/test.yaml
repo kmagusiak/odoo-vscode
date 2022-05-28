@@ -1,0 +1,29 @@
+name: Run test
+
+on:
+  workflow_call:
+    inputs:
+      timeout:
+        description: Timeout in minutes
+        type: int
+        default: 10
+    secrets:
+      AZURE_SECRET:
+        required: true
+
+
+jobs:
+  test_run:
+    timeout-minutes: ${{ inputs.timeout }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Run test container
+      run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run odoo
+
+    - name: Stop containers
+      if: always()
+      run: docker-compose -f "docker-compose.yml" down
