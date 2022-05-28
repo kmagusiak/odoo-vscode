@@ -5,7 +5,7 @@ on:
     inputs:
       timeout:
         description: Timeout in minutes
-        type: int
+        type: number
         default: 10
     secrets:
       AZURE_SECRET:
