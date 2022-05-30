@@ -19,7 +19,7 @@ fi
 ODOO_BIN="$ODOO_BASEPATH/odoo-bin"
 : ${ODOO_BASE_ADDONS:=/mnt/odoo-addons}
 : ${ODOO_EXTRA_ADDONS:=/mnt/extra-addons}
-EXTRA_ADDONS_PATHS=$(python3 getaddons.py ${ODOO_EXTRA_ADDONS} ${ODOO_BASE_ADDONS} ${ODOO_BASEPATH} 2>&1)
+EXTRA_ADDONS_PATHS=$(odoo-getaddons.py ${ODOO_EXTRA_ADDONS} ${ODOO_BASE_ADDONS} ${ODOO_BASEPATH})
 
 if [ ! -f ${ODOO_RC} ]
 then
@@ -68,7 +68,7 @@ fi
 
 if [ -n "$EXTRA_ADDONS_PATHS" ]
 then
-    echo "ENTRY - Addon paths: $EXTRA_ADDONS_PATHS"
+    echo "ENTRY - Addons paths: $EXTRA_ADDONS_PATHS"
 fi
 if [ -n "$EXTRA_ADDONS_PATHS" ] && [ "${PIP_AUTO_INSTALL:-}" -eq "1" ]
 then
@@ -76,7 +76,7 @@ then
     do
         [ -d "$ADDON_PATH" ] || continue
         echo "ENTRY - Auto install requirements.txt from $ADDON_PATH"
-        find $ADDON_PATH -name 'requirements.txt' -exec pip3 install --user -r {} \;
+        find "$ADDON_PATH" -name 'requirements.txt' -exec pip3 install --user -r {} \;
     done
 fi
 
@@ -101,29 +101,49 @@ case "${1:-}" in
 esac
 
 case "${1:-}" in
-    -- | odoo | odoo-bin | "")
-        shift
-        if [[ "${1:-}" == "scaffold" ]]
+    -- | odoo | odoo-bin | odoo-test | "")
+        if [[ "${1:-}" == odoo-test ]]
         then
+            ODOO_BIN=$(which odoo-test)
+            TEST_MODULE_PATH=$ODOO_EXTRA_ADDONS
+            shift
+        elif [[ "${2:-}" == "scaffold" ]]
+        then
+            shift
             exec odoo "$@"
             exit $?
+        else
+            shift
         fi
 
+        echo "ENTRY - Wait for postgres"
         wait-for-psql.py "${DB_ARGS[@]}" --timeout=30
 
-        if [ -n "${TEST_ENABLE}" ] && [ "${TEST_ENABLE}" != "False" ]
+        if [ -n "${TEST_MODULE_PATH:-}" ]
         then
+            echo "ENTRY - Enable testing for path: ${TEST_MODULE_PATH}"
+            set -- "${DB_NAME_TEST:-${DB_NAME}}" "${TEST_MODULE_PATH}" "$@"
+        elif [ -n "${TEST_ENABLE}" ] && [ "${TEST_ENABLE}" != "False" ]
+        then
+            # TODO replace with odoo-test
             if [ -z "${TEST_MODULES:-}" ]
             then
-                TEST_MODULES=$(python3 -c "from getaddons import get_modules; print(','.join(get_modules('${ODOO_EXTRA_ADDONS}', depth=3)))")
+                TEST_MODULES=$(odoo-getaddons.py -m 3 "${ODOO_EXTRA_ADDONS}")
+            fi
+            if [ -z "${TEST_MODULES:-}" ]
+            then
+                echo "ENTRY - No modules to test, abort"
+                exit 1
             fi
             if [ -n "${DB_NAME_TEST:-}" ]
             then
                 echo "ENTRY - Drop test database: ${DB_NAME_TEST}"
                 click-odoo-dropdb --if-exists "${DB_NAME_TEST}"
+                echo "ENTRY - Initialize database: ${DB_NAME_TEST}"
+                click-odoo-initdb --new-database "${DB_NAME_TEST}" --demo --no-cache -m base
             fi
             echo "ENTRY - Enable testing for modules: ${TEST_MODULES}"
-            set -- "$@" "--test-enable" "--stop-after-init" "-i" "base,${TEST_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
+            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${TEST_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
             ODOO_DB_LIST=$(psql -X -A -d postgres -t -c "SELECT STRING_AGG(datname, ' ') FROM pg_database WHERE datdba=(SELECT usesysid FROM pg_user WHERE usename=current_user) AND NOT datistemplate and datallowconn AND datname <> 'postgres'")

@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # This file was customly adapted from OCA's maintainer tools
 
 """
-Usage: get-addons [-m] path1 [path2 ...]
+Usage: odoo-getaddons [-m] path1 [path2 ...]
 Given a list  of paths, finds and returns a list of valid addons paths.
 With -m flag, will return a list of modules names instead.
 """
@@ -142,55 +142,48 @@ def get_localizations_with_dependents(modules):
 
 
 def main(argv=None):
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Given a list of paths, find addons paths")
+    parser.add_argument(
+        '-m', '--modules',  metavar='depth', type=int, nargs='?', const=1,
+        help="List the module names instead of paths",
+    )
+    parser.add_argument('--only-applications', dest='application', action='store_const', const=True)
+    parser.add_argument('--exclude-applications', dest='application', action='store_const', const=False)
+    parser.add_argument('--only-localizations', dest='localization', action='store_const', const=True)
+    parser.add_argument('--exclude-localizations', dest='localization', action='store_const', const=False)
+    parser.add_argument('-e', '--exclude', dest='exclude')
+    parser.add_argument('paths', metavar='path', nargs='+')
     if argv is None:
-        argv = sys.argv
-    params = argv[1:]
-    if not params:
-        print(__doc__)
-        return 1
+        argv = sys.argv[1:]
+    args = parser.parse_args(argv)
 
-    list_modules = False
-    application = None
-    localization = None
-    exclude_modules = []
+    list_modules_depth = args.modules
+    exclude_modules = args.exclude.split(',') if args.exclude else []
+    paths = args.paths
 
-    while params and params[0].startswith('-'):
-        param = params.pop(0)
-        if param == '-m':
-            list_modules = True
-        elif param == '-e':
-            exclude_modules = [x for x in params.pop(0).split(',')]
-        elif param == '--only-applications':
-            application = True
-        elif param == '--exclude-applications':
-            application = False
-        elif param == '--only-localization':
-            localization = True
-        elif param == '--exclude-localization':
-            localization = False
-        elif param.startswith('-'):
-            raise Exception('Unknown parameter: %s' % param)
-    if list_modules:
+    if list_modules_depth:
         modules = {}
-        for path in params:
-            modules.update(get_modules_info(path))
+        for path in paths:
+            modules.update(get_modules_info(path, depth=list_modules_depth))
         res = set(modules.keys())
         applications, localizations = set(), set()
-        if application is True or application is False:
+        if isinstance(args.application, bool):
             applications = get_applications_with_dependencies(modules)
-            if not application:
+            if not args.application:
                 res -= applications
                 applications = set()
-        if localization is True or localization is False:
+        if isinstance(args.localization, bool):
             localizations = get_localizations_with_dependents(modules)
-            if not localization:
+            if not args.localization:
                 res -= localizations
                 localizations = set()
-        if application or localization:
+        if args.application or args.localization:
             res = applications | localizations
         res = sorted(list(res))
     else:
-        lists = [get_addons(path) for path in params]
+        lists = [get_addons(path) for path in paths]
         res = [x for ls in lists for x in ls]  # flatten list of lists
     if exclude_modules:
         res = [x for x in res if x not in exclude_modules]

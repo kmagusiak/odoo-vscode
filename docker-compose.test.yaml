@@ -7,8 +7,8 @@ services:
     environment:
       - DB_NAME_TEST=test_odoo
       - LOG_LEVEL=info
-      - TEST_ENABLE=True
+      # - TEST_ENABLE=True
       - WITHOUT_DEMO=False
       - PIP_AUTO_INSTALL=1
       - DEBUGPY_ENABLE=0
-    command: ["odoo"]
+    command: ["odoo-test"]

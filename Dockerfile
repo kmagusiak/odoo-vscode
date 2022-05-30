@@ -27,7 +27,7 @@ run pip3 install --no-cache click-odoo-contrib debugpy
 
 # Entrypoint
 copy --chown=odoo:odoo ./resources/entrypoint.sh /
-copy --chown=odoo:odoo ./resources/getaddons.py /
+copy --chown=odoo:odoo ./resources/odoo-getaddons.py ./resources/odoo-test /usr/local/bin
 entrypoint ["/entrypoint.sh"]
 
 # VSCODE (tools for development)
