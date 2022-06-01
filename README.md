@@ -121,32 +121,22 @@ It is installed on the odoo container, so you could just mount a
 You can also use `click-odoo-initdb` or `click-odoo-update` to update
 installed modules.
 
-TODO click-odoo to reset passwords and configuration
-
 ## Running tests
 
 	# inside the devcontainer
 	odoo --test-enable --stop-after-init -i mymodule -d test_db_1
+	# alternatively
+	odoo-test
 
 	# using docker-compose
-	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm \
-		-e TEST_MODULES=base odoo
+	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 
 # TODO Improvements
 
-TODO test with browser (chrome?)
-
 Wanted commands:
-- backup db
-- restore db
 - create db template
-- reset config (and password)
-- list_db
-- lint
-- test
-
-Store files in database by default
-requires to have a module to change this and migrate data
+- store files in database by default (make a module for this)
+- unit/integration tests and test with browser
 
 # Credits
 

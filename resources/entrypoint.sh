@@ -123,27 +123,6 @@ case "${1:-}" in
         then
             echo "ENTRY - Enable testing for path: ${TEST_MODULE_PATH}"
             set -- "${DB_NAME_TEST:-${DB_NAME}}" "${TEST_MODULE_PATH}" "$@"
-        elif [ -n "${TEST_ENABLE}" ] && [ "${TEST_ENABLE}" != "False" ]
-        then
-            # TODO replace with odoo-test
-            if [ -z "${TEST_MODULES:-}" ]
-            then
-                TEST_MODULES=$(odoo-getaddons.py -m 3 "${ODOO_EXTRA_ADDONS}")
-            fi
-            if [ -z "${TEST_MODULES:-}" ]
-            then
-                echo "ENTRY - No modules to test, abort"
-                exit 1
-            fi
-            if [ -n "${DB_NAME_TEST:-}" ]
-            then
-                echo "ENTRY - Drop test database: ${DB_NAME_TEST}"
-                click-odoo-dropdb --if-exists "${DB_NAME_TEST}"
-                echo "ENTRY - Initialize database: ${DB_NAME_TEST}"
-                click-odoo-initdb --new-database "${DB_NAME_TEST}" --demo --no-cache -m base
-            fi
-            echo "ENTRY - Enable testing for modules: ${TEST_MODULES}"
-            set -- "$@" "--test-enable" "--stop-after-init" "-i" "${TEST_MODULES}" "-d" "${DB_NAME_TEST:-${DB_NAME}}"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
             ODOO_DB_LIST=$(psql -X -A -d postgres -t -c "SELECT STRING_AGG(datname, ' ') FROM pg_database WHERE datdba=(SELECT usesysid FROM pg_user WHERE usename=current_user) AND NOT datistemplate and datallowconn AND datname <> 'postgres'")
