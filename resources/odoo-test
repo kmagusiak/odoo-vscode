@@ -16,7 +16,9 @@ get_modules = __import__('odoo-getaddons').get_modules
 def run_command(function, args):
     args = ["'" + a.replace('"', '\"') + "'" for a in args]
     command = " ".join([function] + args)
-    return os.system(command)
+    result_code = os.system(command)
+    if result_code:
+        raise RuntimeError('%s failed (%d)' % (function, result_code))
 
 
 def create_database(dbname, modules=[], drop_first=True):

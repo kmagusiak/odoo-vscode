@@ -122,7 +122,7 @@ case "${1:-}" in
         if [ -n "${TEST_MODULE_PATH:-}" ]
         then
             echo "ENTRY - Enable testing for path: ${TEST_MODULE_PATH}"
-            set -- "${DB_NAME_TEST:-${DB_NAME}}" "${TEST_MODULE_PATH}" "$@"
+            set -- "${DB_NAME_TEST:-${DB_NAME:-odoo_test}}" "${TEST_MODULE_PATH}" "$@"
         elif [ "${UPGRADE_ENABLE:-0}" == "1" ]
         then
             ODOO_DB_LIST=$(psql -X -A -d postgres -t -c "SELECT STRING_AGG(datname, ' ') FROM pg_database WHERE datdba=(SELECT usesysid FROM pg_user WHERE usename=current_user) AND NOT datistemplate and datallowconn AND datname <> 'postgres'")
