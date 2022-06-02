@@ -126,7 +126,7 @@ installed modules.
 	# inside the devcontainer
 	odoo --test-enable --stop-after-init -i mymodule -d test_db_1
 	# alternatively
-	odoo-test
+	odoo-test -t -a mymodule -d test_db_1
 
 	# using docker-compose
 	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
@@ -134,7 +134,6 @@ installed modules.
 # TODO Improvements
 
 Wanted commands:
-- create db template
 - store files in database by default (make a module for this)
 - unit/integration tests and test with browser
 

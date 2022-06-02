@@ -10,4 +10,4 @@ services:
       - WITHOUT_DEMO=False
       - PIP_AUTO_INSTALL=1
       - DEBUGPY_ENABLE=0
-    command: ["odoo-test"]
+    command: ["odoo-test", "--test-enable", "--"]
