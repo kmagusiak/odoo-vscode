@@ -70,7 +70,7 @@ if [ -n "$EXTRA_ADDONS_PATHS" ]
 then
     echo "ENTRY - Addons paths: $EXTRA_ADDONS_PATHS"
 fi
-if [ -n "$EXTRA_ADDONS_PATHS" ] && [ "${PIP_AUTO_INSTALL:-}" -eq "1" ]
+if [ -n "$EXTRA_ADDONS_PATHS" ] && [ "${PIP_AUTO_INSTALL:-0}" -eq "1" ]
 then
     for ADDON_PATH in "$ODOO_BASE_ADDONS" "$ODOO_EXTRA_ADDONS"
     do
