@@ -29,10 +29,13 @@ def run_command(function, args):
         raise RuntimeError('%s failed (%d)' % (function, result_code))
 
 
-def create_database(dbname, modules=[], drop_first=True):
-    if drop_first:
-        print(f"TEST - Drop database: {dbname}")
-        run_command('click-odoo-dropdb', ["--if-exists", dbname])
+def create_database(dbname, modules=[], template=None):
+    print(f"TEST - Drop database: {dbname}")
+    run_command('click-odoo-dropdb', ["--if-exists", dbname])
+    if template:
+        print(f"TEST - Start from template database: {template}")
+        run_command('click-odoo-copydb', [template, dbname])
+        return
     print(f"TEST - Initialize database: {dbname}")
     modules = ['base'] + [m for m in modules if m not in ('', 'base')]
     base_modules = ','.join(modules)
@@ -57,6 +60,12 @@ def parse_args(args):
         default=dbname,
         required=not dbname,
     )
+    parser.add_argument(
+        '--template',
+        '--from-template',
+        metavar='template',
+        help="Use the database template",
+    )
     parser.add_argument('-a', '--addons', help='The addons to test')
     parser.add_argument(
         '--get-addons',
@@ -79,9 +88,9 @@ def parse_args(args):
     addons = (arg.addons or '').split(',')
     if arg.get_addons:
         addons += get_modules(arg.get_addons, depth=3)
-    base_addons = (
-        (os.environ.get('BASE_MODULES') or '') + ',' + (arg.base_addons or '')
-    ).split(',')
+    base_addons = ((os.environ.get('BASE_MODULES') or '') + ',' + (arg.base_addons or '')).split(
+        ','
+    )
     args = arg.odoo_args
     if args[:1] == ['--']:
         args = args[1:]
@@ -89,6 +98,7 @@ def parse_args(args):
         args = ['--test-enable'] + args
     return {
         'dbname': arg.database,
+        'template': arg.template,
         'addons': [a for a in set(addons) if a],
         'base_addons': base_addons,
         'odoo_args': args,
@@ -110,16 +120,12 @@ def main(args=None):
 
     # create db with base modules
     print_time('Start')
-    create_database(dbname, base_addons)
+    print(f"Modules ({len(addons)}): {','.join(addons)}")
+    create_database(dbname, base_addons, template=arg.get('template'))
     # update arguments and run odoo
     print_time('Start Test')
-    args = (
-        ["odoo", "--stop-after-init"]
-        + arg['odoo_args']
-        + ["-d", dbname, "-i", ','.join(addons)]
-    )
+    args = ["odoo", "--stop-after-init"] + arg['odoo_args'] + ["-d", dbname, "-i", ','.join(addons)]
     sys.argv = args
-    print(f"TEST - Testing modules: {','.join(addons)}")
     odoo.cli.main()
     print_time('Done')
 
