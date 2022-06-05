@@ -105,7 +105,8 @@ case "${1:-}" in
         if [[ "${1:-}" == odoo-test ]]
         then
             ODOO_BIN=$(which odoo-test)
-            TEST_MODULE_PATH=$ODOO_EXTRA_ADDONS
+            : ${TEST_MODULE_PATH:=$ODOO_EXTRA_ADDONS}
+            : ${BASE_MODULES:=base}
             shift
         elif [[ "${2:-}" == "scaffold" ]]
         then

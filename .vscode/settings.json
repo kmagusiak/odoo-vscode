@@ -38,6 +38,7 @@
 	"python.linting.enabled": true,
 	"python.linting.flake8Enabled": true,
 	"python.linting.pylintEnabled": false,
+	"python.linting.mypyEnabled": false,
 	"python.analysis.extraPaths": [
 		"./odoo",
 		"./odoo-enterprise",

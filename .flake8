@@ -1,0 +1,12 @@
+[flake8]
+# E123,E133,E226,E241,E242 are ignored by default by pep8 and flake8
+# C901 Ignore complexity
+# E203 Whitespace before ':' (black behaviour)
+# W503 Ignored and W504 is pep8: Line break should be before operator
+# F401 Module imported but unused
+ignore = C901,E123,E133,E203,E226,E241,E242,D100,D101,D400,D102,D403,D210,D205,D202,W503
+max-line-length = 100
+exclude = .git
+max-complexity = 10
+per-file-ignores =
+  **/__init__.py:F401
