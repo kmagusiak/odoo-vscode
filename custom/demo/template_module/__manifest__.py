@@ -12,4 +12,9 @@
         'security/ir.model.access.csv',
         'views/views.xml',
     ],
+    'assets': {
+        'web.assets_tests': [
+            'template_module/static/tests/tours/test_tour.js',
+        ],
+    },
 }
