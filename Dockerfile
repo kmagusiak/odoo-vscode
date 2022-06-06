@@ -35,7 +35,7 @@ from base as vscode
 user root
 add requirements.txt /tmp
 run apt-get update \
-	&& apt-get install -y --no-install-recommends git htop less vim \
+	&& apt-get install -y --no-install-recommends git htop less openssh-client vim \
 	&& apt-get install -y --no-install-recommends libxml2-utils \
 	&& apt-get install -y --no-install-recommends chromium-driver \
 	&& pip3 install --no-cache invoke -r /tmp/requirements.txt \
