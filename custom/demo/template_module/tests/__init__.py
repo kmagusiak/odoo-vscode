@@ -1,3 +1,1 @@
-from . import test_example
-from . import test_final
-from . import test_tour
+from . import test_example, test_final, test_tour
