@@ -131,12 +131,6 @@ installed modules.
 	# using docker-compose
 	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 
-# TODO Improvements
-
-Wanted commands:
-- store files in database by default (make a module for this)
-- unit/integration tests and test with browser
-
 # Credits
 
 Based on:
