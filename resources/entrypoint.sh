@@ -20,6 +20,7 @@ ODOO_BIN="$ODOO_BASEPATH/odoo-bin"
 : ${ODOO_BASE_ADDONS:=/mnt/odoo-addons}
 : ${ODOO_EXTRA_ADDONS:=/mnt/extra-addons}
 EXTRA_ADDONS_PATHS=$(odoo-getaddons.py ${ODOO_EXTRA_ADDONS} ${ODOO_BASE_ADDONS} ${ODOO_BASEPATH})
+DB_ARGS=()  # for images where ODOO_RC is already generated
 
 if [ ! -f ${ODOO_RC} ]
 then
@@ -64,6 +65,19 @@ without_demo = ${WITHOUT_DEMO:-True}
 workers = ${WORKERS:-0}
 odoo_stage = ${ODOO_STAGE:-docker}
 EOF
+else
+    # add DB arguments
+    function check_config() {
+        param="$1"
+        value="$2"
+        DB_ARGS+=("--${param}" "${value}")
+    }
+
+    export PGHOST PGPORT PGUSER PGPASSWORD
+    check_config "db_host" "$PGHOST"
+    check_config "db_port" "$PGPORT"
+    check_config "db_user" "$PGUSER"
+    check_config "db_password" "$PGPASSWORD"
 fi
 
 if [ -n "$EXTRA_ADDONS_PATHS" ]
@@ -80,19 +94,6 @@ then
     done
 fi
 
-DB_ARGS=()
-function check_config() {
-    param="$1"
-    value="$2"
-    DB_ARGS+=("--${param}" "${value}")
-}
-
-export PGHOST PGPORT PGUSER PGPASSWORD
-check_config "db_host" "$PGHOST"
-check_config "db_port" "$PGPORT"
-check_config "db_user" "$PGUSER"
-check_config "db_password" "$PGPASSWORD"
-
 # if we have an odoo command, just prepend odoo
 case "${1:-}" in
     scaffold | shell | -*)
@@ -100,6 +101,7 @@ case "${1:-}" in
         ;;
 esac
 
+# dispatch the command
 case "${1:-}" in
     -- | odoo | odoo-bin | odoo-test | "")
         if [[ "${1:-}" == odoo-test ]]

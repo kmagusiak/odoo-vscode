@@ -83,15 +83,13 @@ def parse_args(args):
         help="Enable testing",
         action='store_true',
     )
-    parser.add_argument('odoo_args', nargs=argparse.REMAINDER)
-    arg = parser.parse_args(args)
+    arg, args = parser.parse_known_args(args)
     addons = (arg.addons or '').split(',')
     if arg.get_addons:
         addons += get_modules(arg.get_addons, depth=3)
     base_addons = ((os.environ.get('BASE_MODULES') or '') + ',' + (arg.base_addons or '')).split(
         ','
     )
-    args = arg.odoo_args
     if args[:1] == ['--']:
         args = args[1:]
     if arg.test_enable:
