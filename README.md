@@ -48,21 +48,21 @@ psql -U odoo -h db -l
 
 ```bash
 your-project/
- ├── .devcontainer/     # vscode development in container
+ ├── .devcontainer/        # vscode development in container
  │   ├── devconainer.json    # definition of the container
  │   └── docker-vscode.yaml  # docker-compose for the container
- ├── .vscode/           # vscode default configuration
- ├── custom/            # Custom modules goes here, put them inside separate directories
+ ├── .vscode/              # vscode default configuration
+ ├── custom/               # Custom modules goes here, put them inside separate directories
  │   ├── OCA/
  │   └── myaddons/
- ├── resources/         # Scripts for service automation
- ├── ...                # Common files (.gitignore, etc.)
- ├── .env               # Environment definition
- ├── Dockerfile         # Image definition
- ├── docker-compose.yml # The default docker-compose
- ├── requirements.txt   # Python requirements for development
+ ├── resources/            # Scripts for service automation
+ ├── ...                   # Common files (.gitignore, etc.)
+ ├── .env                  # Environment definition
+ ├── Dockerfile            # Image definition
+ ├── docker-compose.yml    # The default docker-compose
+ ├── requirements-dev.txt  # Python requirements for development
  ├── vscode.code-workspace # workspace to use inside the container
- └── README.md          # This file
+ └── README.md             # This file
 ```
 
 ## The Dockerfile

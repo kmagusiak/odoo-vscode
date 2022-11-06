@@ -1,1 +1,7 @@
 version: "3.7"
+
+services:
+  odoo:
+    volumes: []
+    #- ./odoo:/opt/odoo:cached
+    #- ./odoo-addons:/mnt/odoo-addons:cached
