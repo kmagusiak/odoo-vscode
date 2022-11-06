@@ -1,4 +1,4 @@
-from odoo:15 as base
+from odoo:16 as base
 env PYTHONUNBUFFERED 1
 env ODOO_BASEPATH /opt/odoo
 env ODOO_BASE_ADDONS /mnt/odoo-addons

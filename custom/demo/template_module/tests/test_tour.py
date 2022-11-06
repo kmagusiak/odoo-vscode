@@ -1,4 +1,4 @@
-# https://www.odoo.com/documentation/15.0/fr/developer/reference/backend/testing.html#writing-a-test-tour
+# https://www.odoo.com/documentation/16.0/developer/reference/backend/testing.html#writing-a-test-tour
 from odoo.tests.common import HttpCase, tagged
 
 

@@ -1,4 +1,4 @@
-# https://www.odoo.com/documentation/15.0/fr/developer/reference/backend/testing.html#testing-python-code
+# https://www.odoo.com/documentation/16.0/developer/reference/backend/testing.html
 from odoo.tests.common import TransactionCase, tagged
 
 

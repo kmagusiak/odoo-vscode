@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- https://www.odoo.com/documentation/15.0/developer/reference/backend/views.html -->
+    <!-- https://www.odoo.com/documentation/16.0/developer/reference/backend/views.html -->
     <record id="template_template_form" model="ir.ui.view">
         <field name="name">template.template.form</field>
         <field name="model">template.template</field>

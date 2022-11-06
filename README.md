@@ -11,7 +11,7 @@ a container.
 docker-compose up -d
 
 # mount odoo source files hosted locally
-git clone --depth=1 -b 15.0 git@github.com:odoo/odoo.git
+git clone --depth=1 -b 16.0 git@github.com:odoo/odoo.git
 mkdir odoo-addons
 cat > docker-compose.override.yaml <<EOF
 version: "3.7"
