@@ -65,20 +65,20 @@ without_demo = ${WITHOUT_DEMO:-True}
 workers = ${WORKERS:-0}
 odoo_stage = ${ODOO_STAGE:-docker}
 EOF
-else
-    # add DB arguments
-    function check_config() {
-        param="$1"
-        value="$2"
-        DB_ARGS+=("--${param}" "${value}")
-    }
-
-    export PGHOST PGPORT PGUSER PGPASSWORD
-    check_config "db_host" "$PGHOST"
-    check_config "db_port" "$PGPORT"
-    check_config "db_user" "$PGUSER"
-    check_config "db_password" "$PGPASSWORD"
 fi
+
+# add DB arguments
+function check_config() {
+    param="$1"
+    value="$2"
+    DB_ARGS+=("--${param}" "${value}")
+}
+
+export PGHOST PGPORT PGUSER PGPASSWORD
+check_config "db_host" "$PGHOST"
+check_config "db_port" "$PGPORT"
+check_config "db_user" "$PGUSER"
+check_config "db_password" "$PGPASSWORD"
 
 if [ -n "$EXTRA_ADDONS_PATHS" ]
 then
@@ -103,7 +103,7 @@ esac
 
 # dispatch the command
 case "${1:-}" in
-    -- | odoo | odoo-bin | odoo-test | "")
+    -- | odoo | odoo-* | "")
         if [[ "${1:-}" == odoo-test ]]
         then
             ODOO_BIN=$(which odoo-test)

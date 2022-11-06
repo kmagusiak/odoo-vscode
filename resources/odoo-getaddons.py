@@ -146,13 +146,24 @@ def main(argv=None):
 
     parser = argparse.ArgumentParser(description="Given a list of paths, find addons paths")
     parser.add_argument(
-        '-m', '--modules',  metavar='depth', type=int, nargs='?', const=1,
+        '-m',
+        '--modules',
+        metavar='depth',
+        type=int,
+        nargs='?',
+        const=1,
         help="List the module names instead of paths",
     )
     parser.add_argument('--only-applications', dest='application', action='store_const', const=True)
-    parser.add_argument('--exclude-applications', dest='application', action='store_const', const=False)
-    parser.add_argument('--only-localizations', dest='localization', action='store_const', const=True)
-    parser.add_argument('--exclude-localizations', dest='localization', action='store_const', const=False)
+    parser.add_argument(
+        '--exclude-applications', dest='application', action='store_const', const=False
+    )
+    parser.add_argument(
+        '--only-localizations', dest='localization', action='store_const', const=True
+    )
+    parser.add_argument(
+        '--exclude-localizations', dest='localization', action='store_const', const=False
+    )
     parser.add_argument('-e', '--exclude', dest='exclude')
     parser.add_argument('paths', metavar='path', nargs='+')
     if argv is None:

@@ -5,7 +5,6 @@ pylint-odoo
 
 # debugging and tools
 debugpy
-invoke
 ipython
 
 # unit testing (chrome)

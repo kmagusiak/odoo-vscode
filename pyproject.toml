@@ -1,7 +1,21 @@
 [build-system]
 requires = [
+	"setuptools>=61",
+	"setuptools-scm>=6",
+	"wheel",
 ]
 build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+skip-string-normalization = 1
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
+line_length = 100
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
