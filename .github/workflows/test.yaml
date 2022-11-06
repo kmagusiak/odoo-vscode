@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
     inputs: {}
 
+concurrency:
+  # cancel already in progress jobs
+  group: ${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   test_run:
     timeout-minutes: 30

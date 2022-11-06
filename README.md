@@ -8,19 +8,19 @@ a container.
 
 ```shell
 # start up odoo and the database
-docker-compose up
+docker-compose up -d
 
 # mount odoo source files hosted locally
 git clone --depth=1 -b 15.0 git@github.com:odoo/odoo.git
+mkdir odoo-addons
 cat > docker-compose.override.yaml <<EOF
 version: "3.7"
 
 services:
-odoo:
-	volumes:
-	- /opt/odoo:/opt/odoo:cached
-	- /opt/odoo-addons:/mnt/odoo-addons:cached
-	- /mnt:/mnt/host:ro
+  odoo:
+    volumes:
+    - ./odoo:/opt/odoo:cached
+    - ./odoo-addons:/mnt/odoo-addons:cached
 EOF
 
 # connect and run things on the containers
@@ -52,7 +52,7 @@ your-project/
  │   ├── devconainer.json    # definition of the container
  │   └── docker-vscode.yaml  # docker-compose for the container
  ├── .vscode/           # vscode default configuration
- ├── custom/            # Custom modules goes here, same level hierarchy **REQUIRED**
+ ├── custom/            # Custom modules goes here, put them inside separate directories
  │   ├── OCA/
  │   └── myaddons/
  ├── resources/         # Scripts for service automation
@@ -116,7 +116,7 @@ want the full checks.
 You can use [click-odoo-contrib] to backup, restore, copy databases and
 related jobs.
 It is installed on the odoo container, so you could just mount a
-/mnt/backup folder and use it for files.
+`/mnt/backup` folder and use it for files.
 
 You can also use `click-odoo-initdb` or `click-odoo-update` to update
 installed modules.
@@ -124,9 +124,9 @@ installed modules.
 ## Running tests
 
 	# inside the devcontainer
-	odoo --test-enable --stop-after-init -i mymodule -d test_db_1
+	odoo --test-enable --stop-after-init -i template_module -d test_db_1
 	# alternatively
-	odoo-test -t -a mymodule -d test_db_1
+	odoo-test -t -a template_module -d test_db_1
 
 	# using docker-compose
 	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
