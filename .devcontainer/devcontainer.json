@@ -4,7 +4,7 @@
 		"../docker-compose.yaml",
 		"../docker-compose.override.yaml",
 		"docker-vscode.yaml"
-	],	
+	],
 	"service": "odoo",
 	"remoteUser": "vscode",
 	"shutdownAction": "stopCompose",

@@ -2,6 +2,6 @@
 .git
 .github
 .gitignore
-LICENSE
-README.md
 custom/*
+odoo/*
+odoo-addons/*

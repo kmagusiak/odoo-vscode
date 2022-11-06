@@ -20,6 +20,29 @@
             ]
         },
         {
+            "name": "Python Attach 41234 (/odoo)",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "127.0.0.1",
+                "port": 41234
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/custom",
+                    "remoteRoot": "/mnt/extra-addons"
+                },
+                {
+                    "localRoot": "${workspaceFolder}/odoo",
+                    "remoteRoot": "/opt/odoo"
+                },
+                {
+                    "localRoot": "${workspaceFolder}/odoo-addons",
+                    "remoteRoot": "/mnt/odoo-addons"
+                }
+            ]
+        },
+        {
             "name": "Odoo Debug",
             "type": "python",
             "request": "launch",
