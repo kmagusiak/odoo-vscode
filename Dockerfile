@@ -1,9 +1,7 @@
 arg ODOO_VERSION=16.0
 from ghcr.io/kmagusiak/odoo-docker:${ODOO_VERSION} as base
 
-###############################
-# DEV (tools for development)
-from base as dev
+# tools for development
 user root
 add requirements-dev.txt /tmp
 run apt-get update \
@@ -13,14 +11,14 @@ run apt-get update \
 	&& pip3 install --no-cache invoke -r /tmp/requirements-dev.txt \
 	&& rm -f /tmp/requirements-dev.txt
 # use a single user for both running the container and devcontainer
-arg VSCODE_UID=1000
-run useradd --uid "${VSCODE_UID}" -G odoo --create-home vscode \
-	&& echo "root:${ODOO_PASSWORD:-admin}" | chpasswd
+arg DEV_UID=1000
+run useradd --uid "${DEV_UID}" -G odoo --create-home vscode \
+	&& echo "root:${ADMIN_PASSWORD:-admin}" | chpasswd
 user vscode
 
 ###############################
 # VSCODE
-from dev as vscode
+from base as vscode
 user root
 run true \
 	&& mkdir /odoo-workspace \

@@ -18,11 +18,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Generate config
+      run: bash ./scripts/generate.sh compose
+
     - name: Build image
       run: docker-compose -f "docker-compose.yaml" build
 
     - name: Run test container
-      run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run odoo
+      run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run odoo-test
 
     - name: Stop containers
       if: always()

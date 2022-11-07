@@ -37,13 +37,13 @@
 			"/opt/odoo/addons",
 			"/opt/odoo",
 			"/opt/odoo/odoo/addons",
-			"/mnt/odoo-addons",
+			"/opt/odoo-addons",
 			"/mnt/extra-addons"
 		],
 		"files.exclude": {
 			"**/*__pycache__": true,
-			"**/.git": true,
-		},
+			"**/.git": true
+		}
 	},
 
 	"extensions": [

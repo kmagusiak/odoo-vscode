@@ -4,6 +4,5 @@ __pycache__
 
 # Local files
 /.env
-/docker-compose.override.yaml
-/odoo
-/odoo-addons
+*.override.yaml
+/.vscode/launch.json

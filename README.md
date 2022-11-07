@@ -6,22 +6,17 @@ a container.
 
 ## Running
 
+If you want to use your own odoo sources, you must clone the `odoo`
+repository to a folder of your choosing and export the absolute path
+to it in ODOO_PATH and ODOO_ADDONS_PATH.
+The directories will be mounted in the container.
+
+**Starting...**
 ```shell
+# generate your configuration
+bash ./scripts/generate.sh compose
 # start up odoo and the database
 docker-compose up -d
-
-# mount odoo source files hosted locally
-git clone --depth=1 -b 16.0 git@github.com:odoo/odoo.git
-mkdir odoo-addons
-cat > docker-compose.override.yaml <<EOF
-version: "3.7"
-
-services:
-  odoo:
-    volumes:
-    - ./odoo:/opt/odoo:cached
-    - ./odoo-addons:/mnt/odoo-addons:cached
-EOF
 
 # connect and run things on the containers
 docker-compose exec odoo bash
@@ -49,61 +44,59 @@ psql -U odoo -h db -l
 ```bash
 your-project/
  ├── .devcontainer/        # vscode development in container
- │   ├── devconainer.json    # definition of the container
- │   └── docker-vscode.yaml  # docker-compose for the container
+ │   ├── devconainer.json       # definition of the container
+ │   ├── docker-vscode.yaml     # docker-compose for the container
+ │   └── vscode.code-workspace  # workspace to use inside the container
  ├── .vscode/              # vscode default configuration
  ├── custom/               # Custom modules goes here, put them inside separate directories
  │   ├── OCA/
+ │   ├── template/
  │   └── myaddons/
- ├── resources/            # Scripts for service automation
+ ├── scripts/              # Scripts for environment automation
  ├── ...                   # Common files (.gitignore, etc.)
- ├── .env                  # Environment definition
+ ├── .env                  # Environment definition (generated)
  ├── Dockerfile            # Image definition
- ├── docker-compose.yml    # The default docker-compose
+ ├── docker-compose.yml    # The default docker-compose (generated override)
  ├── requirements-dev.txt  # Python requirements for development
- ├── vscode.code-workspace # workspace to use inside the container
  └── README.md             # This file
+odoo/                      # Optionally, have odoo sources available
 ```
 
 ## The Dockerfile
 
-We are starting from the [official Odoo docker image](https://github.com/odoo/docker).
-We move Odoo sources to `/opt/odoo` (ODOO_BASEPATH) so that you can easily
-mount your own sources.
-We install `click-odoo-contrib` and `debugpy`;
-replace the entrypoint and add a *health check* to the image.
-
-You can set up environment variables in `.env` file.
-These are loaded into the odoo container and a configuration file is generated
-every time the container starts at `/etc/odoo/odoo.conf`.
-The default database is `odoo`.
-
-The addon's directories are found in the following locations:
-- ODOO_BASEPATH where you find Odoo source code
-- ODOO_EXTRA_ADDONS where you find your addons
-- ODOO_BASE_ADDONS where you find other already available addons
-  like *enterprise* (optional)
-
-*Addon paths* are generated dynamically, so you can checkout entire
-Odoo addon repositories in the `custom` directory
-and it will build all the paths.
-ODOO_BASE_ADDONS is there if your docker image already contains some addons.
+Starting from [odoo-docker](https://github.com/kmagusiak/odoo-docker),
+add development tools
+and a user for development with the same UID as yourself.
 
 ## vscode: devcontainer
 
 [Remote Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 
 Inside the Dockerfile, there is a separate stage in the Dockerfile for vscode.
-Inside devcontainer, the user is *vscode* (uid=1000 - as probably is your user)
-which we create here, beacuse odoo's uid=101.
+Inside the devcontainer, the user is *vscode* with uid=$DEV_UID.
 
 File locations:
 - The workspace is mounted at `/odoo-workspace`
 - ODOO_EXTRA_ADDONS=`/odoo-workspace/custom`
 - ODOO_BASEPATH=`/opt/odoo`
-- ODOO_BASE_ADDONS=`/mnt/odoo-addons`
+- ODOO_BASE_ADDONS=`/opt/odoo-addons`
 
 # Development and Testing
+
+## Cloning odoo
+
+You should clone *odoo sources* outside of this repository.
+That repository is quite big and can be shared among projects.
+
+```shell
+ODOO_SOURCE=git@github.com:odoo
+git clone $ODOO_SOURCE/odoo.git
+mkdir odoo-addons
+# optionally clone what you need (example)
+cd odoo-addons
+git clone $ODOO_SOURCE/design-themes.git
+git clone $ODOO_SOURCE/enterprise.git
+```
 
 ## Linting
 
@@ -129,7 +122,7 @@ installed modules.
 	odoo-test -t -a template_module -d test_db_1
 
 	# using docker-compose
-	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
+	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo odoo-test
 
 # Credits
 

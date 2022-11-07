@@ -1,0 +1,3 @@
+# this file in included in .env
+BASE_MODULES=base
+TEST_MODULE_PATH=$ODOO_EXTRA_ADDONS/template

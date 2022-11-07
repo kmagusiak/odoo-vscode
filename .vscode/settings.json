@@ -3,28 +3,6 @@
 	"editor.rulers": [79, 100],
 	"files.eol": "\n",
 	"search.useIgnoreFiles": false,
-	"search.exclude": {
-		"**/.git": true,
-	},
-	"sqltools.connections": [{
-		"name": "Container odoo",
-		"driver": "PostgreSQL",
-		"previewLimit": 50,
-		"server": "db",
-		"port": 5432,
-		"database": "odoo",
-		"username": "odoo",
-		"password": "odoo"
-	},{
-		"name": "Container postgres",
-		"driver": "PostgreSQL",
-		"previewLimit": 50,
-		"server": "db",
-		"port": 5432,
-		"database": "postgres",
-		"username": "odoo",
-		"password": "odoo"
-	}],
 	"[python]": {
 		"editor.insertSpaces": true,
 		"editor.tabSize": 4
@@ -41,17 +19,16 @@
 	"python.linting.mypyEnabled": false,
 	"python.analysis.extraPaths": [
 		"./odoo",
-		"./odoo-enterprise",
+		"./odoo-addons",
+		"./odoo-addons/enterprise",
 	],
 	// inherited
 	"python.linting.ignorePatterns": [
-		"/opt/odoo"
+		"./odoo",
+		"./odoo-addons",
 	],
 	"python.linting.pylintArgs": [
 		//"--rcfile", "${workspaceFolder}/.vscode/oca_pylint.cfg",
 		"--load-plugins", "pylint_odoo"
-	],
-	"python.linting.flake8Args": [
-		//"--config", "${workspaceFolder}/.vscode/travis_run_flake8.cfg"
 	],
 }

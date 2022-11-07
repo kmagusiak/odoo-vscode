@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Odoo Debug",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceRoot}",
+            "justMyCode": false,
+            "program": "/usr/bin/odoo",
+            "args": [
+                "--dev=qweb,xml",
+                "--log-level=debug",
+                "--workers=0",
+                "--limit-time-real=100000"
+            ]
+        },
+        {
+            "name": "Odoo Shell",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceRoot}",
+            "program": "/usr/bin/odoo",
+            "args": [
+                "shell",
+                "--log-level=info",
+                "--workers=0",
+                "--limit-time-real=100000"
+            ]
+        }
+    ]
+}

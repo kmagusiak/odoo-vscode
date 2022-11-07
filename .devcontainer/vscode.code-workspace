@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": ".."
 		},
 		{
 			"path": "/opt/odoo"
 		},
 		{
-			"path": "/mnt/odoo-addons"
+			"path": "/opt/odoo-addons"
 		}
 	],
 	"settings": {
