@@ -76,7 +76,7 @@ odoo/                      # Optionally, have odoo sources available
 
 ## The Dockerfile
 
-Starting from [odoo-docker](https://github.com/kmagusiak/odoo-docker),
+Starting from [odoo-docker],
 add development tools
 and a user for development with the same UID as yourself.
 
@@ -84,8 +84,8 @@ and a user for development with the same UID as yourself.
 
 [Remote Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 
-Inside the Dockerfile, there is a separate stage in the Dockerfile for vscode.
 Inside the devcontainer, the user is *vscode* with uid=$DEV_UID.
+The same image is used for compose and devcontainer.
 
 File locations:
 - The workspace is mounted at `/odoo-workspace`
@@ -116,13 +116,7 @@ want the full checks.
 
 ## Backup and restore database
 
-You can use [click-odoo-contrib] to backup, restore, copy databases and
-related jobs.
-It is installed on the odoo container, so you could just mount a
-`/mnt/backup` folder and use it for files.
-
-You can also use `click-odoo-initdb` or `click-odoo-update` to update
-installed modules.
+See the utilities in the [odoo-docker] image.
 
 ## Running tests
 
@@ -142,7 +136,7 @@ Based on:
 
 Bunch of ideas taken from:
 
-* [Odoo] ([odoo-docker])
+* [Odoo] ([odoo-docker](https://github.com/odoo/docker))
 * [OCA] ([maintainer-quality-tools](https://github.com/OCA/maintainer-quality-tools))
 * [click-odoo-contrib]
 
@@ -151,4 +145,4 @@ Bunch of ideas taken from:
 [dockerdoo]: https://github.com/iterativo-git/dockerdoo
 [OCA]: https://github.com/OCA
 [Odoo]: https://github.com/odoo
-[odoo-docker]: https://github.com/odoo/docker
+[odoo-docker]: https://github.com/kmagusiak/odoo-docker
