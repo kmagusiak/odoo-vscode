@@ -54,7 +54,7 @@ file="docker-compose.override.yaml"
 if [ ! -f "$file" ]
 then
 	echo "- $file"
-	cp "scripts/docker-compose.volumes.yaml" "$file"
+	cp "scripts/docker-compose.default.yaml" "$file"
 fi
 
 file=".vscode/launch.json"

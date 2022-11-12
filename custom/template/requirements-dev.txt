@@ -1,4 +1,0 @@
-# linting and formatting
-black
-flake8
-pylint-odoo

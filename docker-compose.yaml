@@ -16,7 +16,8 @@ services:
     
     restart: unless-stopped
 
-    ports: ["8069:8069", "8072:8072", "41234:41234"]
+    ports:
+      - "8069"
 
     volumes:
       - odoo_data:${ODOO_DATA_DIR}

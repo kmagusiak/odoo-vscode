@@ -4,14 +4,26 @@ Dockerized version of Odoo for development and debugging.
 You will need `docker-compose` for this to run or `vscode` to develop inside
 a container.
 
-## Running
+## Cloning odoo
 
 If you want to use your own odoo sources, you must clone the `odoo`
-repository to a folder of your choosing and export the absolute path
-to it in ODOO_PATH and ODOO_ADDONS_PATH.
-The directories will be mounted in the container.
+repository to a folder of your choosing outside of this repository.
+That repository is quite big and can be shared among projects.
+The directories will be mounted in the container, but you should check
+the configuration files.
 
-**Starting...**
+```shell
+ODOO_SOURCE=git@github.com:odoo
+git clone $ODOO_SOURCE/odoo.git
+mkdir odoo-addons
+# optionally clone what you need (example)
+cd odoo-addons
+git clone $ODOO_SOURCE/design-themes.git
+git clone $ODOO_SOURCE/enterprise.git
+```
+
+## Starting...
+
 ```shell
 # generate your configuration
 bash ./scripts/generate.sh compose
@@ -83,20 +95,18 @@ File locations:
 
 # Development and Testing
 
-## Cloning odoo
+## Modes
 
-You should clone *odoo sources* outside of this repository.
-That repository is quite big and can be shared among projects.
+Run `./scripts/generate.sh` when changing modes.
+It will adapt the launch configuration, and generate default files which
+are `.env` and `docker-compose.override.yaml`.
 
-```shell
-ODOO_SOURCE=git@github.com:odoo
-git clone $ODOO_SOURCE/odoo.git
-mkdir odoo-addons
-# optionally clone what you need (example)
-cd odoo-addons
-git clone $ODOO_SOURCE/design-themes.git
-git clone $ODOO_SOURCE/enterprise.git
-```
+- *devcontainer* as the name indicates is for working inside a container
+  - if you have local odoo sources they are mounted
+  - .devcontainer/vscode.code-workspace shows odoo sources
+- *compose* supposes that you run `docker-compose` and debug remotely
+  - .vscode/odoo.code-workspace shows odoo sources
+- *compose-odoo* similar to *compose*, but with local odoo sources
 
 ## Linting
 
@@ -122,7 +132,7 @@ installed modules.
 	odoo-test -t -a template_module -d test_db_1
 
 	# using docker-compose
-	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo odoo-test
+	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 
 # Credits
 

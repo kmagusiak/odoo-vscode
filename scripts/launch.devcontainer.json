@@ -22,6 +22,7 @@
             "request": "launch",
             "redirectOutput": false,
             "cwd": "${workspaceRoot}",
+            "justMyCode": false,
             "program": "/usr/bin/odoo",
             "args": [
                 "shell",

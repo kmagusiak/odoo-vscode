@@ -18,14 +18,14 @@
 	"python.linting.pylintEnabled": false,
 	"python.linting.mypyEnabled": false,
 	"python.analysis.extraPaths": [
-		"./odoo",
-		"./odoo-addons",
-		"./odoo-addons/enterprise",
+		"../odoo",
+		"../odoo-addons",
+		"../odoo-addons/enterprise",
 	],
 	// inherited
 	"python.linting.ignorePatterns": [
-		"./odoo",
-		"./odoo-addons",
+		"../odoo",
+		"../odoo-addons",
 	],
 	"python.linting.pylintArgs": [
 		//"--rcfile", "${workspaceFolder}/.vscode/oca_pylint.cfg",

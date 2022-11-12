@@ -6,7 +6,6 @@ pylint-odoo
 # debugging and tools
 debugpy
 ipython
-jupyterlab
 
 # unit testing (chrome)
 websocket-client

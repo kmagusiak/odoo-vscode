@@ -2,6 +2,10 @@ version: "3.7"
 
 services:
   odoo:
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+      - "41234:41234"
     volumes:
     #- ../odoo:/opt/odoo:cached
     #- ../odoo-addons:/opt/odoo-addons:cached
