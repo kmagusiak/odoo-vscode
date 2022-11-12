@@ -12,7 +12,6 @@ services:
       - vscode_home:/home/vscode
     environment:
       - ODOO_EXTRA_ADDONS=/odoo-workspace/custom
-      - ODOO_DATA_DIR=/home/vscode
       - ODOO_STAGE=devcontainer
       - PIP_AUTO_INSTALL=1
     command: /bin/sh -c "while sleep 1000; do :; done"

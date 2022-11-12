@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Attach 41234",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "127.0.0.1",
+                "port": 41234
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/custom",
+                    "remoteRoot": "/mnt/extra-addons"
+                }
+            ]
+        }
+   ]
+}

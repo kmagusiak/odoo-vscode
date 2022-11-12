@@ -1,0 +1,19 @@
+// workspace template to use if you want to run with your local odoo sources
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../odoo"
+		},
+		{
+			"path": "../../odoo-addons"
+		}
+	],
+	"settings": {
+		"python.linting.enabled": false,
+	},
+	"launch": {
+	}
+}

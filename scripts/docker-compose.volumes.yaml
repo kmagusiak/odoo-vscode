@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  odoo:
+    volumes:
+    #- ../odoo:/opt/odoo:cached
+    #- ../odoo-addons:/opt/odoo-addons:cached
+    #- ${BACKUP_PATH}:/mnt/backup
+    - /tmp/odoo:/tmp

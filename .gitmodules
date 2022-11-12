@@ -1,16 +1,16 @@
-[submodule "custom/reporting-engine"]
-	path = custom/reporting-engine
-	url = git@github.com:OCA/reporting-engine.git
-	branch = 15.0
-[submodule "custom/server-ux"]
-	path = custom/server-ux
-	url = git@github.com:OCA/server-ux.git
-	branch = 15.0
-[submodule "custom/mis-builder"]
-	path = custom/mis-builder
-	url = git@github.com:OCA/mis-builder.git
-	branch = 15.0
+[submodule "custom/web"]
+	path = custom/web
+	url = git@github.com:OCA/web.git
+	branch = 16.0
+[submodule "custom/queue"]
+	path = custom/queue
+	url = git@github.com:OCA/queue.git
+	branch = 16.0
+[submodule "custom/server-backend"]
+	path = custom/server-backend
+	url = git@github.com:OCA/server-backend.git
+	branch = 16.0
 [submodule "custom/server-tools"]
 	path = custom/server-tools
 	url = git@github.com:OCA/server-tools.git
-	branch = 15.0
+	branch = 16.0

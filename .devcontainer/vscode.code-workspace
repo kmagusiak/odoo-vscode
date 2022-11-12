@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "/opt/odoo"
+		},
+		{
+			"path": "/opt/odoo-addons"
+		}
+	],
+	"settings": {
+		"python.linting.enabled": false,
+		"sqltools.connections": [
+			{
+				"name": "Container odoo",
+				"driver": "PostgreSQL",
+				"previewLimit": 50,
+				"server": "db",
+				"port": 5432,
+				"database": "odoo",
+				"username": "odoo",
+				"password": "odoo"
+			},
+			{
+				"name": "Container postgres",
+				"driver": "PostgreSQL",
+				"previewLimit": 50,
+				"server": "db",
+				"port": 5432,
+				"database": "postgres",
+				"username": "odoo",
+				"password": "odoo"
+			}
+		]
+	},
+	"launch": {
+	}
+}
