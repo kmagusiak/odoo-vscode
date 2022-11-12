@@ -15,11 +15,11 @@
                     "remoteRoot": "/mnt/extra-addons"
                 },
                 {
-                    "localRoot": "${workspaceFolder}/odoo",
+                    "localRoot": "${workspaceFolder}/../odoo",
                     "remoteRoot": "/opt/odoo"
                 },
                 {
-                    "localRoot": "${workspaceFolder}/odoo-addons",
+                    "localRoot": "${workspaceFolder}/../odoo-addons",
                     "remoteRoot": "/opt/odoo-addons"
                 }
             ]

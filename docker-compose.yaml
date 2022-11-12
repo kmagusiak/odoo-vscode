@@ -9,7 +9,6 @@ services:
   odoo:
     build:
       context: .
-      target: base
       args:
         ODOO_VERSION: "16.0"
         DEV_UID: "${DEV_UID}"
