@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "redirectOutput": false,
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceFolder}",
             "justMyCode": false,
             "program": "/usr/bin/odoo",
             "args": [
@@ -21,7 +21,7 @@
             "type": "python",
             "request": "launch",
             "redirectOutput": false,
-            "cwd": "${workspaceRoot}",
+            "cwd": "${workspaceFolder}",
             "justMyCode": false,
             "program": "/usr/bin/odoo",
             "args": [

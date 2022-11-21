@@ -7,17 +7,13 @@ compose)
 	dev_type=compose
 	launch_type=attach
 	;;
-compose-odoo)
-	dev_type=compose
-	launch_type=attach.odoo
-	;;
 devcontainer)
 	dev_type=devcontainer
 	launch_type=devcontainer
 	;;
 *)
 	echo "Usage: $0 type"
-	echo "  type = devcontainer | compose | compose-odoo"
+	echo "  type = devcontainer | compose"
 	exit 1
 	;;
 esac

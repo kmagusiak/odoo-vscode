@@ -60,6 +60,8 @@ your-project/
  │   ├── docker-vscode.yaml     # docker-compose for the container
  │   └── vscode.code-workspace  # workspace to use inside the container
  ├── .vscode/              # vscode default configuration
+ │   ├── settings.json          # settings for your project folder
+ │   └── odoo.code-workspace    # workspace to use inside the container
  ├── custom/               # Custom modules goes here, put them inside separate directories
  │   ├── OCA/
  │   ├── template/
@@ -68,7 +70,7 @@ your-project/
  ├── ...                   # Common files (.gitignore, etc.)
  ├── .env                  # Environment definition (generated)
  ├── Dockerfile            # Image definition
- ├── docker-compose.yml    # The default docker-compose (generated override)
+ ├── docker-compose.yml    # The default docker-compose (and generated override)
  ├── requirements-dev.txt  # Python requirements for development
  └── README.md             # This file
 odoo/                      # Optionally, have odoo sources available
@@ -100,13 +102,12 @@ File locations:
 Run `./scripts/generate.sh` when changing modes.
 It will adapt the launch configuration, and generate default files which
 are `.env` and `docker-compose.override.yaml`.
+If you use local odoo sources, mount them in the compose override file.
 
-- *devcontainer* as the name indicates is for working inside a container
-  - if you have local odoo sources they are mounted
-  - .devcontainer/vscode.code-workspace shows odoo sources
+- *devcontainer* as the name indicates, it is for working inside a container
+  - `.devcontainer/vscode.code-workspace` is a workspace with odoo sources
 - *compose* supposes that you run `docker-compose` and debug remotely
-  - .vscode/odoo.code-workspace shows odoo sources
-- *compose-odoo* similar to *compose*, but with local odoo sources
+  - `.vscode/odoo.code-workspace` is to be used when you have local odoo sources
 
 ## Linting
 
@@ -121,9 +122,9 @@ See the utilities in the [odoo-docker] image.
 ## Running tests
 
 	# inside the devcontainer
-	odoo --test-enable --stop-after-init -i template_module -d test_db_1
-	# alternatively
 	odoo-test -t -a template_module -d test_db_1
+	# which is similar to
+	odoo --test-enable --stop-after-init -i template_module -d test_db_1
 
 	# using docker-compose
 	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
