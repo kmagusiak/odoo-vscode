@@ -4,35 +4,20 @@ Dockerized version of Odoo for development and debugging.
 You will need `docker-compose` for this to run or `vscode` to develop inside
 a container.
 
-## Cloning odoo
-
-If you want to use your own odoo sources, you must clone the `odoo`
-repository to a folder of your choosing outside of this repository.
-That repository is quite big and can be shared among projects.
-The directories will be mounted in the container, but you should check
-the configuration files.
-
-```shell
-ODOO_SOURCE=git@github.com:odoo
-git clone $ODOO_SOURCE/odoo.git
-mkdir odoo-addons
-# optionally clone what you need (example)
-cd odoo-addons
-git clone $ODOO_SOURCE/design-themes.git
-git clone $ODOO_SOURCE/enterprise.git
-```
-
 ## Starting...
 
+Let's start by generating required files, run:
+`scripts/generate.sh` with either *devcontainer* or *compose* argument.
+It will generate the *.env* file, *docker-compose.override.yaml* and
+launcher configuration.
+You should edit the compose override file for the mounts you want.
+
 ```shell
-# generate your configuration
-bash ./scripts/generate.sh compose
 # start up odoo and the database
 docker-compose up -d
 
 # connect and run things on the containers
 docker-compose exec odoo bash
-docker-compose exec odoo odoo shell
 docker-compose exec db psql -U odoo -l
 
 # copy files to and from the container
@@ -45,10 +30,8 @@ commands inside the odoo container without specifying most parameters.
 ``` shell
 # run the shell
 odoo shell
-
-# connect to the database or list them
-psql -U odoo -h db
-psql -U odoo -h db -l
+# connect to the database
+psql
 ```
 
 ## Project Structure
@@ -97,6 +80,26 @@ File locations:
 
 # Development and Testing
 
+## Cloning odoo
+
+If you want to use your own odoo sources, you must clone the `odoo`
+repository to a folder of your choosing outside of this repository.
+That repository is quite big and can be shared among projects.
+By default, we expect the odoo directory next to your project directory;
+if not check the configuration files.
+
+```shell
+ODOO_SOURCE=git@github.com:odoo
+git clone $ODOO_SOURCE/odoo.git
+mkdir odoo-addons
+# optionally clone what you need (example)
+cd odoo-addons
+git clone $ODOO_SOURCE/design-themes.git
+git clone $ODOO_SOURCE/enterprise.git
+```
+
+Add the path in the *docker-comopse.override.yaml* file.
+
 ## Modes
 
 Run `./scripts/generate.sh` when changing modes.
@@ -121,13 +124,15 @@ See the utilities in the [odoo-docker] image.
 
 ## Running tests
 
-	# inside the devcontainer
-	odoo-test -t -a template_module -d test_db_1
-	# which is similar to
-	odoo --test-enable --stop-after-init -i template_module -d test_db_1
+```shell
+# inside the devcontainer
+odoo-test -t -a template_module -d test_db_1
+# which is similar to
+odoo --test-enable --stop-after-init -i template_module -d test_db_1
 
-	# using docker-compose
-	docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
+# using docker-compose
+docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
+```
 
 # Credits
 
