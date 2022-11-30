@@ -30,7 +30,7 @@ services:
       - db
 
   db:
-    image: postgres:12
+    image: postgres:14
     restart: unless-stopped
     volumes:
       - postgres_odoo:/var/lib/postgresql/data
