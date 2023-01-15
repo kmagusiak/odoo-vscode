@@ -8,7 +8,7 @@
             "redirectOutput": false,
             "cwd": "${workspaceFolder}",
             "justMyCode": false,
-            "program": "/usr/bin/odoo",
+            "program": "/usr/bin/odoo-bin",
             "args": [
                 "--dev=qweb,xml",
                 "--log-level=debug",
@@ -23,12 +23,41 @@
             "redirectOutput": false,
             "cwd": "${workspaceFolder}",
             "justMyCode": false,
-            "program": "/usr/bin/odoo",
+            "program": "/usr/bin/odoo-bin",
             "args": [
                 "shell",
                 "--log-level=info",
                 "--workers=0",
                 "--limit-time-real=100000"
+            ]
+        },
+        {
+            "name": "Odoo Base Test",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceFolder}",
+            "justMyCode": false,
+            "program": "/usr/bin/odoo-bin",
+            "args": [
+                "--log-level=debug",
+                "--workers=0",
+                "--database=test",
+                "--test-enable",
+                "-i", "${input:odoo_module}",
+                "--limit-time-real=100000"
+            ]
+        },
+        {
+            "name": "pytest debug",
+            "type": "python",
+            "request": "launch",
+            "redirectOutput": false,
+            "cwd": "${workspaceFolder}",
+            "justMyCode": false,
+            "program": "/usr/local/bin/pytest",
+            "args": [
+                "${file}"
             ]
         }
     ]

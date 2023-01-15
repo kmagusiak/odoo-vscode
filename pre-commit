@@ -3,7 +3,6 @@ set -eu
 cd "$(dirname "$0")"
 
 case "${1:-run}" in
-	run | lint) ;;
 	install)
 		echo "Installing pre-commit"
 		(cd .git/hooks && ln -sf ../../pre-commit .)
@@ -12,7 +11,7 @@ case "${1:-run}" in
 		echo "Uninstalling pre-commit"
 		rm -f .git/hooks/pre-commit
 		exit;;
-	*)
+	-*)
 		echo "Invalid option: $*"
 		echo "Supported options: install, uninstall"
 		exit 1;;
