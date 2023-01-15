@@ -1,6 +1,6 @@
 arg ODOO_VERSION=16.0
 arg DOCKER_BASE_IMAGE=ghcr.io/kmagusiak/odoo-docker:${ODOO_VERSION}
-from $DOCKER_BASE_IMAGE as vscode
+from ${DOCKER_BASE_IMAGE} as vscode
 
 # tools for development
 user root

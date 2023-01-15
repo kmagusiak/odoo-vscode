@@ -44,11 +44,10 @@ commands inside the odoo container without specifying most parameters.
 
 ``` shell
 # run the shell
-odoo shell
+odoo-bin shell
 
-# connect to the database or list them
-psql -U odoo -h db
-psql -U odoo -h db -l
+# connect to the database
+psql -l
 ```
 
 ## Project Structure
@@ -78,8 +77,7 @@ odoo/                      # Optionally, have odoo sources available
 
 ## The Dockerfile
 
-Starting from [odoo-docker],
-add development tools
+Starting from [odoo-docker], add development tools
 and a user for development with the same UID as yourself.
 
 ## vscode: devcontainer
@@ -117,7 +115,21 @@ want the full checks.
 
 ## Backup and restore database
 
-See the utilities in the [odoo-docker] image.
+You can restore the database from a dump.
+After restoring the database, you might want to run the *reset* command
+to set the password and check system properties.
+The password is set to "admin" for all users.
+
+	# env
+	source .env
+	DB_TEMPLATE=dump
+
+	# load the dump
+	dropdb --if-exists "$DB_TEMPLATE" && createdb "$DB_TEMPLATE"
+	psql "$DB_TEMPLATE" < dump.sql
+
+	# create your copy
+	scripts/reset-db.sh "$DB_NAME" "$DB_TEMPLATE"
 
 ## Running tests
 
