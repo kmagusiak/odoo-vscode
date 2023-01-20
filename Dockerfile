@@ -9,7 +9,7 @@ run apt-get update \
 	&& apt-get install -y --no-install-recommends libxml2-utils \
 	&& apt-get install -y --no-install-recommends chromium-driver
 add requirements-dev.txt /tmp
-run true \
+run cd /tmp \
 	&& pip3 install --no-cache invoke -r /tmp/requirements-dev.txt jupyterlab \
 	&& rm -f /tmp/requirements-dev.txt
 

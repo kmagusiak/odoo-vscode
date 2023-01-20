@@ -1,10 +1,21 @@
 [flake8]
-# E123,E133,E226,E241,E242 are ignored by default by pep8 and flake8
-# C901 Ignore complexity
-# E203 Whitespace before ':' (black behaviour)
-# W503 Ignored and W504 is pep8: Line break should be before operator
-# F401 Module imported but unused
-ignore = C901,E123,E133,E203,E226,E241,E242,D100,D101,D400,D102,D403,D210,D205,D202,W503
+# * Complexity
+# C901: complexity check (mccabe)
+# * Errors & style (https://flake8.pycqa.org/en/latest/user/error-codes.html)
+# E123,E133: ignored by default by pep8, so we ignore them here
+# E203: space before comma, not pep8 compliant
+# E241,E242: spacing after a comma - not used
+# F401: module imported but unused
+# F812: list comprehension redefines name
+# W503: line break before operator - ignored as W504 is in pep8
+# * Documentation (https://pep257.readthedocs.io/en/latest/error_codes.html)
+# D100: missing doc in module
+# D101: missing doc in class
+# D102,D103: missing doc in public method, function
+# D205: 1 blank line required between summary line and description
+# D210: no whitespaces allowed surrounding docstring text - not used
+# D400: first line should end with a period
+ignore = C901,E123,E133,E203,F812,W503,D102,D205,D400
 max-line-length = 100
 exclude = .git
 max-complexity = 10

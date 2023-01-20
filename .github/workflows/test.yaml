@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
     inputs: {}
 
+permissions:
+  contents: read
+  packages: read
+
 concurrency:
   # cancel already in progress jobs
   group: ${{ github.ref || github.run_id }}

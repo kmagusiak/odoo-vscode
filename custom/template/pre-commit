@@ -42,8 +42,8 @@ then
 		exit 1
 	fi
 	# Skipping: import-error (odoo not available in github actions)
-	pylint --errors-only -e odoolint -d import-error \
-		$(find -name '__manifest__.py' -exec dirname '{}' ';')
+	pylint --errors-only -d import-error \
+		$(find -name '__manifest__.py' -exec dirname '{}' ';' | sort)
 fi
 
 echo "All good to commit"
