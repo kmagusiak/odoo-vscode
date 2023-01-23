@@ -25,6 +25,13 @@ jobs:
     - name: Generate config
       run: bash ./scripts/generate.sh compose
 
+    - name: Login to GitHub Packages
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Build image
       run: docker-compose -f "docker-compose.yaml" build
 
