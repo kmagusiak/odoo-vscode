@@ -28,6 +28,9 @@ Since the default configuration is set to connect to odoo, you can run
 commands inside the odoo container without specifying most parameters.
 
 ``` shell
+# install addons
+odoo-update base --install
+
 # run the shell
 odoo-bin shell
 
@@ -125,16 +128,18 @@ After restoring the database, you might want to run the *reset* command
 to set the password and check system properties.
 The password is set to "admin" for all users.
 
-	# env
-	source .env
-	DB_TEMPLATE=dump
+```shell
+# env
+source .env
+DB_TEMPLATE=dump
 
-	# load the dump
-	dropdb --if-exists "$DB_TEMPLATE" && createdb "$DB_TEMPLATE"
-	psql "$DB_TEMPLATE" < dump.sql
+# load the dump
+dropdb --if-exists "$DB_TEMPLATE" && createdb "$DB_TEMPLATE"
+psql "$DB_TEMPLATE" < dump.sql
 
-	# create your copy
-	scripts/reset-db.sh "$DB_NAME" "$DB_TEMPLATE"
+# create your copy
+scripts/reset-db.sh "$DB_NAME" "$DB_TEMPLATE"
+```
 
 ## Running tests
 
@@ -147,6 +152,12 @@ odoo --test-enable --stop-after-init -i template_module -d test_db_1
 # using docker-compose
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 ```
+
+You will probably have to also install a web-browser in the container.
+Since the image is based on Ubuntu, chromium requires snap which
+is not running in the container.
+You can install [google-chrome](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
+Download it, and run `apt-get install ./google-chrome-stable_current_amd64.deb chromium-driver`.
 
 # Credits
 

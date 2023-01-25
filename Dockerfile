@@ -5,9 +5,9 @@ from ${DOCKER_BASE_IMAGE} as vscode
 # tools for development
 user root
 run apt-get update \
-	&& apt-get install -y --no-install-recommends git htop less openssh-client vim \
-	&& apt-get install -y --no-install-recommends libxml2-utils \
-	&& apt-get install -y --no-install-recommends chromium-driver
+	&& apt-get install -y --no-install-recommends \
+		libxml2-utils \
+		git htop less openssh-client vim
 add requirements-dev.txt /tmp
 run cd /tmp \
 	&& pip3 install --no-cache invoke -r /tmp/requirements-dev.txt jupyterlab \

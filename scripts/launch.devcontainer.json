@@ -32,7 +32,7 @@
             ]
         },
         {
-            "name": "Odoo Base Test",
+            "name": "Odoo Test",
             "type": "python",
             "request": "launch",
             "redirectOutput": false,
@@ -42,7 +42,6 @@
             "args": [
                 "--log-level=debug",
                 "--workers=0",
-                "--database=test",
                 "--test-enable",
                 "-i", "${input:odoo_module}",
                 "--limit-time-real=100000"
