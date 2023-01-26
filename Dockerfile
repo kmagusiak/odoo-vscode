@@ -7,7 +7,7 @@ user root
 run apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		libxml2-utils \
-		git htop less openssh-client vim
+		bash-completion git htop less openssh-client vim
 add requirements-dev.txt /tmp
 run cd /tmp \
 	&& pip3 install --no-cache invoke -r /tmp/requirements-dev.txt jupyterlab \
