@@ -23,10 +23,12 @@ echo "* dev: $dev_type"
 # Generate files
 
 file=".env"
-if [ ! -f "$file" ]
+if true
 then
 	echo "- $file"
 	(
+		cat scripts/env-template
+		echo
 		echo "# User uid"
 		echo "DEV_UID=$(id -u)"
 		echo "# Odoo addon paths"
@@ -38,11 +40,9 @@ then
 		fi
 		if [ -f "custom/module-list" ]
 		then
-			echo "# Module lists"
+			echo "# Module list"
 			cat "custom/module-list"
 		fi
-		echo
-		cat scripts/env-template
 	) > "$file"
 fi
 

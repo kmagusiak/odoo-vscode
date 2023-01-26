@@ -11,6 +11,7 @@ Let's start by generating required files, run:
 It will generate the *.env* file, *docker-compose.override.yaml* and
 launcher configuration.
 You should edit the compose override file for the mounts you want.
+If you change the configuration, reset your container instance.
 
 ```shell
 # start up odoo and the database

@@ -2,6 +2,13 @@
 set -eu
 cd "$(dirname "$(dirname "$0")")"
 
+if [ $# -eq 0 ]
+then
+	echo "Usage: $0 db_name [ db_template ]"
+	echo "Copy a database and reset it"
+	exit 1
+fi
+
 DB_NAME="$1"
 DB_TEMPLATE="${2:-}"
 SCRIPT_DIR="$(dirname $0)"
