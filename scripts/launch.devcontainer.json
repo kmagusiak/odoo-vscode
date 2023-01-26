@@ -38,8 +38,8 @@
             "justMyCode": false,
             "program": "/usr/bin/odoo-bin",
             "args": [
-                "--log-level=debug",
                 "--workers=0",
+                "--stop-after-init",
                 "--test-enable",
                 "-i", "${input:odoo_module}",
                 "--limit-time-real=100000"
