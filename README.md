@@ -50,7 +50,7 @@ your-project/
  ├── .vscode/              # vscode default configuration
  │   ├── settings.json          # settings for your project folder
  │   └── odoo.code-workspace    # workspace to use inside the container
- ├── custom/               # Custom modules goes here, put them inside separate directories
+ ├── addons/               # Custom modules goes here, put them inside separate directories
  │   ├── OCA/
  │   ├── template/
  │   └── myaddons/
@@ -78,7 +78,7 @@ The same image is used for compose and devcontainer.
 
 File locations:
 - The workspace is mounted at `/odoo-workspace`
-- ODOO_EXTRA_ADDONS=`/odoo-workspace/custom`
+- ODOO_EXTRA_ADDONS=`/odoo-workspace/addons`
 - ODOO_BASEPATH=`/opt/odoo`
 - ODOO_BASE_ADDONS=`/opt/odoo-addons`
 

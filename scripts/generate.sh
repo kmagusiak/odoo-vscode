@@ -34,14 +34,14 @@ then
 		echo "# Odoo addon paths"
 		if [ "$launch_type" == "devcontainer" ]
 		then
-			echo "ODOO_EXTRA_ADDONS=/odoo-workspace/custom"
+			echo "ODOO_EXTRA_ADDONS=/odoo-workspace/addons"
 		else
 			echo "ODOO_EXTRA_ADDONS=/mnt/extra-addons"
 		fi
-		if [ -f "custom/module-list" ]
+		if [ -f "addons/module-list" ]
 		then
 			echo "# Module list"
-			cat "custom/module-list"
+			cat "addons/module-list"
 		fi
 	) > "$file"
 fi

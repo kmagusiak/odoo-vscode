@@ -2,4 +2,5 @@
 .git
 .github
 .gitignore
-custom/*
+/.*_cache
+/addons/*

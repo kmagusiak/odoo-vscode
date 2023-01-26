@@ -21,7 +21,7 @@ esac
 [ -d .git ] || cd ../..
 
 # Run checks
-for precommit in custom/*/pre-commit
+for precommit in addons/*/pre-commit
 do
 	echo "Project > $precommit"
 	(cd "$(dirname "$precommit")" && ./pre-commit "${1:-}")
