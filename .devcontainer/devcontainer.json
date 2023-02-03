@@ -11,58 +11,62 @@
 
 	"workspaceFolder": "/odoo-workspace",
 
-	"settings": {
-		"editor.insertSpaces": false,
-		"editor.rulers": [79, 100],
-		"files.eol": "\n",
-		"search.followSymlinks": true,
-		"terminal.integrated.defaultProfile.linux": "bash",
-		"python.defaultInterpreterPath": "/usr/bin/python3",
-		"[python]": {
-			"editor.insertSpaces": true,
-			"editor.tabSize": 4
-		},
-		"python.formatting.blackArgs": [
-			"--skip-string-normalization",
-			"--line-length",
-			"100"
-		],
-		"python.formatting.provider": "black",
-		"python.linting.enabled": true,
-		"python.linting.flake8Enabled": true,
-		"python.linting.pylintEnabled": false,
-		"python.terminal.activateEnvInCurrentTerminal": true,
-		// inherited
-		"python.autoComplete.extraPaths": [
-			"/opt/odoo/addons",
-			"/opt/odoo",
-			"/opt/odoo/odoo/addons",
-			"/opt/odoo-addons",
-			"/mnt/extra-addons"
-		],
-		"files.exclude": {
-			"**/*__pycache__": true,
-			"**/.git": true
-		}
-	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.insertSpaces": false,
+				"editor.rulers": [79, 100],
+				"files.eol": "\n",
+				"search.followSymlinks": true,
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"python.defaultInterpreterPath": "/usr/bin/python3",
+				"[python]": {
+					"editor.insertSpaces": true,
+					"editor.tabSize": 4
+				},
+				"python.formatting.blackArgs": [
+					"--skip-string-normalization",
+					"--line-length",
+					"100"
+				],
+				"python.formatting.provider": "black",
+				"python.linting.enabled": true,
+				"python.linting.flake8Enabled": true,
+				"python.linting.pylintEnabled": false,
+				"python.terminal.activateEnvInCurrentTerminal": true,
+				// inherited
+				"python.autoComplete.extraPaths": [
+					"/opt/odoo/addons",
+					"/opt/odoo",
+					"/opt/odoo/odoo/addons",
+					"/opt/odoo-addons",
+					"/mnt/extra-addons"
+				],
+				"files.exclude": {
+					"**/*__pycache__": true,
+					"**/.git": true
+				}
+			},
 
-	"extensions": [
-		"aaron-bond.better-comments",
-		"dbaeumer.vscode-eslint",
-		"eamodio.gitlens",
-		//"ms-python.python",
-		"mstuttgart.odoo-snippets",
-		"visualstudioexptteam.vscodeintellicode",
-		"scapigliato.vsc-odoo-development",
-		"scapigliato.odoo-snippets",
-		// my addons
-		"gruntfuggly.todo-tree",
-		"mechatroner.rainbow-csv",
-		"mrorz.language-gettext",
-		"redhat.vscode-xml",
-		"ms-python.python",
-		"ms-python.vscode-pylance",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg"
-	]
+			"extensions": [
+				"aaron-bond.better-comments",
+				"dbaeumer.vscode-eslint",
+				"eamodio.gitlens",
+				//"ms-python.python",
+				"mstuttgart.odoo-snippets",
+				"visualstudioexptteam.vscodeintellicode",
+				"scapigliato.vsc-odoo-development",
+				"scapigliato.odoo-snippets",
+				// my addons
+				"gruntfuggly.todo-tree",
+				"mechatroner.rainbow-csv",
+				"mrorz.language-gettext",
+				"redhat.vscode-xml",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-pg"
+			]
+		}
+	}
 }
