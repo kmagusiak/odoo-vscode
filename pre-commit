@@ -2,8 +2,7 @@
 set -eu
 # Check directory
 cd "$(dirname "$0")"
-[ -d .git ] || cd ../..
-[ -d .git ]
+[[ "$0" != *.git/hooks/* ]] || cd ../..
 
 pre_commit() {
 	for precommit in addons/*/pre-commit
