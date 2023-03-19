@@ -1,6 +1,7 @@
 # linting and formatting
 black
 flake8
+isort
 pylint-odoo
 
 # debugging and tools
