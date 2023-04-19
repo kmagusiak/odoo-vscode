@@ -8,5 +8,8 @@ pylint-odoo
 debugpy
 ipython
 
+# fix version for python 3.10.6
+prompt-toolkit==3.0.28
+
 # unit testing (chrome)
 websocket-client
