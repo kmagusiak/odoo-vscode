@@ -7,6 +7,7 @@ pylint-odoo
 # debugging and tools
 debugpy
 ipython
+py-spy
 
 # fix version for python 3.10.6
 prompt-toolkit==3.0.28
