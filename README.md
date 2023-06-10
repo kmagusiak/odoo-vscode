@@ -160,6 +160,26 @@ is not running in the container.
 You can install [google-chrome](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
 Download it, and run `apt-get install ./google-chrome-stable_current_amd64.deb chromium-driver`.
 
+## Translations
+
+If you want to load a new translations into odoo, run a command below.
+
+```shell
+odoo-update template_module --install --load-language=fr_BE
+odoo-update template_module --i18n-overwrite --load-language=fr_BE
+```
+
+To export translation files, you can use one of the following methods.
+`click-odoo-makepot` creates pot files for each module in the current working
+directory that is installed and merges it into existing language files.
+If you have translations in the database, you can use odoo directly.
+To ease exporting, we provide a script for this.
+
+```shell
+scripts/translations-export.sh addons/template/template_module/
+scripts/translations-export.sh addons/template/template_module/
+```
+
 # Credits
 
 Based on:

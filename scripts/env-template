@@ -40,6 +40,6 @@ LOG_LEVEL=info
 # SMTP_SERVER=localhost
 # SMTP_SSL=False
 # SMTP_USER=False
-# UNACCENT=False
+UNACCENT=True
 WITHOUT_DEMO=False
 WORKERS=0

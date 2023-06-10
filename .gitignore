@@ -8,3 +8,6 @@ __pycache__
 /.env
 *.override.yaml
 /.vscode/launch.json
+
+# Temporary files
+*~
