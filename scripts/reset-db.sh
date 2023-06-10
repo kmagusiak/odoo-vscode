@@ -60,11 +60,10 @@ fi
 if [ -n "$DB_RESET" ]
 then
 	echo "- reset DB"
+	run odoo-bin neutralize -d "$DB_NAME"
 	run psql "$DB_NAME" < "$SCRIPT_DIR/reset-db.sql"
 	echo "- update modules"
 	run click-odoo-update -d "$DB_NAME" --ignore-core-addons
-	echo "- reset ir.config_parameter"
-	run click-odoo -d "$DB_NAME" <<<'env["ir.config_parameter"].init(force=True)'
 fi
 echo "- done"
 end
