@@ -6,6 +6,8 @@ file="${1:-}"
 usage() {
 	echo "Usage: $0 module/i18n/file.po[t]"
 	echo "       $0 path"
+	echo "       $0 --merge path/module ..."
+	echo "       $0 --load path/module/i18n/fr.po"
 	echo
 	echo "Generate a po or pot file from the database."
 	echo "With a path, generate pot file for each module in the directory and then"
@@ -13,6 +15,33 @@ usage() {
 	echo
 	echo "To load a language for multiple modules, use:"
 	echo "odoo-update modules --load-language=lang --i18n-overwrite"
+	echo
+	echo "You can merge (--merge) the pot file for each provided addon directory"
+}
+
+merge_lang_files() {
+	(_merge_lang_files "$@")
+}
+_merge_lang_files() {
+	path="$1"
+	module="$(basename $PWD)"
+	[ -f "$path/i18n/$module.pot" ] || return 0
+	cd "$path"
+	cd i18n
+	for file_lang in *.po
+	do
+		[ "$file_lang" != '*.po' ] || continue
+		echo "Update $module: $file_lang"
+		# merge with pot file
+		# use either --no-fuzzy-matching otherwise
+		# translate all fuzzy text or keep only translated
+		msgmerge --quiet --update --backup=none --fuzzy-matching \
+			"$file_lang" "$module.pot"
+		# remove obsolete and format file
+		msgattrib --no-obsolete \
+			--sort-by-file --width 300 \
+			--output-file "$file_lang" "$file_lang"
+	done
 }
 
 case "$file" in
@@ -30,7 +59,11 @@ case "$file" in
 	module="$(basename $PWD)"
 	cd ..
 	echo "Export pot file for $module"
-	click-odoo-makepot --modules "$module"
+	click-odoo-makepot --modules "$module" -d "${DB_NAME:-odoo}"
+	;;
+--merge)
+	shift
+	merge_lang_files "$@"
 	;;
 --load)
 	shift
@@ -58,14 +91,19 @@ case "$file" in
 		module="$(basename "$PWD")"
 		cd ..
 		echo "Generate pot for $module in ($PWD)"
-		click-odoo-makepot --msgmerge --purge-old-translations -m "$module"
+		click-odoo-makepot -m "$module" -d "${DB_NAME:-odoo}"
+		merge_lang_files "$module"
 	else
 		paths=($(odoo-getaddons.py "$file" | tr ',' ' '))
 		for path in "${paths[@]}"
 		do
 			echo "Generate pot for modules in $path"
 			odoo-getaddons.py -m 1 "$path"
-			click-odoo-makepot --msgmerge --purge-old-translations --addons-dir "$path"
+			click-odoo-makepot --addons-dir "$path" -d "${DB_NAME:-odoo}"
+			for module in $(odoo-getaddons.py -m 1 "$path" | tr ',' ' ')
+			do
+				merge_lang_files "$path/$module"
+			done
 		done
 	fi
 esac
