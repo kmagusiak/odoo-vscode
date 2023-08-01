@@ -27,7 +27,7 @@ lint() {
 		exit 1
 	fi
 	# Skipping: import-error (odoo not available in github actions)
-	pylint --errors-only -d import-error \
+	pylint -d import-error \
 		$(find -name '__manifest__.py' -exec dirname '{}' ';' | sort)
 }
 

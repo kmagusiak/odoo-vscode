@@ -1,150 +1,87 @@
 [MASTER]
-profile=no
 ignore=.git,studio_customization
 persistent=yes
-cache-size=500
 load-plugins=pylint.extensions.docstyle,pylint.extensions.mccabe,pylint_odoo
 extension-pkg-whitelist=lxml
 
 [ODOOLINT]
-readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
-manifest_required_authors=Odoo Community Association (OCA),Krzysztof Magusiak
-manifest_required_keys=license, author
-manifest_deprecated_keys=description,active
-manifest_version_format=\d+(.\d+)+
-valid_odoo_versions=16.0
-license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
-method_required_super=create,write,read,unlink,copy,setUp,setUpClass,tearDown,default_get
+readme-template-url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
+manifest-required-authors=Odoo Community Association (OCA),Krzysztof Magusiak
+manifest-required-keys=license,author
+manifest-deprecated-keys=description,active
+manifest-version-format=\d+(.\d+)+
+valid-odoo-versions=16.0
+license-allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
+method-required-super=create,write,read,unlink,copy,setUp,setUpClass,tearDown,default_get
 
 [MESSAGES CONTROL]
 disable=all
 
-# Enable message and code:
-#   anomalous-backslash-in-string - W1401
-#   assignment-from-none - W1111
-#   api-one-deprecated - W8104
-#   api-one-multi-together - W8101
-#   attribute-deprecated - W8105
-#   class-camelcase - C8104
-#   create-user-wo-reset-password - W7905
-#   consider-merging-classes-inherited - R7980
-#   copy-wo-api-one - W8102
-#   dangerous-filter-wo-user - W7901
-#   dangerous-view-replace-wo-priority - W7940
-#   dangerous-default-value - W0102
-#   duplicate-key - W0109
-#   deprecated-module - W0402
-#   duplicate-id-csv - W7906
-#   duplicate-xml-fields - W7907
-#   duplicate-xml-record-id - W7902
-#   eval-used - W0123
-#   eval-referenced - W8111
-#   file-not-used - W7930
-#   incoherent-interpreter-exec-perm - W8201
-#   invalid-commit - E8102
-#   javascript-lint - W7903
-#   manifest-author-string - E8101
-#   manifest-required-author - C8101
-#   manifest-required-key - C8102
-#   manifest-version-format - C8106
-#   manifest-deprecated-key - C8103
-#   method-compute - C8108
-#   method-inverse - C8110
-#   method-required-super - W8106
-#   method-search - C8109
-#   missing-newline-extrafiles - W7908
-#   missing-readme - C7902
-#   missing-import-error - W7935
-#   missing-manifest-dependency - W7936
-#   unnecessary-utf8-coding-comment - C8202
-#   odoo-addons-relative-import - W7950
-#   old-api7-method-defined - R8110
-#   openerp-exception-warning - R8101
-#   pointless-statement - W0104
-#   pointless-string-statement - W0105
-#   print-statement - E1601
-#   redundant-modulename-xml - W7909
-#   redundant-keyword-arg - E1124
-#   reimported - W0404
-#   relative-import - W0403
-#   return-in-init - E0101
-#   rst-syntax-error - E7901
-#   sql-injection - E8103
-#   too-complex - C0901
-#   translation-field - W8103
-#   translation-required - C8107
-#   too-few-format-args - E1306
-#   use-vim-comment - W8202
-#   unreachable - W0101
-#   wrong-tabs-instead-of-spaces - W7910
-#   xml-syntax-error - E7902
-
-enable=odoolint,
+enable=async,logging,method_args,modified_iteration,stdlib,
     anomalous-backslash-in-string,
+    arguments-differ,
+    arguments-renamed,
     assignment-from-none,
-    api-one-deprecated,
-    api-one-multi-together,
     attribute-deprecated,
-    class-camelcase,
-    create-user-wo-reset-password,
+    attribute-deprecated,
     consider-merging-classes-inherited,
-    copy-wo-api-one,
-    dangerous-filter-wo-user,
-    dangerous-view-replace-wo-priority,
-    dangerous-default-value,
-    duplicate-key,
     deprecated-module,
-    duplicate-id-csv,
-    duplicate-xml-fields,
-    duplicate-xml-record-id,
+    duplicate-key,
     eval-used,
-    eval-referenced,
-    file-not-used,
+    except-pass,
+    external-request-timeout,
+    function-redefined,
     invalid-commit,
-    javascript-lint,
+    license-allowed,
     manifest-author-string,
+    manifest-deprecated-key,
     manifest-required-author,
     manifest-required-key,
     manifest-version-format,
-    manifest-deprecated-key,
     method-compute,
     method-inverse,
     method-required-super,
     method-search,
-    missing-newline-extrafiles,
-    missing-import-error,
-    missing-manifest-dependency,
-    unnecessary-utf8-coding-comment,
+    missing-final-newline,
+    missing-return,
+    no-self-argument,
+    no-write-in-compute,
     odoo-addons-relative-import,
-    old-api7-method-defined,
-    openerp-exception-warning,
-    pointless-statement,
-    pointless-string-statement,
+    odoo-exception-warning,
+    overridden-final-method,
     print-used,
-    redefined-builtin,
-    redundant-modulename-xml,
     redundant-keyword-arg,
     reimported,
-    relative-import,
+    renamed-field-parameter,
+    resource-not-exist,
     return-in-init,
-    rst-syntax-error,
     sql-injection,
     too-few-format-args,
-    too-complex,
+    too-many-branches,
+    too-many-lines,
     translation-field,
+    translation-format-interpolation,
+    translation-not-lazy,
     translation-required,
+    translation-too-few-args,
+    translation-too-many-args,
+    undefined-loop-variable,
+    unknown-option-value,
+    unneeded-not,
     unreachable,
+    unrecognized-option,
+    unspecified-encoding,
+    unused-variable,
     use-vim-comment,
-    wrong-tabs-instead-of-spaces,
-    xml-syntax-error,
+    used-before-assignment,
+    useless-parent-delegation,
 
 [REPORTS]
 msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
 output-format=colorized
-files-output=no
 reports=no
+score=no
 evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
-comment=no
 
 [FORMAT]
 indent-string='    '
@@ -163,54 +100,38 @@ notes=FIXME,TODO,XXX
 [BASIC]
 good-names=i,j,k,ex,Run,_
 function-rgx=[a-z_][a-z0-9_]{2,30}$
-function-name-hint=[a-z_][a-z0-9_]{2,30}$
 variable-rgx=[a-z_][a-z0-9_]{2,30}$
-variable-name-hint=[a-z_][a-z0-9_]{2,30}$
 const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
-const-name-hint=(([A-Z_][A-Z0-9_]*)|(__.*__))$
 attr-rgx=[a-z_][a-z0-9_]{2,30}$
-attr-name-hint=[a-z_][a-z0-9_]{2,30}$
 argument-rgx=[a-z_][a-z0-9_]{2,30}$
-argument-name-hint=[a-z_][a-z0-9_]{2,30}$
 class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,30}|(__.*__))$
-class-attribute-name-hint=([A-Za-z_][A-Za-z0-9_]{2,30}|(__.*__))$
 inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
-inlinevar-name-hint=[A-Za-z_][A-Za-z0-9_]*$
 class-rgx=[A-Z_][a-zA-Z0-9]+$
-class-name-hint=[A-Z_][a-zA-Z0-9]+$
 module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
-module-name-hint=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
 method-rgx=[a-z_][a-z0-9_]{2,30}$
-method-name-hint=[a-z_][a-z0-9_]{2,30}$
 no-docstring-rgx=^_
 docstring-min-length=-1
+
+[DESIGN]
+max-complexity=15
+max-args=8
+ignored-argument-names=_.*
+max-locals=15
+max-returns=8
+max-branches=12
+max-statements=50
+max-parents=7
+max-attributes=12
+min-public-methods=1
+max-public-methods=30
+max-bool-expr=10
 
 [ELIF]
 max-nested-blocks=4
 
 [VARIABLES]
 init-import=no
-dummy-variables-rgx=_+[a-zA-Z0-9]*?$
+dummy-variables-rgx=_+.*|dummy
 
 [IMPORTS]
 deprecated-modules=pdb,pudb,ipdb,openerp.osv
-
-bad-functions=apply,
-    cmp,
-    coerce,
-    execfile,
-    input,
-    intern,
-    long,
-    raw_input,
-    reload,
-    xrange,
-    long,
-    map,
-    filter,
-    zip,
-    basestring,
-    unichr,
-    unicode,
-    file,
-    reduce,
