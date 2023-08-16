@@ -24,15 +24,11 @@
 					"editor.insertSpaces": true,
 					"editor.tabSize": 4
 				},
-				"python.formatting.blackArgs": [
+				"black-formatter.args": [
 					"--skip-string-normalization",
 					"--line-length",
 					"100"
 				],
-				"python.formatting.provider": "black",
-				"python.linting.enabled": true,
-				"python.linting.flake8Enabled": true,
-				"python.linting.pylintEnabled": false,
 				"python.terminal.activateEnvInCurrentTerminal": true,
 				// inherited
 				"python.autoComplete.extraPaths": [
@@ -63,6 +59,9 @@
 				"mrorz.language-gettext",
 				"redhat.vscode-xml",
 				"ms-python.python",
+				"ms-python.black-formatter",
+				"ms-python.flake8",
+				"ms-python.isort",
 				"ms-python.vscode-pylance",
 				"mtxr.sqltools",
 				"mtxr.sqltools-driver-pg"

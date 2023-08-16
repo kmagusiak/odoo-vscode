@@ -7,28 +7,14 @@
 		"editor.insertSpaces": true,
 		"editor.tabSize": 4
 	},
-	"python.formatting.blackArgs": [
-		"--skip-string-normalization",
-		"--line-length",
-		"100"
-	],
-	"python.formatting.provider": "black",
-	"python.linting.enabled": true,
-	"python.linting.flake8Enabled": true,
-	"python.linting.pylintEnabled": false,
-	"python.linting.mypyEnabled": false,
+	"black-formatter.args": [
+        "--skip-string-normalization",
+        "--line-length",
+        "100"
+    ],
 	"python.analysis.extraPaths": [
 		"../odoo",
 		"../odoo-addons",
 		"../odoo-addons/enterprise",
-	],
-	// inherited
-	"python.linting.ignorePatterns": [
-		"../odoo",
-		"../odoo-addons",
-	],
-	"python.linting.pylintArgs": [
-		//"--rcfile", "${workspaceFolder}/.vscode/oca_pylint.cfg",
-		"--load-plugins", "pylint_odoo"
-	],
+	]
 }
