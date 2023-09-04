@@ -8,6 +8,7 @@ pre_commit() {
 	flake8
 	black --check .
 	isort --check-only .
+	lint_text
 }
 
 lint_text() {
@@ -17,8 +18,8 @@ lint_text() {
 		echo '... should be indented with spaces'
 		return 1
 	fi
-	find -name '*.xml' -type f -print0 | xargs --no-run-if-empty -0 -n1 -P5 \
-		python3 -c 'import xml.etree.ElementTree as ET; import sys; ET.parse(sys.argv[1])'
+	find -name '*.xml' -type f -print0 | xargs --no-run-if-empty -0 -n50 -P3 \
+		python3 -c 'import xml.etree.ElementTree as ET; import sys; _ = [ET.parse(f) for f in sys.argv[1:]]'
 }
 
 format() {
@@ -28,7 +29,6 @@ format() {
 
 lint() {
 	pre_commit
-	lint_text
 	# Skipping: import-error (odoo not available in github actions)
 	pylint -d import-error \
 		$(find -name '__manifest__.py' -exec dirname '{}' ';' | sort)

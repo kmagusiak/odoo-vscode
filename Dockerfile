@@ -10,7 +10,7 @@ run apt-get update \
 		bash-completion gettext git htop less openssh-client vim
 add requirements-dev.txt /tmp
 run cd /tmp \
-	&& pip3 install --no-cache invoke -r /tmp/requirements-dev.txt jupyterlab \
+	&& pip3 install --no-cache -r /tmp/requirements-dev.txt jupyterlab \
 	&& rm -f /tmp/requirements-dev.txt
 
 # use a single user for both running the container and devcontainer
