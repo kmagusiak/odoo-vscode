@@ -24,7 +24,7 @@ merge_lang_files() {
 }
 _merge_lang_files() {
 	path="$1"
-	module="$(basename $PWD)"
+	module="$(basename $path)"
 	[ -f "$path/i18n/$module.pot" ] || return 0
 	cd "$path"
 	cd i18n
