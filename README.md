@@ -150,6 +150,9 @@ odoo-test -t -a template_module -d test_db_1
 # which is similar to
 odoo --test-enable --stop-after-init -i template_module -d test_db_1
 
+# or use pytest
+pytest --odoo-http addons/template
+
 # using docker-compose
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 ```
