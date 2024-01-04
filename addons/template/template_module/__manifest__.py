@@ -5,8 +5,7 @@
     'category': 'category',
     'license': 'GPL-3',
     'depends': [
-        # Odoo modules
-        'base',
+        'web',
     ],
     'data': [
         'security/ir.model.access.csv',

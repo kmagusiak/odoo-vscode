@@ -6,4 +6,5 @@ from odoo.tests.common import HttpCase, tagged
 class IntegrationCase(HttpCase):
     def test_tour(self):
         """Default create"""
-        self.start_tour("/web", 'template_module.test_tour', login="admin")
+        # add watch=True for debugging
+        self.start_tour("/web", 'template_tour', login="admin")

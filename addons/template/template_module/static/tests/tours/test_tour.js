@@ -1,17 +1,14 @@
-odoo.define('sale.tour', function(require) {
-    "use strict";
-
-    const {_t} = require('web.core');
-    var tour = require('web_tour.tour');
-
-    tour.register('template_tour', {
-        url: '/web',  // Here, you can specify any other starting url
-        test: true,
-    }, [
-        tour.stepUtils.showAppsMenuItem(),
-        {
-            trigger: ".o_app[data-menu-xmlid='base.menu_management']",
-            content: _t("Open Apps"),
-        },
-    ]);
-});
+/** @odoo-module */
+import tour from 'web_tour.tour';
+tour.register('template_tour', {
+    url: "/web",
+    test: true,
+}, [
+    // tour.stepUtils.showAppsMenuItem(),
+    ...tour.stepUtils.goToAppSteps('base.menu_management', 'Open apps'),
+    {
+        content: "Find something",
+        trigger: 'a',
+        run: function() {},  // do nothing
+    },
+]);

@@ -154,11 +154,16 @@ odoo --test-enable --stop-after-init -i template_module -d test_db_1
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 ```
 
-You will probably have to also install a web-browser in the container.
+If you want to run integration tests with the browser, you will have to install
+a web-browser in the container.
 Since the image is based on Ubuntu, chromium requires snap which
 is not running in the container.
 You can install [google-chrome](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
-Download it, and run `apt-get install ./google-chrome-stable_current_amd64.deb chromium-driver`.
+
+```shell
+curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome.deb
+apt-get install /tmp/google-chrome.deb
+```
 
 ## Translations
 
