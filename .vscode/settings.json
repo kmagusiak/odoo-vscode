@@ -7,6 +7,10 @@
 		"editor.insertSpaces": true,
 		"editor.tabSize": 4
 	},
+	"[javascript]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2
+	},
 	"black-formatter.args": [
         "--skip-string-normalization",
         "--line-length",
@@ -16,5 +20,11 @@
 		"../odoo",
 		"../odoo-addons",
 		"../odoo-addons/enterprise",
-	]
+	],
+	"python.testing.pytestArgs": [
+		"--odoo-http",
+		"./addons/template"
+	],
+	"python.testing.pytestEnabled": true,
+	"python.testing.unittestEnabled": false
 }

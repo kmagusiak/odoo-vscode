@@ -16,4 +16,5 @@ services:
       "--base-addons", "${BASE_MODULES:-base}",
       "--get-addons", "${TEST_MODULE_PATH:-$ODOO_EXTRA_ADDONS}",
       "--addons", "${INSTALL_MODULES:-}",
+      "--test-tags=-tour",
     ]

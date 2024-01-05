@@ -4,6 +4,11 @@ Dockerized version of Odoo for development and debugging.
 You will need `docker-compose` for this to run or `vscode` to develop inside
 a container.
 
+## The Dockerfile
+
+Starting from [odoo-docker], add development tools
+and a user for development with the same UID as yourself.
+
 ## Starting...
 
 Let's start by generating required files, run:
@@ -12,6 +17,8 @@ It will generate the *.env* file, *docker-compose.override.yaml* and
 launcher configuration.
 You should edit the compose override file for the mounts you want.
 If you change the configuration, reset your container instance.
+
+Sample commands:
 
 ```shell
 # start up odoo and the database
@@ -64,15 +71,10 @@ your-project/
 odoo/                      # Optionally, have odoo sources available
 ```
 
-## The Dockerfile
-
-Starting from [odoo-docker], add development tools
-and a user for development with the same UID as yourself.
-
 ## vscode: devcontainer
 
 [Remote Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
-
+Install the extension and reopen after generating the default configuration.
 Inside the devcontainer, the user is *vscode* with uid=$DEV_UID.
 The same image is used for compose and devcontainer.
 
@@ -150,8 +152,8 @@ odoo-test -t -a template_module -d test_db_1
 # which is similar to
 odoo --test-enable --stop-after-init -i template_module -d test_db_1
 
-# or use pytest
-pytest --odoo-http addons/template
+# or use pytest (on existing database)
+pytest --odoo-http --odoo-database test_db_1 addons/template
 
 # using docker-compose
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
