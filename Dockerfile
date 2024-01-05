@@ -10,7 +10,7 @@ run apt-get update \
 # chrome for testing
 run curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome.deb \
 	&& apt-get install -y --no-install-recommends /tmp/google-chrome.deb \
-	rm /tmp/google-chrome.deb
+	&& rm /tmp/google-chrome.deb
 # python (dev) requirements
 add requirements-dev.txt /tmp
 run cd /tmp \
