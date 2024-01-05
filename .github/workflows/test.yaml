@@ -36,7 +36,7 @@ jobs:
       run: docker-compose -f "docker-compose.yaml" build
 
     - name: Run test container
-      run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run odoo
+      run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run --rm odoo
 
     - name: Stop containers
       if: always()

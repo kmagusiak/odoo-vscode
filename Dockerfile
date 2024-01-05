@@ -6,8 +6,12 @@ from ${DOCKER_BASE_IMAGE} as vscode
 user root
 run apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		libxml2-utils \
 		bash-completion gettext git htop less openssh-client vim
+# chrome for testing
+run curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome.deb \
+	&& apt-get install -y --no-install-recommends /tmp/google-chrome.deb \
+	rm /tmp/google-chrome.deb
+# python (dev) requirements
 add requirements-dev.txt /tmp
 run cd /tmp \
 	&& pip3 install --no-cache -r /tmp/requirements-dev.txt jupyterlab \
