@@ -137,8 +137,9 @@ source .env
 DB_TEMPLATE=dump
 
 # load the dump
-dropdb --if-exists "$DB_TEMPLATE" && createdb "$DB_TEMPLATE"
-psql "$DB_TEMPLATE" < dump.sql
+# dropdb --if-exists "$DB_TEMPLATE" && createdb "$DB_TEMPLATE"
+# psql "$DB_TEMPLATE" < dump.sql
+scripts/reset-db.sh "$DB_TEMPLATE" dump.sql
 
 # create your copy
 scripts/reset-db.sh "$DB_NAME" "$DB_TEMPLATE"

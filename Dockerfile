@@ -6,7 +6,6 @@ from ${DOCKER_BASE_IMAGE} as vscode
 user root
 run apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		libxml2-utils \
 		bash-completion gettext git htop less openssh-client vim
 # chrome for testing
 run curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome.deb \
