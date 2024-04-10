@@ -13,3 +13,11 @@ WHERE key = 'database.expiration_date';
 -- Force "admin" password
 SELECT NULL AS "Reset admin passwords";
 UPDATE res_users SET password = 'admin';
+-- Reset totp_secret (2FA) if it exists
+DO $$
+BEGIN
+	UPDATE res_users SET totp_secret = null;
+EXCEPTION WHEN OTHERS THEN
+	NULL;
+END;
+$$;
