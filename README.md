@@ -11,12 +11,16 @@ and a user for development with the same UID as yourself.
 
 ## Starting...
 
-Let's start by generating required files, run:
+To generate required files, run:
 `scripts/generate.sh` with either *devcontainer* or *compose* argument.
-It will generate the *.env* file, *docker-compose.override.yaml* and
+It will generate the `.env` file, `docker-compose.override.yaml` and
 launcher configuration.
-You should edit the compose override file for the mounts you want.
+You should edit the compose override file for the mounts and ports you want.
 If you change the configuration, reset your container instance.
+
+Using the *devcontainer*, you are working inside the odoo container.
+Using *docker-compose*, you work on your machine and run Odoo inside a
+container, you can attach debug remotely.
 
 Sample commands:
 
@@ -56,8 +60,8 @@ your-project/
  │   └── vscode.code-workspace  # workspace to use inside the container
  ├── .vscode/              # vscode default configuration
  │   ├── settings.json          # settings for your project folder
- │   └── odoo.code-workspace    # workspace to use inside the container
- ├── addons/               # Custom modules goes here, put them inside separate directories
+ │   └── odoo.code-workspace    # workspace to add ../odoo and ../odoo-addons
+ ├── addons/               # Your custom modules, put them inside separate directories
  │   ├── OCA/
  │   ├── template/
  │   └── myaddons/
@@ -68,7 +72,8 @@ your-project/
  ├── docker-compose.yml    # The default docker-compose (and generated override)
  ├── requirements-dev.txt  # Python requirements for development
  └── README.md             # This file
-odoo/                      # Optionally, have odoo sources available
+odoo/                      # Odoo sources (optional) and mount them
+odoo-addons/               # Optional, other addons
 ```
 
 ## vscode: devcontainer
@@ -105,18 +110,6 @@ git clone $ODOO_SOURCE/enterprise.git
 ```
 
 Add the path in the *docker-comopse.override.yaml* file.
-
-## Modes
-
-Run `./scripts/generate.sh` when changing modes.
-It will adapt the launch configuration, and generate default files which
-are `.env` and `docker-compose.override.yaml`.
-If you use local odoo sources, mount them in the compose override file.
-
-- *devcontainer* as the name indicates, it is for working inside a container
-  - `.devcontainer/vscode.code-workspace` is a workspace with odoo sources
-- *compose* supposes that you run `docker-compose` and debug remotely
-  - `.vscode/odoo.code-workspace` is to be used when you have local odoo sources
 
 ## Linting
 

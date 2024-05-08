@@ -31,7 +31,9 @@ then
 		echo
 		echo "# User uid"
 		echo "DEV_UID=$(id -u)"
-		echo "# Odoo addon paths"
+		echo "# Odoo paths"
+		echo "ODOO_DATA_DIR=/var/lib/odoo"
+		echo "ODOO_BASEPATH=/opt/odoo"
 		if [ "$launch_type" == "devcontainer" ]
 		then
 			echo "ODOO_EXTRA_ADDONS=/odoo-workspace/addons"
@@ -55,6 +57,6 @@ fi
 
 file=".vscode/launch.json"
 echo "- $file"
-cp "scripts/launch.${launch_type}.json" "$file"
+ln -sf "../scripts/launch.${launch_type}.json" "$file"
 
 echo "* done"

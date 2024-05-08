@@ -1,5 +1,4 @@
-version: "3.7"
-# docker-compose to enable tests
+# Service Odoo to run the tests
 
 services:
   odoo:

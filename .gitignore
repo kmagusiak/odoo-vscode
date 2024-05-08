@@ -1,8 +1,7 @@
 # Python files
 *.py[cod]
 __pycache__
-.mypy_cache
-.pytest_cache
+.*_cache
 
 # Local files
 /.env

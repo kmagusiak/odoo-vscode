@@ -1,13 +1,10 @@
 # Base image
 ODOO_VERSION=16.0
-DOCKER_BASE_IMAGE=ghcr.io/kmagusiak/odoo-docker:${ODOO_VERSION}
+# DOCKER_BASE_IMAGE=
 
 # PostgreSQL configuration
 PGPASSWORD=odoo
 PGUSER=odoo
-
-# General Configuration paths
-ODOO_BASEPATH=/opt/odoo
 
 # Auto Install dependencies or run Tests
 PIP_AUTO_INSTALL=1
@@ -16,7 +13,6 @@ DEBUGPY_ENABLE=1
 
 # Odoo Configuration file defaults
 ADMIN_PASSWORD=odooadmin
-ODOO_DATA_DIR=/var/lib/odoo
 # DB_SSLMODE=prefer
 # DB_TEMPLATE=template1
 # DB_FILTER=.*

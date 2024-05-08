@@ -1,5 +1,4 @@
-version: "3.7"
-
+# Docker target vscode
 volumes:
   vscode_home:
 

@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Python Attach 41234",
-            "type": "python",
+            "type": "debugpy",
             "request": "attach",
             "connect": {
                 "host": "127.0.0.1",

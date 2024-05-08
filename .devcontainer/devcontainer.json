@@ -45,26 +45,26 @@
 			},
 
 			"extensions": [
-				"aaron-bond.better-comments",
-				"dbaeumer.vscode-eslint",
-				"eamodio.gitlens",
-				//"ms-python.python",
-				"mstuttgart.odoo-snippets",
-				"visualstudioexptteam.vscodeintellicode",
-				"scapigliato.vsc-odoo-development",
-				"scapigliato.odoo-snippets",
-				// my addons
-				"gruntfuggly.todo-tree",
-				"mechatroner.rainbow-csv",
-				"mrorz.language-gettext",
-				"redhat.vscode-xml",
 				"ms-python.python",
 				"ms-python.black-formatter",
 				"ms-python.flake8",
 				"ms-python.isort",
 				"ms-python.vscode-pylance",
 				"mtxr.sqltools",
-				"mtxr.sqltools-driver-pg"
+				"mtxr.sqltools-driver-pg",
+				"eamodio.gitlens",
+				"mstuttgart.odoo-snippets",
+				"visualstudioexptteam.vscodeintellicode",
+				"scapigliato.vsc-odoo-development",
+				"scapigliato.odoo-snippets",
+				// my addons
+				"aaron-bond.better-comments",
+				"dbaeumer.vscode-eslint",
+				"foam.foam-vscode",
+				"gruntfuggly.todo-tree",
+				"mechatroner.rainbow-csv",
+				"mrorz.language-gettext",
+				"redhat.vscode-xml"
 			]
 		}
 	}
