@@ -9,3 +9,7 @@ services:
     #- ../odoo-addons:/opt/odoo-addons:cached
     #- ${BACKUP_PATH}:/mnt/backup
     - /tmp/odoo:/tmp/odoo
+  db:
+    mem_limit: 8G
+    volumes:
+      - ./scripts/db_tune.sql:/docker-entrypoint-initdb.d/db_tune.sql:ro

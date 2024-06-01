@@ -12,10 +12,10 @@
 		"editor.tabSize": 2
 	},
 	"black-formatter.args": [
-        "--skip-string-normalization",
-        "--line-length",
-        "100"
-    ],
+		"--skip-string-normalization",
+		"--line-length",
+		"100"
+	],
 	"python.analysis.extraPaths": [
 		"../odoo",
 		"../odoo-addons",

@@ -16,12 +16,9 @@ services:
     environment:
       PGHOST: db
       PGPORT: 5432
-    
     restart: unless-stopped
-
     ports:
       - "8069"
-
     volumes:
       - odoo_data:${ODOO_DATA_DIR}
       - ./addons:${ODOO_EXTRA_ADDONS}:cached
@@ -35,7 +32,7 @@ services:
     volumes:
       - postgres_odoo:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=${PGPASSWORD}
-      - POSTGRES_USER=${PGUSER}
-      - PGDATA=/var/lib/postgresql/data
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+      POSTGRES_USER: ${PGUSER}
+      PGDATA: /var/lib/postgresql/data
