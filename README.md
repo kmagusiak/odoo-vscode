@@ -11,12 +11,12 @@ and a user for development with the same UID as yourself.
 
 ## Starting...
 
-To generate required files, run:
+To generate missing local files, run:
 `scripts/generate.sh` with either *devcontainer* or *compose* argument.
 It will generate the `.env` file, `docker-compose.override.yaml` and
 launcher configuration.
 You should edit the compose override file for the mounts and ports you want.
-If you change the configuration, reset your container instance.
+If you change the configuration, restart your container instance.
 
 Using the *devcontainer*, you are working inside the odoo container.
 Using *docker-compose*, you work on your machine and run Odoo inside a
@@ -90,6 +90,19 @@ File locations:
 - ODOO_BASE_ADDONS=`/opt/odoo-addons`
 
 # Development and Testing
+
+## Selecting the version
+
+The repository is configured for a specific version of Odoo, if you want to run
+another version, you'll have to update a few files:
+- `.env` change ODOO_VERSION (see scripts/env-template file too)
+- `.pylintrc`: valid-odoo-versions
+- check odoo requirements and preferred versions
+
+| odoo version | python | system       | postgres |
+| ------------ | ------ | ------------ | -------- |
+| 16.0         | 3.10   | ubuntu 22.04 | 14       |
+| 17.0         | 3.10   | ubuntu 22.04 | 14       |
 
 ## Cloning odoo
 
