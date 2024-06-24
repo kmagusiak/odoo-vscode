@@ -15,9 +15,10 @@ run curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 # Create the vscode development image
 # python (dev) requirements
 from ${DOCKER_BASE_IMAGE} as dev
+user root
 add requirements-dev.txt /tmp
 run cd /tmp \
-	&& pip3 install --no-cache -r /tmp/requirements-dev.txt \
+	&& pip3 install --break-system-packages --no-cache -r /tmp/requirements-dev.txt \
 	&& rm -f /tmp/requirements-dev.txt
 
 # use a single user for both running the container and devcontainer
