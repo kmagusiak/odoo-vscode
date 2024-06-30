@@ -1,4 +1,4 @@
-# https://www.odoo.com/documentation/16.0/developer/reference/backend/testing.html
+# https://www.odoo.com/documentation/master/developer/reference/backend/testing.html
 from odoo.tests.common import TransactionCase, tagged
 
 

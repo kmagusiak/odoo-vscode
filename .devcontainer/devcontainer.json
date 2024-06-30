@@ -55,10 +55,10 @@
 				"eamodio.gitlens",
 				"mstuttgart.odoo-snippets",
 				"visualstudioexptteam.vscodeintellicode",
+				// odoo addons
 				"scapigliato.vsc-odoo-development",
 				"scapigliato.odoo-snippets",
 				// my addons
-				"aaron-bond.better-comments",
 				"dbaeumer.vscode-eslint",
 				"foam.foam-vscode",
 				"gruntfuggly.todo-tree",

@@ -1,4 +1,4 @@
-arg ODOO_VERSION=16.0
+arg ODOO_VERSION=master
 arg DOCKER_BASE_IMAGE=base_image
 
 # Base image with added development tools
@@ -18,7 +18,7 @@ from ${DOCKER_BASE_IMAGE} as dev
 user root
 add requirements-dev.txt /tmp
 run cd /tmp \
-	&& pip3 install --break-system-packages --no-cache -r /tmp/requirements-dev.txt \
+	&& pip3 install --prefix=/usr --no-cache -r /tmp/requirements-dev.txt \
 	&& rm -f /tmp/requirements-dev.txt
 
 # use a single user for both running the container and devcontainer

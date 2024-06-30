@@ -99,10 +99,10 @@ another version, you'll have to update a few files:
 - `.pylintrc`: valid-odoo-versions
 - check odoo requirements and preferred versions
 
-| odoo version | python | system       | postgres |
-| ------------ | ------ | ------------ | -------- |
-| 16.0         | 3.10   | ubuntu 22.04 | 14       |
-| 17.0         | 3.10   | ubuntu 22.04 | 14       |
+| odoo version | python | postgres |
+| ------------ | ------ | -------- |
+| 16.0         | 3.10   | 14       |
+| 17.0         | 3.10   | 14       |
 
 ## Cloning odoo
 

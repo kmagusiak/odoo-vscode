@@ -10,7 +10,7 @@ manifest-required-authors=Odoo Community Association (OCA),Krzysztof Magusiak
 manifest-required-keys=license,author
 manifest-deprecated-keys=description,active
 manifest-version-format=\d+(.\d+)+
-valid-odoo-versions=16.0
+#valid-odoo-versions=16.0
 license-allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
 method-required-super=create,write,read,unlink,copy,setUp,setUpClass,tearDown,default_get
 
