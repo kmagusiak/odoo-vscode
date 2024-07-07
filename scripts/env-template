@@ -15,7 +15,7 @@ DEBUGPY_ENABLE=1
 # Odoo Configuration file defaults
 ADMIN_PASSWORD=odooadmin
 # DB_SSLMODE=prefer
-# DB_TEMPLATE=template1
+# DB_TEMPLATE=template0
 # DB_FILTER=.*
 DB_NAME=odoo
 # LIMIT_MEMORY_HARD=2684354560

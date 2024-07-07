@@ -48,5 +48,6 @@
     </record>
     <menuitem id="action_template_template_menu"
         action="action_template_template"
-        parent="base.menu_reporting_dashboard"/>
+        />
+        <!-- parent="base.menu_administration" -->
 </odoo>

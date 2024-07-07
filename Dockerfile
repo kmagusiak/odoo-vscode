@@ -1,16 +1,5 @@
 arg ODOO_VERSION=master
-arg DOCKER_BASE_IMAGE=base_image
-
-# Base image with added development tools
-from ghcr.io/kmagusiak/odoo-docker:${ODOO_VERSION} as base_image
-user root
-run apt-get update \
-	&& apt-get install -y --no-install-recommends \
-		bash-completion gettext git htop less openssh-client vim
-# chrome for testing
-run curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome.deb \
-	&& apt-get install -y --no-install-recommends /tmp/google-chrome.deb \
-	&& rm /tmp/google-chrome.deb
+arg DOCKER_BASE_IMAGE=ghcr.io/kmagusiak/odoo-docker:${ODOO_VERSION}-dev
 
 # Create the vscode development image
 # python (dev) requirements

@@ -1,12 +1,10 @@
-# Python files
-*.py[cod]
-__pycache__
-.*_cache
-
 # Local files
 /.env
 *.override.yaml
 /.vscode/launch.json
 
-# Temporary files
+# Python and temporary files
+*.py[cod]
+__pycache__
+.*_cache
 *~

@@ -17,6 +17,8 @@ method-required-super=create,write,read,unlink,copy,setUp,setUpClass,tearDown,de
 [MESSAGES CONTROL]
 disable=all
 
+# some disabled rules that can be interesting for teams
+# - manifest-required-author
 enable=async,logging,method_args,modified_iteration,stdlib,
     anomalous-backslash-in-string,
     arguments-differ,
@@ -35,7 +37,6 @@ enable=async,logging,method_args,modified_iteration,stdlib,
     license-allowed,
     manifest-author-string,
     manifest-deprecated-key,
-    manifest-required-author,
     manifest-required-key,
     manifest-version-format,
     method-compute,

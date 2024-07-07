@@ -15,7 +15,7 @@
 		"vscode": {
 			"settings": {
 				"editor.insertSpaces": false,
-				"editor.rulers": [79, 100],
+				"editor.rulers": [79, 100, 116],
 				"files.eol": "\n",
 				"search.followSymlinks": true,
 				"terminal.integrated.defaultProfile.linux": "bash",
@@ -46,20 +46,22 @@
 
 			"extensions": [
 				"ms-python.python",
-				"ms-python.black-formatter",
-				"ms-python.flake8",
-				"ms-python.isort",
 				"ms-python.vscode-pylance",
+				//"ms-python.black-formatter",
+				//"ms-python.flake8",
+				//"ms-python.isort",
+				"charliermarsh.ruff",
+				//"dbaeumer.vscode-eslint",
 				"mtxr.sqltools",
 				"mtxr.sqltools-driver-pg",
-				"eamodio.gitlens",
-				"mstuttgart.odoo-snippets",
 				"visualstudioexptteam.vscodeintellicode",
 				// odoo addons
+				"Odoo.odoo",
+				"mstuttgart.odoo-snippets",
 				"scapigliato.vsc-odoo-development",
 				"scapigliato.odoo-snippets",
 				// my addons
-				"dbaeumer.vscode-eslint",
+				"donjayamanne.githistory",
 				"foam.foam-vscode",
 				"gruntfuggly.todo-tree",
 				"mechatroner.rainbow-csv",

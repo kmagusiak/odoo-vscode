@@ -1,6 +1,6 @@
 {
 	"editor.insertSpaces": false,
-	"editor.rulers": [79, 100],
+	"editor.rulers": [78, 100, 116],
 	"files.eol": "\n",
 	"search.useIgnoreFiles": false,
 	"[python]": {

@@ -1,8 +1,7 @@
 # linting and formatting
 black>=22
-flake8>=7
-isort>=5
 pylint-odoo>=9
+ruff>=0.5
 
 # debugging and tools
 debugpy

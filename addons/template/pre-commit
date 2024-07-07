@@ -5,9 +5,8 @@ cd "$(dirname "$0")"
 [[ "$0" != *.git/hooks/* ]] || cd ../..
 
 pre_commit() {
-	flake8
-	black --check .
-	isort --check-only .
+	ruff check
+	ruff format --check
 	lint_text
 }
 
@@ -23,8 +22,8 @@ lint_text() {
 }
 
 format() {
-	black .
-	isort .
+	ruff check --fix
+	ruff format
 }
 
 lint() {
