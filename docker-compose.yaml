@@ -1,4 +1,4 @@
-# Base for running docker
+# docker-compose: base for running docker
 
 volumes:
   odoo_data:

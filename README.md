@@ -1,36 +1,39 @@
 # Odoo in docker
 
+[![Docker Image](https://img.shields.io/badge/docker-repository-blue)][odoo-docker]
+
 Dockerized version of Odoo for development and debugging.
-You will need `docker-compose` for this to run or `vscode` to develop inside
-a container.
+You will need `docker-compose` for to run this project.
+You can either just use docker or `vscode` to develop inside a container.
 
-## The Dockerfile
-
-Starting from [odoo-docker], add development tools
+Starting from [odoo-docker] (development version), add required tools
 and a user for development with the same UID as yourself.
 
 ## Starting...
 
-To generate missing local files, run:
-`scripts/generate.sh` with either *devcontainer* or *compose* argument.
-It will generate the `.env` file, `docker-compose.override.yaml` and
-launcher configuration.
-You should edit the compose override file for the mounts and ports you want.
-If you change the configuration, restart your container instance.
-
+Fork or clone this repository and...
 Using the *devcontainer*, you are working inside the odoo container.
 Using *docker-compose*, you work on your machine and run Odoo inside a
-container, you can attach debug remotely.
+container, you can attach to debugger remotely.
+
+```shell
+# Clone other repositories (optional, see later)
+# Generate additional files
+scripts/setup.py devcontainer  # or compose
+# Edit the generated files
+vim .env
+vim docker-compose.override.yaml
+# Go...
+docker-compose up -d  # or reopen in devcontainer
+```
 
 Sample commands:
 
 ```shell
-# start up odoo and the database
-docker-compose up -d
-
 # connect and run things on the containers
 docker-compose exec odoo bash
 docker-compose exec db psql -U odoo -l
+docker-compose exec odoo psql  # it's also available there
 
 # copy files to and from the container
 docker copy myfile.tar dockerodoo-odoo-1:/
@@ -68,7 +71,7 @@ your-project/
  ├── scripts/              # Scripts for environment automation
  ├── ...                   # Common files (.gitignore, etc.)
  ├── .env                  # Environment definition (generated)
- ├── Dockerfile            # Image definition
+ ├── Dockerfile            # Docker image definition
  ├── docker-compose.yml    # The default docker-compose (and generated override)
  ├── requirements-dev.txt  # Python requirements for development
  └── README.md             # This file
@@ -95,14 +98,12 @@ File locations:
 
 The repository is configured for a specific version of Odoo, if you want to run
 another version, you'll have to update a few files:
-- `.env` change ODOO_VERSION (see scripts/env-template file too)
-- `.pylintrc`: valid-odoo-versions
-- check odoo requirements and preferred versions
+- `.env` change ODOO_VERSION, POSTGRES_VERSION
+  (see scripts/env-template file too)
+- `.pylintrc`: valid-odoo-versions (if you use it)
 
-| odoo version | python | postgres |
-| ------------ | ------ | -------- |
-| 16.0         | 3.10   | 14       |
-| 17.0         | 3.10   | 14       |
+You may want to checkout the sources or rebuild the container after this
+operation.
 
 ## Cloning odoo
 
@@ -117,9 +118,11 @@ ODOO_SOURCE=git@github.com:odoo
 git clone $ODOO_SOURCE/odoo.git
 mkdir odoo-addons
 # optionally clone what you need (example)
-cd odoo-addons
+pushd odoo-addons
 git clone $ODOO_SOURCE/design-themes.git
 git clone $ODOO_SOURCE/enterprise.git
+popd
+git clone $ODOO_SOURCE/documentation.git
 ```
 
 Add the path in the *docker-comopse.override.yaml* file.
@@ -166,16 +169,9 @@ pytest --odoo-http --odoo-database test_db_1 addons/template
 docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 ```
 
-If you want to run integration tests with the browser, you will have to install
-a web-browser in the container.
-Since the image is based on Ubuntu, chromium requires snap which
-is not running in the container.
-You can install [google-chrome](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
-
-```shell
-curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output /tmp/google-chrome.deb
-apt-get install /tmp/google-chrome.deb
-```
+A version of chrome is installed in the devcontainer if you want to run
+integration tests.
+Source: [google-chrome](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb).
 
 ## Translations
 
@@ -197,21 +193,6 @@ scripts/translations-export.sh addons/template/template_module/
 scripts/translations-export.sh addons/template/template_module/
 ```
 
-# Credits
-
-Based on:
-
-* [dockerdoo]
-
-Bunch of ideas taken from:
-
-* [Odoo] ([odoo-docker](https://github.com/odoo/docker))
-* [OCA] ([maintainer-quality-tools](https://github.com/OCA/maintainer-quality-tools))
-* [click-odoo-contrib]
-
-
-[click-odoo-contrib]: https://github.com/acsone/click-odoo-contrib
-[dockerdoo]: https://github.com/iterativo-git/dockerdoo
 [OCA]: https://github.com/OCA
 [Odoo]: https://github.com/odoo
 [odoo-docker]: https://github.com/kmagusiak/odoo-docker

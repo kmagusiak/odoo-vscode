@@ -1,4 +1,4 @@
-# Service Odoo to run the tests
+# docker-compose: enable test run
 
 services:
   odoo:

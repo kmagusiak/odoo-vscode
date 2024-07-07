@@ -21,8 +21,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
     - name: Generate config
-      run: bash ./scripts/generate.sh compose
+      run: bash ./scripts/setup.py compose
 
     - name: Login to GitHub Packages
       uses: docker/login-action@v3

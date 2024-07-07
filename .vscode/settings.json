@@ -1,9 +1,8 @@
 {
-	"editor.insertSpaces": false,
-	"editor.rulers": [78, 100, 116],
+	"editor.rulers": [80, 100, 116],
 	"files.eol": "\n",
-	"search.useIgnoreFiles": false,
 	"[python]": {
+		"editor.defaultFormatter": "charliermarsh.ruff",
 		"editor.insertSpaces": true,
 		"editor.tabSize": 4
 	},
@@ -11,11 +10,6 @@
 		"editor.insertSpaces": true,
 		"editor.tabSize": 2
 	},
-	"black-formatter.args": [
-		"--skip-string-normalization",
-		"--line-length",
-		"100"
-	],
 	"python.analysis.extraPaths": [
 		"../odoo",
 		"../odoo-addons",

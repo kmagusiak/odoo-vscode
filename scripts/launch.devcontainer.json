@@ -35,13 +35,15 @@
             "request": "launch",
             "redirectOutput": false,
             "cwd": "${workspaceFolder}",
-            "justMyCode": false,
+            "justMyCode": true,
             "program": "/usr/bin/odoo-bin",
             "args": [
                 "--workers=0",
                 "--stop-after-init",
-                "--test-enable",
+                "-d", "test",
                 "-i", "${input:odoo_module}",
+                "--test-enable",
+                "--test-tags", "${input:test_tags}",
                 "--limit-time-real=100000"
             ]
         },
@@ -63,6 +65,12 @@
             "id": "odoo_module",
             "type": "promptString",
             "description": "Odoo module to test"
+        },
+        {
+            "id": "test_tags",
+            "type": "promptString",
+            "description": "Odoo test tag selector",
+            "default": "standard"
         }
     ]
 }
