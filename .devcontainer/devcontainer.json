@@ -41,6 +41,7 @@
 					"**/.git": true
 				},
 				"foam.files.ignore": [
+					"*_cache/**/*",
 					"addons/**/*",
 					"enterprise/**/*",
 					"**/doc/cla/**/*"
