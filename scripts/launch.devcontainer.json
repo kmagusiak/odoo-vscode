@@ -40,7 +40,6 @@
             "args": [
                 "--workers=0",
                 "--stop-after-init",
-                "-d", "test",
                 "-i", "${input:odoo_module}",
                 "--test-enable",
                 "--test-tags", "${input:test_tags}",

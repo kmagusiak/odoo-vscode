@@ -2,5 +2,6 @@
 .git
 .github
 .gitignore
+.vscode
 /.*_cache
 /addons/*
