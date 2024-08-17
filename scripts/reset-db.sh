@@ -32,9 +32,9 @@ then
 		true
 	}
 else
-	echo "- docker-compose down"
-	docker-compose down
-	cont=$(docker-compose run --rm -d odoo /bin/bash -c "for i in {1..30}; do sleep 60; done")
+	echo "- docker compose down"
+	docker compose down
+	cont=$(docker compose run --rm -d odoo /bin/bash -c "for i in {1..30}; do sleep 60; done")
 	echo "- container: $cont"
 	run() {
 		docker exec -i "$cont" "$@"

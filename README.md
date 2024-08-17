@@ -24,16 +24,16 @@ scripts/setup.py devcontainer  # or compose
 vim .env
 vim docker-compose.override.yaml
 # Go...
-docker-compose up -d  # or reopen in devcontainer
+docker compose up -d  # or reopen in devcontainer
 ```
 
 Sample commands:
 
 ```shell
 # connect and run things on the containers
-docker-compose exec odoo bash
-docker-compose exec db psql -U odoo -l
-docker-compose exec odoo psql  # it's also available there
+docker compose exec odoo bash
+docker compose exec db psql -U odoo -l
+docker compose exec odoo psql  # it's also available there
 
 # copy files to and from the container
 docker copy myfile.tar dockerodoo-odoo-1:/
@@ -165,8 +165,8 @@ odoo --test-enable --stop-after-init -i template_module -d test_db_1
 # or use pytest (on existing database)
 pytest --odoo-http --odoo-database test_db_1 addons/template
 
-# using docker-compose
-docker-compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
+# using docker compose
+docker compose -f docker-compose.yaml -f docker-compose.test.yaml run --rm odoo
 ```
 
 A version of chrome is installed in the devcontainer if you want to run

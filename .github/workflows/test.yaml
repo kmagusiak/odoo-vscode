@@ -37,11 +37,11 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build image
-      run: docker-compose -f "docker-compose.yaml" build
+      run: docker compose -f "docker-compose.yaml" build
 
     - name: Run test container
-      run: docker-compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run --rm odoo
+      run: docker compose -f "docker-compose.yaml" -f "docker-compose.test.yaml" run --rm odoo
 
     - name: Stop containers
       if: always()
-      run: docker-compose -f "docker-compose.yaml" down
+      run: docker compose -f "docker-compose.yaml" down
