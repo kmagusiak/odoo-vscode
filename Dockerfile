@@ -13,8 +13,11 @@ run cd /tmp \
 # use a single user for both running the container and devcontainer
 from dev as vscode
 arg DEV_UID=1000
-run useradd --uid "${DEV_UID}" -G odoo --create-home vscode \
-	&& echo "root:${ADMIN_PASSWORD:-admin}" | chpasswd \
+run echo "root:${ADMIN_PASSWORD:-admin}" | chpasswd \
 	&& mkdir /odoo-workspace \
-	&& chown vscode:odoo /odoo-workspace
+	&& ( \
+		[ "${DEV_UID}" == "0" ] && \
+		useradd -G odoo --create-home vscode || \
+		useradd --uid "${DEV_UID}" -G odoo --create-home vscode \
+	 ) && chown vscode:odoo /odoo-workspace
 user vscode
