@@ -1,5 +1,4 @@
 # linting and formatting
-black>=22
 pylint-odoo>=9
 ruff>=0.5
 

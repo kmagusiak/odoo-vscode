@@ -14,6 +14,8 @@ log = logging.getLogger("setup")
 
 def create_dotenv(container_type):
     dotenv_path = BASE_DIR / ".env"
+    if dotenv_path.exists():
+        return
     log.info("create %s", dotenv_path)
     extra_addons = "/mnt/extra-addons"
     if container_type == "devcontainer":

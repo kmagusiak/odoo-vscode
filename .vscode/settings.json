@@ -12,8 +12,6 @@
 	},
 	"python.analysis.extraPaths": [
 		"../odoo",
-		"../odoo-addons",
-		"../odoo-addons/enterprise",
 	],
 	"python.testing.pytestArgs": [
 		"--odoo-http",
