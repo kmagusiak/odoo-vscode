@@ -16,7 +16,7 @@
             ]
         },
         {
-            "name": "Odoo Shell",
+            "name": "Odoo Command",
             "type": "debugpy",
             "request": "launch",
             "redirectOutput": false,
@@ -24,7 +24,7 @@
             "justMyCode": false,
             "program": "/usr/bin/odoo-bin",
             "args": [
-                "shell",
+                "${input:odoo_command}",
                 "--workers=0",
                 "--limit-time-real=100000"
             ]
@@ -60,6 +60,12 @@
         }
     ],
     "inputs": [
+        {
+            "id": "odoo_command",
+            "type": "promptString",
+            "description": "Odoo command to run",
+            "default": "shell"
+        },
         {
             "id": "odoo_module",
             "type": "promptString",

@@ -15,7 +15,7 @@
 	"customizations": {
 		"vscode": {
 			"settings": {
-				"editor.rulers": [80, 100, 116],
+				"editor.rulers": [80, 100, 120],
 				"files.eol": "\n",
 				"search.followSymlinks": true,
 				"search.useIgnoreFiles": true,
@@ -67,7 +67,7 @@
 				"scapigliato.odoo-snippets",
 				// my addons
 				"donjayamanne.githistory",
-				"foam.foam-vscode",
+				//"foam.foam-vscode",
 				"gruntfuggly.todo-tree",
 				"mechatroner.rainbow-csv",
 				"mrorz.language-gettext",

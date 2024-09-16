@@ -1,5 +1,5 @@
 {
-	"editor.rulers": [80, 100, 116],
+	"editor.rulers": [80, 100, 120],
 	"files.eol": "\n",
 	"[python]": {
 		"editor.defaultFormatter": "charliermarsh.ruff",
