@@ -4,11 +4,10 @@ services:
     - "8069:8069"
     #- "8072:8072"
     #- "41234:41234"
-    volumes:
+    #volumes:
     #- ../odoo:/opt/odoo:cached
     #- ../odoo-addons:/opt/odoo-addons:cached
     #- ${BACKUP_PATH}:/mnt/backup
-    - /tmp/odoo:/tmp/odoo
   db:
     mem_limit: 8G
     volumes:
