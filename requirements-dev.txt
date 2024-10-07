@@ -8,7 +8,6 @@ py-spy
 
 # investigation
 ipython
-jupyterlab
 prompt-toolkit==3.0.28; python_version <= '3.10.6'  # fix version
 
 # unit testing
