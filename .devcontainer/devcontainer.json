@@ -61,10 +61,10 @@
 				"mtxr.sqltools-driver-pg",
 				"visualstudioexptteam.vscodeintellicode",
 				// odoo addons
-				"Odoo.odoo",
+				"odoo.odoo",
 				"mstuttgart.odoo-snippets",
-				"scapigliato.vsc-odoo-development",
-				"scapigliato.odoo-snippets",
+				//"scapigliato.vsc-odoo-development",
+				//"scapigliato.odoo-snippets",
 				// my addons
 				"donjayamanne.githistory",
 				//"foam.foam-vscode",
