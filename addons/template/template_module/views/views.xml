@@ -15,13 +15,13 @@
             </form>
         </field>
     </record>
-    <record id="template_template_tree" model="ir.ui.view">
-        <field name="name">template.template.tree</field>
+    <record id="template_template_list" model="ir.ui.view">
+        <field name="name">template.template.list</field>
         <field name="model">template.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name"/>
-            </tree>
+            </list>
         </field>
     </record>
     <record id="template_template_search" model="ir.ui.view">
@@ -44,7 +44,7 @@
     <record id="action_template_template" model="ir.actions.act_window">
         <field name="name">Template Example</field>
         <field name="res_model">template.template</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem id="action_template_template_menu"
         action="action_template_template"
