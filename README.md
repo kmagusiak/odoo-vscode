@@ -19,7 +19,7 @@ container, you can attach to debugger remotely.
 ```shell
 # Clone other repositories (optional, see later)
 # Generate additional files
-scripts/setup.py devcontainer  # or compose
+scripts/init.py devcontainer  # or compose
 # Edit the generated files
 vim .env
 vim docker-compose.override.yaml

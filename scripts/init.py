@@ -9,7 +9,7 @@ SCRIPT_DIR = pathlib.Path(__file__).parent
 BASE_DIR = SCRIPT_DIR.parent.absolute()
 
 logging.basicConfig(level=logging.INFO)
-log = logging.getLogger("setup")
+log = logging.getLogger("initdev")
 
 
 def create_dotenv(container_type):
@@ -74,7 +74,7 @@ def main(args=None):
     action = args.action
 
     if action in ('devcontainer', 'compose'):
-        log.info("setup %s in %s", action, BASE_DIR)
+        log.info("init %s in %s", action, BASE_DIR)
         create_dotenv(action)
         create_compose_override()
         create_vscode_launch(action)

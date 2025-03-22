@@ -8,7 +8,7 @@
 	"service": "odoo",
 	"remoteUser": "vscode",
 	"shutdownAction": "stopCompose",
-	"initializeCommand": "scripts/setup.py devcontainer",
+	"initializeCommand": "scripts/init.py devcontainer",
 
 	"workspaceFolder": "/odoo-workspace",
 
