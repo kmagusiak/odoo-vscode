@@ -99,7 +99,7 @@ File locations:
 The repository is configured for a specific version of Odoo, if you want to run
 another version, you'll have to update a few files:
 - `.env` change ODOO_VERSION, POSTGRES_VERSION
-  (see scripts/env-template file too)
+  (see `scripts/env-template` file too)
 - `.pylintrc`: valid-odoo-versions (if you use it)
 
 You may want to checkout the sources or rebuild the container after this
@@ -110,8 +110,7 @@ operation.
 If you want to use your own odoo sources, you must clone the `odoo`
 repository to a folder of your choosing outside of this repository.
 That repository is quite big and can be shared among projects.
-By default, we expect the odoo directory next to your project directory;
-if not check the configuration files.
+By default, we expect the odoo directory next to your project directory.
 
 ```shell
 ODOO_SOURCE=git@github.com:odoo
@@ -145,7 +144,7 @@ The password is set to "admin" for all users.
 source .env
 DB_TEMPLATE=dump
 
-# load the dump
+# load the dump, similar to:
 # dropdb --if-exists "$DB_TEMPLATE" && createdb "$DB_TEMPLATE"
 # psql "$DB_TEMPLATE" < dump.sql
 scripts/reset-db.sh "$DB_TEMPLATE" dump.sql
