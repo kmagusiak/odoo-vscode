@@ -17,8 +17,6 @@ services:
       PGHOST: db
       PGPORT: 5432
     restart: unless-stopped
-    ports:
-      - "8069"
     volumes:
       - odoo_data:${ODOO_DATA_DIR}
       - ./addons:${ODOO_EXTRA_ADDONS}:cached
