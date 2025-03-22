@@ -11,7 +11,7 @@
             },
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}/addons",
+                    "localRoot": "${workspaceFolder}",
                     "remoteRoot": "/mnt/extra-addons"
                 }
             ]

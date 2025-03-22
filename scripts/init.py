@@ -19,7 +19,7 @@ def create_dotenv(container_type):
     log.info("create %s", dotenv_path)
     extra_addons = "/mnt/extra-addons"
     if container_type == "devcontainer":
-        extra_addons = "/odoo-workspace/addons"
+        extra_addons = "/odoo-workspace"
     content = [
         (SCRIPT_DIR / "env-template").read_text(),
         "",
