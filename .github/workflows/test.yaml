@@ -27,7 +27,7 @@ jobs:
         python-version: "3.10"
 
     - name: Generate config
-      run: bash ./scripts/init.py compose
+      run: python3 ./scripts/init.py compose
 
     - name: Login to GitHub Packages
       uses: docker/login-action@v3
