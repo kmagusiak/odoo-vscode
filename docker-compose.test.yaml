@@ -5,7 +5,7 @@ services:
     restart: "no"
     environment:
       - LOG_LEVEL=info
-      - WITHOUT_DEMO=False
+      - WITH_DEMO=True
       - PIP_AUTO_INSTALL=1
       - DEBUGPY_ENABLE=0
       - ODOO_STAGE=test

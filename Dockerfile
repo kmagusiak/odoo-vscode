@@ -15,7 +15,7 @@ user odoo
 from dev as vscode
 user root
 arg DEV_UID=1000
-run echo "root:${ADMIN_PASSWORD:-admin}" | chpasswd \
+run echo "root:${ODOO_ADMIN_PASSWD:-admin}" | chpasswd \
 	&& mkdir /odoo-workspace \
 	&& ( \
 		[ "${DEV_UID}" == "0" ] && \
