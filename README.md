@@ -44,7 +44,7 @@ commands inside the odoo container without specifying most parameters.
 
 ``` shell
 # install addons
-odoo-update base --install
+odoo-update -i base
 
 # run the shell
 odoo-bin shell
@@ -177,8 +177,8 @@ Source: [google-chrome](https://dl.google.com/linux/direct/google-chrome-stable_
 If you want to load a new translations into odoo, run a command below.
 
 ```shell
-odoo-update template_module --install --load-language=fr_BE
-odoo-update template_module --i18n-overwrite --load-language=fr_BE
+odoo-update -i template_module --load-language=fr_BE
+odoo-update -u template_module --i18n-overwrite --load-language=fr_BE
 ```
 
 To export translation files, you can use one of the following methods.
