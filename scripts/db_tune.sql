@@ -25,3 +25,13 @@ ALTER SYSTEM SET max_worker_processes = '12';
 ALTER SYSTEM SET max_parallel_workers_per_gather = '4';
 ALTER SYSTEM SET max_parallel_workers = '12';
 ALTER SYSTEM SET max_parallel_maintenance_workers = '4';
+
+-- OTHER SETTINGS
+
+-- Performance turning for Odoo
+-- for semi-complex queries, starting the jit has a big overhead
+ALTER SYSTEM SET jit=off;
+
+-- Added to speed up testing
+ALTER SYSTEM SET fsync=off;
+ALTER SYSTEM SET full_page_writes=off;
