@@ -12,6 +12,9 @@ PIP_AUTO_INSTALL=1
 UPGRADE_ENABLE=0
 DEBUGPY_ENABLE=1
 
+# Odoo variables
+ODOO_TEST_DISABLE_TIMEOUT=1
+
 # Odoo Configuration file defaults
 ODOO_ADMIN_PASSWD=odooadmin
 PGDATABASE=odoo
