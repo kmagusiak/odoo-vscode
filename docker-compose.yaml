@@ -28,9 +28,12 @@ services:
     image: postgres:${POSTGRES_VERSION}
     restart: unless-stopped
     volumes:
-      - postgres_odoo:/var/lib/postgresql/data
+      - postgres_odoo:/var/lib/postgresq
+      - ./scripts/db_template_init.sql:/docker-entrypoint-initdb.d/db_template_init.sql:ro
+      - ./scripts/db_app_user.sh:/docker-entrypoint-initdb.d/db_app_user.sh:rol/data
     environment:
       POSTGRES_DB: postgres
       POSTGRES_PASSWORD: ${PGPASSWORD}
-      POSTGRES_USER: ${PGUSER}
+      APP_PASSWORD: ${PGPASSWORD}
+      APP_USER: ${PGUSER}
       PGDATA: /var/lib/postgresql/data

@@ -4,8 +4,10 @@ services:
   odoo:
     restart: "no"
     environment:
-      - LOG_LEVEL=info
-      - WITH_DEMO=True
+      - ODOO_LOG_LEVEL=info
+      - ODOO_WITH_DEMO=True
+      - ODOO_WITH_TEST_DATA=True
+      - ODOO_WORKERS=0
       - PIP_AUTO_INSTALL=1
       - DEBUGPY_ENABLE=0
       - ODOO_STAGE=test
